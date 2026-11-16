@@ -80,10 +80,13 @@
                   <img *ngIf="item.image_url" [src]="apiBase + item.image_url" class="item-thumb">
                   <span *ngIf="!item.image_url" class="no-img">🍽</span>
                 </div>
-                <label class="upload-label" title="Upload image">
-                  📷
-                  <input type="file" accept="image/*" (change)="uploadImage(item.id, $event)" style="display:none">
-                </label>
+                <div class="img-actions">
+                  <label class="upload-label" title="Upload / replace image">
+                    📷 Photo
+                    <input type="file" accept="image/*" (change)="uploadImage(item.id, $event)" style="display:none">
+                  </label>
+                  <button *ngIf="item.image_url" class="remove-img-btn" (click)="removeImage(item.id)" title="Remove photo">✕ Remove</button>
+                </div>
               </td>
               <td><b>{{ item.name }}</b></td>
               <td class="desc-cell">{{ item.description || '—' }}</td>

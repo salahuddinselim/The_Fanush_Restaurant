@@ -28,6 +28,10 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   submitError = '';
   submitting = false;
   year = new Date().getFullYear();
+  navScrolled = false;
+  searchQuery = '';
+  searchSuggestions: string[] = [];
+  showSuggestions = false;
 
   form = this.fb.group({
     name: ['', Validators.required],
@@ -56,7 +60,10 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
     this.api.getHours().subscribe(h => this.hours = h);
   }
 
+  private scrollHandler = () => { this.navScrolled = window.scrollY > 60; };
+
   ngAfterViewInit() {
+    window.addEventListener('scroll', this.scrollHandler, { passive: true });
     this.observer = new IntersectionObserver(
       entries => entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('revealed'); this.observer?.unobserve(e.target); } }),
       { threshold: 0.12 }
@@ -65,7 +72,50 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
       .forEach(el => this.observer!.observe(el));
   }
 
-  ngOnDestroy() { this.observer?.disconnect(); }
+  ngOnDestroy() {
+    window.removeEventListener('scroll', this.scrollHandler);
+    this.observer?.disconnect();
+  }
+
+  get allItems() {
+    return this.categories.flatMap(c => c.items);
+  }
+
+  get filteredCategories() {
+    if (!this.searchQuery.trim()) return this.categories;
+    const q = this.searchQuery.toLowerCase();
+    return this.categories.map(c => ({
+      ...c, items: c.items.filter(i => i.name.toLowerCase().includes(q) || (i.description || '').toLowerCase().includes(q))
+    })).filter(c => c.items.length > 0);
+  }
+
+  onSearchInput(value: string) {
+    this.searchQuery = value;
+    if (value.trim().length > 1) {
+      this.searchSuggestions = this.allItems
+        .filter(i => i.name.toLowerCase().includes(value.toLowerCase()))
+        .map(i => i.name).slice(0, 6);
+      this.showSuggestions = this.searchSuggestions.length > 0;
+    } else {
+      this.searchSuggestions = [];
+      this.showSuggestions = false;
+    }
+  }
+
+  selectSuggestion(name: string) {
+    this.searchQuery = name;
+    this.showSuggestions = false;
+    this.scrollTo('menu');
+  }
+
+  clearSearch() {
+    this.searchQuery = '';
+    this.showSuggestions = false;
+  }
+
+  hideSearchSuggestions() {
+    setTimeout(() => { this.showSuggestions = false; }, 200);
+  }
 
   get logoUrl() { return this.config['logo_url'] || ''; }
   get name() { return this.config['restaurant_name'] || 'The Fanus Restaurant'; }

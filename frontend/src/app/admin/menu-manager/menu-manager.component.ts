@@ -58,4 +58,9 @@ export class MenuManagerComponent implements OnInit {
     if (!file) return;
     this.api.uploadItemImage(itemId, file).subscribe(() => this.load());
   }
+
+  removeImage(itemId: number) {
+    if (!confirm('Remove photo from this item?')) return;
+    this.api.removeItemImage(itemId).subscribe(() => this.load());
+  }
 }

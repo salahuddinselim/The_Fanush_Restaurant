@@ -11,9 +11,11 @@
 </div>
 
 <!-- HEADER / NAV -->
-<header class="site-nav">
+<header class="site-nav" [class.scrolled]="navScrolled" [class.nav-open]="mobileMenuOpen">
   <div class="wrap nav-inner">
-    <a class="brand" (click)="scrollTo('top')" style="cursor:pointer">
+
+    <!-- Brand -->
+    <a class="brand" (click)="scrollTo('top'); clearSearch()" style="cursor:pointer">
       <span class="brand-mark">
         <img *ngIf="logoUrl" [src]="logoUrl" [alt]="name" class="brand-logo-img">
         <span *ngIf="!logoUrl" class="brand-letter">F</span>
@@ -24,18 +26,68 @@
       </span>
     </a>
 
-    <nav class="navlinks" [class.open]="mobileMenuOpen">
+    <!-- Search bar (desktop) -->
+    <div class="nav-search-wrap">
+      <div class="nav-search-box">
+        <span class="search-ic">🔍</span>
+        <input
+          type="text"
+          class="nav-search-input"
+          placeholder="Search menu items…"
+          [value]="searchQuery"
+          (input)="onSearchInput($any($event.target).value)"
+          (focus)="showSuggestions = searchSuggestions.length > 0"
+          (blur)="hideSearchSuggestions()"
+          aria-label="Search menu"
+        >
+        <button *ngIf="searchQuery" class="search-clear" (click)="clearSearch()">✕</button>
+      </div>
+      <div class="search-suggestions" *ngIf="showSuggestions">
+        <button *ngFor="let s of searchSuggestions" (mousedown)="selectSuggestion(s)">{{ s }}</button>
+      </div>
+    </div>
+
+    <!-- Desktop nav links -->
+    <nav class="navlinks">
       <a (click)="scrollTo('about')">About</a>
       <a (click)="scrollTo('menu')">Menu</a>
       <a (click)="scrollTo('visit')">Visit</a>
       <a (click)="scrollTo('contact')">Contact</a>
+      <a [href]="'tel:' + phone" class="btn nav-cta">{{ ctaText }}</a>
     </nav>
 
-    <a [href]="'tel:' + phone" class="btn nav-cta">{{ ctaText }}</a>
-
+    <!-- Burger -->
     <button class="burger" (click)="mobileMenuOpen = !mobileMenuOpen" [class.open]="mobileMenuOpen" aria-label="Toggle menu">
       <span></span><span></span><span></span>
     </button>
+  </div>
+
+  <!-- Mobile panel -->
+  <div class="mobile-panel" [class.open]="mobileMenuOpen">
+    <div class="mobile-search-wrap">
+      <span class="search-ic">🔍</span>
+      <input
+        type="text"
+        placeholder="Search menu items…"
+        [value]="searchQuery"
+        (input)="onSearchInput($any($event.target).value)"
+        aria-label="Search menu"
+      >
+      <button *ngIf="searchQuery" (click)="clearSearch()">✕</button>
+    </div>
+    <div class="mobile-links">
+      <a (click)="scrollTo('about'); mobileMenuOpen=false">About</a>
+      <a (click)="scrollTo('menu'); mobileMenuOpen=false">Menu</a>
+      <a (click)="scrollTo('visit'); mobileMenuOpen=false">Visit</a>
+      <a (click)="scrollTo('contact'); mobileMenuOpen=false">Contact</a>
+    </div>
+    <div class="mobile-cats" *ngIf="categories.length">
+      <p class="cats-label">Categories</p>
+      <div class="cats-grid">
+        <a *ngFor="let c of categories" (click)="scrollToCat(c); mobileMenuOpen=false" [class.active]="activeCatId === c.id">{{ c.name }}</a>
+      </div>
+    </div>
+    <a [href]="'tel:' + phone" class="btn" style="margin:0 1rem 1rem">{{ ctaText }}</a>
   </div>
 </header>
 
@@ -103,7 +155,7 @@
         </button>
       </div>
 
-      <div *ngFor="let cat of categories" class="menu-block" [id]="'cat-' + cat.id">
+      <div *ngFor="let cat of filteredCategories" class="menu-block" [id]="'cat-' + cat.id">
         <h3 class="cat-heading">{{ cat.name }}</h3>
         <div class="items-grid">
           <div *ngFor="let item of cat.items" class="menu-item-row">
@@ -117,7 +169,10 @@
         </div>
       </div>
 
-      <div *ngIf="!categories.length" class="menu-empty">
+      <div *ngIf="searchQuery && !filteredCategories.length" class="menu-empty">
+        <p>No items found for "<b>{{ searchQuery }}</b>" — <a (click)="clearSearch()" style="cursor:pointer;color:var(--wine)">clear search</a></p>
+      </div>
+      <div *ngIf="!searchQuery && !categories.length" class="menu-empty">
         <p>Menu loading…</p>
       </div>
     </div>

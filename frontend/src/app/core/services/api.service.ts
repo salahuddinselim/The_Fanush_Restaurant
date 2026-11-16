@@ -37,6 +37,7 @@ export class ApiService {
     const fd = new FormData(); fd.append('file', file);
     return this.http.post(`${API_URL}/menu/items/${id}/image`, fd);
   }
+  removeItemImage(id: number): Observable<any> { return this.http.delete(`${API_URL}/menu/items/${id}/image`); }
 
   // Gallery
   getGallery(): Observable<GalleryImage[]> { return this.http.get<GalleryImage[]>(`${API_URL}/gallery`); }

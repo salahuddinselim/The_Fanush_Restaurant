@@ -107,3 +107,17 @@ async def upload_item_image(item_id: int, file: UploadFile = File(...), db: Sess
     item.image_url = f"/static/uploads/menu/{filename}"
     db.commit()
     return {"image_url": item.image_url}
+
+
+@router.delete("/items/{item_id}/image")
+def remove_item_image(item_id: int, db: Session = Depends(get_db), _: models.User = Depends(get_current_user)):
+    item = db.query(models.MenuItem).filter(models.MenuItem.id == item_id).first()
+    if not item:
+        raise HTTPException(status_code=404, detail="Item not found")
+    if item.image_url:
+        local_path = item.image_url.lstrip("/")
+        if os.path.exists(local_path):
+            os.remove(local_path)
+        item.image_url = None
+        db.commit()
+    return {"detail": "Image removed"}

@@ -245,7 +245,9 @@ img { max-width: 100%; display: block; }
 .item-img-wrap { width: 48px; height: 48px; border-radius: 8px; overflow: hidden; background: var(--cream-2); display: flex; align-items: center; justify-content: center; }
 .item-thumb { width: 48px; height: 48px; object-fit: cover; display: block; }
 .no-img { font-size: 1.3rem; }
-.upload-label { font-size: .7rem; color: var(--wine); cursor: pointer; display: block; margin-top: 4px; text-align: center; &:hover { text-decoration: underline; } }
+.img-actions { display: flex; gap: 4px; flex-direction: column; align-items: center; margin-top: 4px; }
+.upload-label { font-size: .68rem; color: var(--wine); cursor: pointer; display: block; text-align: center; &:hover { text-decoration: underline; } }
+.remove-img-btn { font-size: .65rem; color: #991b1b; background: none; border: none; cursor: pointer; padding: 0; &:hover { text-decoration: underline; } }
 .desc-cell { font-size: 12px; color: var(--ink-soft); max-width: 200px; }
 .edit-row { background: var(--cream) !important; padding: 16px !important; }
 
