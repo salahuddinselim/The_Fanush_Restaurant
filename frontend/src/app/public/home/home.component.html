@@ -64,22 +64,22 @@
   <!-- ABOUT -->
   <section class="about-section" id="about">
     <div class="wrap about-grid">
-      <div class="about-imgs">
+      <div class="about-imgs reveal-left">
         <img [src]="ABOUT_IMGS[0]" alt="Fresh pasta" loading="lazy">
         <img [src]="ABOUT_IMGS[1]" alt="Chicken parmigiana" loading="lazy">
         <img [src]="ABOUT_IMGS[2]" alt="Creamy risotto" loading="lazy">
       </div>
-      <div class="about-copy">
+      <div class="about-copy reveal-right">
         <span class="eyebrow alt">Our Kitchen</span>
         <h2>A neighbourhood table with an Italian heart.</h2>
         <p>The Fanus Restaurant brings together the comfort of classic Italian cooking and the easy-going spirit of a local diner. From slow-cooked beef ragù and creamy risottos to buttermilk-fried chicken burgers, everything is prepared to order and served generously.</p>
         <p>Whether it's a quick lunch, a family dinner, or a takeaway night in — you'll find familiar flavours, fair prices, and a warm welcome on Albany Highway.</p>
-        <div class="badges">
-          <span class="badge-pill">Italian Cuisine</span>
-          <span class="badge-pill">Pizza &amp; Burgers</span>
-          <span class="badge-pill">Dine In</span>
-          <span class="badge-pill">Takeaway</span>
-          <span class="badge-pill">Family Friendly</span>
+        <div class="badges stagger">
+          <span class="badge-pill reveal">Italian Cuisine</span>
+          <span class="badge-pill reveal">Pizza &amp; Burgers</span>
+          <span class="badge-pill reveal">Dine In</span>
+          <span class="badge-pill reveal">Takeaway</span>
+          <span class="badge-pill reveal">Family Friendly</span>
         </div>
       </div>
     </div>
@@ -88,7 +88,7 @@
   <!-- MENU -->
   <section class="menu-section" id="menu">
     <div class="wrap">
-      <div class="sec-head">
+      <div class="sec-head reveal">
         <span class="eyebrow alt">Our Menu</span>
         <h2>Every dish, every price.</h2>
         <p>All prices in Australian dollars. Dine in or take away.</p>
@@ -126,15 +126,15 @@
   <!-- FEATURE STRIP -->
   <section class="feature-strip">
     <div class="wrap feature-cells">
-      <div class="feature-cell">
+      <div class="feature-cell reveal" style="transition-delay:.05s">
         <b>Made to Order</b>
         <p>Every pasta, risotto and burger is cooked fresh when you order — never pre-made.</p>
       </div>
-      <div class="feature-cell">
+      <div class="feature-cell reveal" style="transition-delay:.18s">
         <b>Family Friendly</b>
         <p>Kids' pasta and nuggets on the menu, with generous portions for the whole table.</p>
       </div>
-      <div class="feature-cell">
+      <div class="feature-cell reveal" style="transition-delay:.31s">
         <b>Dine In or Takeaway</b>
         <p>Join us on Albany Highway, or order for pickup and delivery across Gosnells.</p>
       </div>
@@ -144,13 +144,13 @@
   <!-- VISIT -->
   <section class="visit-section" id="visit">
     <div class="wrap">
-      <div class="sec-head">
+      <div class="sec-head reveal">
         <span class="eyebrow alt">Find Us</span>
         <h2>Visit {{ name }}</h2>
         <p>We're on Albany Highway in Gosnells — easy to reach, easy to love.</p>
       </div>
       <div class="visit-grid">
-        <div class="info-card">
+        <div class="info-card reveal-left">
           <h3>Restaurant Details</h3>
           <div class="info-row">
             <span class="info-ic">📍</span>
@@ -180,7 +180,7 @@
           <p class="hours-note" *ngIf="hours.length">Please call ahead to confirm current hours.</p>
         </div>
 
-        <div class="map-frame">
+        <div class="map-frame reveal-right">
           <iframe
             title="Map to {{ name }}"
             loading="lazy"
@@ -194,7 +194,7 @@
 
   <!-- CTA BAND -->
   <section class="cta-band" id="contact">
-    <div class="wrap cta-inner">
+    <div class="wrap cta-inner reveal-scale">
       <h2>Hungry? Let's get you fed.</h2>
       <p>Call us to place a takeaway order, or drop in and grab a table at {{ address }}.</p>
       <div class="cta-actions">
@@ -212,7 +212,7 @@
         <h2>Make a Reservation</h2>
         <p>Fill in your details and we'll confirm your booking.</p>
       </div>
-      <div class="form-wrap">
+      <div class="form-wrap reveal">
         <div *ngIf="submitted" class="success-panel">
           <div class="success-icon">✓</div>
           <h3>Reservation received!</h3>

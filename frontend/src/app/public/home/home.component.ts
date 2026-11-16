@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, AfterViewInit, OnDestroy, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
@@ -13,9 +13,10 @@ const DAYS = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   private api = inject(ApiService);
   private fb = inject(FormBuilder);
+  private observer?: IntersectionObserver;
 
   config: Config = {};
   categories: MenuCategory[] = [];
@@ -54,6 +55,17 @@ export class HomeComponent implements OnInit {
     this.api.getGallery().subscribe(g => this.gallery = g);
     this.api.getHours().subscribe(h => this.hours = h);
   }
+
+  ngAfterViewInit() {
+    this.observer = new IntersectionObserver(
+      entries => entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('revealed'); this.observer?.unobserve(e.target); } }),
+      { threshold: 0.12 }
+    );
+    document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale')
+      .forEach(el => this.observer!.observe(el));
+  }
+
+  ngOnDestroy() { this.observer?.disconnect(); }
 
   get logoUrl() { return this.config['logo_url'] || ''; }
   get name() { return this.config['restaurant_name'] || 'The Fanus Restaurant'; }
