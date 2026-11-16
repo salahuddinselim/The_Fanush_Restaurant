@@ -1,24 +1,41 @@
 <div class="admin-layout">
   <aside class="admin-sidebar">
-    <h2>Restaurant CMS</h2>
-    <a routerLink="/admin/dashboard" routerLinkActive="active">Dashboard</a>
-    <a routerLink="/admin/config" routerLinkActive="active">Site Settings</a>
-    <a routerLink="/admin/menu" routerLinkActive="active">Menu</a>
-    <a routerLink="/admin/gallery" routerLinkActive="active">Gallery</a>
-    <a routerLink="/admin/hours" routerLinkActive="active">Hours</a>
-    <a routerLink="/admin/reservations" routerLinkActive="active">Reservations</a>
-    <a routerLink="/" style="margin-top:12px;opacity:.6">← View Site</a>
-    <div class="logout"><a (click)="auth.logout()" style="cursor:pointer;color:rgba(255,255,255,.5)">Sign Out</a></div>
+    <div class="sidebar-brand">
+      <div class="brand-mark">F</div>
+      <div class="brand-text"><b>Fanus CMS</b><small>Admin Panel</small></div>
+    </div>
+    <span class="sidebar-section">Main</span>
+    <a routerLink="/admin/dashboard" routerLinkActive="active"><span class="nav-ic">🏠</span> Dashboard</a>
+    <a routerLink="/admin/config" routerLinkActive="active"><span class="nav-ic">⚙️</span> Site Settings</a>
+    <hr class="sidebar-divider">
+    <span class="sidebar-section">Content</span>
+    <a routerLink="/admin/menu" routerLinkActive="active"><span class="nav-ic">🍽</span> Menu</a>
+    <a routerLink="/admin/gallery" routerLinkActive="active"><span class="nav-ic">🖼</span> Gallery</a>
+    <a routerLink="/admin/hours" routerLinkActive="active"><span class="nav-ic">🕐</span> Opening Hours</a>
+    <hr class="sidebar-divider">
+    <span class="sidebar-section">Bookings</span>
+    <a routerLink="/admin/reservations" routerLinkActive="active"><span class="nav-ic">📋</span> Reservations</a>
+    <div class="sidebar-footer">
+      <a routerLink="/"><span class="nav-ic">↗</span> View Site</a>
+      <a (click)="auth.logout()" style="cursor:pointer;color:rgba(255,80,80,.7)"><span class="nav-ic">🚪</span> Sign Out</a>
+    </div>
   </aside>
   <main class="admin-main">
-    <h1 class="admin-title">Site Settings</h1>
+    <div class="admin-topbar">
+      <h1 class="admin-page-title">Site Settings <span>Restaurant info, hero content &amp; contact</span></h1>
+    </div>
     <div class="admin-card">
-      <div *ngFor="let f of fields" class="field">
-        <label>{{ f.label }}</label>
-        <input type="text" [(ngModel)]="values[f.key]">
+      <div class="admin-card-header"><h3>Restaurant Details</h3></div>
+      <div class="settings-grid">
+        <div *ngFor="let f of fields" class="field">
+          <label>{{ f.label }}</label>
+          <input type="text" [(ngModel)]="values[f.key]" [placeholder]="f.label">
+        </div>
       </div>
-      <button class="btn btn-gold" (click)="save()">Save Changes</button>
-      <span *ngIf="saved" class="toast">Saved!</span>
+      <div style="display:flex;align-items:center;gap:14px;margin-top:8px">
+        <button class="btn gold" (click)="save()" style="min-width:140px">Save Changes</button>
+        <span *ngIf="saved" class="inline-success">✓ Saved successfully</span>
+      </div>
     </div>
   </main>
 </div>

@@ -1,91 +1,116 @@
 <div class="admin-layout">
   <aside class="admin-sidebar">
-    <h2>Restaurant CMS</h2>
-    <a routerLink="/admin/dashboard" routerLinkActive="active">Dashboard</a>
-    <a routerLink="/admin/config" routerLinkActive="active">Site Settings</a>
-    <a routerLink="/admin/menu" routerLinkActive="active">Menu</a>
-    <a routerLink="/admin/gallery" routerLinkActive="active">Gallery</a>
-    <a routerLink="/admin/hours" routerLinkActive="active">Hours</a>
-    <a routerLink="/admin/reservations" routerLinkActive="active">Reservations</a>
-    <a routerLink="/" style="margin-top:12px;opacity:.6">← View Site</a>
-    <div class="logout"><a (click)="auth.logout()" style="cursor:pointer;color:rgba(255,255,255,.5)">Sign Out</a></div>
+    <div class="sidebar-brand">
+      <div class="brand-mark">F</div>
+      <div class="brand-text"><b>Fanus CMS</b><small>Admin Panel</small></div>
+    </div>
+    <span class="sidebar-section">Main</span>
+    <a routerLink="/admin/dashboard" routerLinkActive="active"><span class="nav-ic">🏠</span> Dashboard</a>
+    <a routerLink="/admin/config" routerLinkActive="active"><span class="nav-ic">⚙️</span> Site Settings</a>
+    <hr class="sidebar-divider">
+    <span class="sidebar-section">Content</span>
+    <a routerLink="/admin/menu" routerLinkActive="active"><span class="nav-ic">🍽</span> Menu</a>
+    <a routerLink="/admin/gallery" routerLinkActive="active"><span class="nav-ic">🖼</span> Gallery</a>
+    <a routerLink="/admin/hours" routerLinkActive="active"><span class="nav-ic">🕐</span> Opening Hours</a>
+    <hr class="sidebar-divider">
+    <span class="sidebar-section">Bookings</span>
+    <a routerLink="/admin/reservations" routerLinkActive="active"><span class="nav-ic">📋</span> Reservations</a>
+    <div class="sidebar-footer">
+      <a routerLink="/"><span class="nav-ic">↗</span> View Site</a>
+      <a (click)="auth.logout()" style="cursor:pointer;color:rgba(255,80,80,.7)"><span class="nav-ic">🚪</span> Sign Out</a>
+    </div>
   </aside>
   <main class="admin-main">
-    <h1 class="admin-title">Menu Manager</h1>
+    <div class="admin-topbar">
+      <h1 class="admin-page-title">Menu Manager <span>Categories &amp; items</span></h1>
+    </div>
 
-    <!-- Add Category -->
+    <!-- Categories -->
     <div class="admin-card">
-      <h3 style="margin-bottom:14px">Categories</h3>
-      <div style="display:flex;gap:10px;margin-bottom:16px">
-        <input type="text" [(ngModel)]="newCatName" placeholder="New category name" style="flex:1;padding:9px 12px;border:1px solid var(--line)">
-        <button class="btn btn-gold" (click)="addCategory()">Add Category</button>
+      <div class="admin-card-header"><h3>Categories</h3></div>
+      <div class="cat-add-row">
+        <input type="text" [(ngModel)]="newCatName" placeholder="New category name e.g. Pasta, Burgers…" class="cat-input">
+        <button class="btn gold" (click)="addCategory()" [disabled]="!newCatName.trim()">+ Add Category</button>
       </div>
-      <div style="display:flex;flex-wrap:wrap;gap:8px">
+      <div class="cat-chips">
         <span *ngFor="let c of categories" class="cat-chip">
           {{ c.name }}
-          <button (click)="deleteCategory(c.id)" class="chip-del">×</button>
+          <button (click)="deleteCategory(c.id)" class="chip-del" title="Delete category">×</button>
         </span>
+        <span *ngIf="categories.length === 0" style="color:var(--ink-soft);font-size:.85rem">No categories yet.</span>
       </div>
     </div>
 
     <!-- Add Item -->
     <div class="admin-card">
-      <h3 style="margin-bottom:14px">Add Menu Item</h3>
+      <div class="admin-card-header"><h3>Add Menu Item</h3></div>
       <div class="row2">
         <div class="field">
-          <label>Category</label>
+          <label>Category *</label>
           <select [(ngModel)]="newItem.category_id">
+            <option value="" disabled>Select category…</option>
             <option *ngFor="let c of categories" [value]="c.id">{{ c.name }}</option>
           </select>
         </div>
-        <div class="field"><label>Name *</label><input type="text" [(ngModel)]="newItem.name" placeholder="Item name"></div>
+        <div class="field"><label>Item Name *</label><input type="text" [(ngModel)]="newItem.name" placeholder="e.g. Spaghetti Bolognese"></div>
       </div>
       <div class="row2">
-        <div class="field"><label>Price ($)</label><input type="number" [(ngModel)]="newItem.price" step="0.01"></div>
-        <div class="field"><label>Display Order</label><input type="number" [(ngModel)]="newItem.display_order"></div>
+        <div class="field"><label>Price (A$)</label><input type="number" [(ngModel)]="newItem.price" step="0.01" min="0" placeholder="0.00"></div>
+        <div class="field"><label>Display Order</label><input type="number" [(ngModel)]="newItem.display_order" min="0"></div>
       </div>
-      <div class="field"><label>Description</label><textarea [(ngModel)]="newItem.description" rows="2"></textarea></div>
-      <button class="btn btn-gold" (click)="addItem()">Add Item</button>
+      <div class="field"><label>Description</label><textarea [(ngModel)]="newItem.description" rows="2" placeholder="Optional short description"></textarea></div>
+      <button class="btn gold" (click)="addItem()" [disabled]="!newItem.name || !newItem.category_id">+ Add Item</button>
     </div>
 
-    <!-- Items Table per category -->
+    <!-- Items per category -->
     <div *ngFor="let cat of categories" class="admin-card">
-      <h3 style="margin-bottom:14px">{{ cat.name }}</h3>
+      <div class="admin-card-header">
+        <h3>{{ cat.name }}</h3>
+        <span class="item-count">{{ cat.items.length }} items</span>
+      </div>
       <table class="data-table">
-        <thead><tr><th>Image</th><th>Name</th><th>Description</th><th>Price</th><th>Actions</th></tr></thead>
+        <thead>
+          <tr><th style="width:70px">Photo</th><th>Name</th><th>Description</th><th>Price</th><th>Actions</th></tr>
+        </thead>
         <tbody>
           <tr *ngFor="let item of cat.items">
             <ng-container *ngIf="editingItem?.id !== item.id">
               <td>
-                <img *ngIf="item.image_url" [src]="apiBase + item.image_url" style="width:56px;height:56px;object-fit:cover">
-                <span *ngIf="!item.image_url" style="color:var(--muted);font-size:12px">None</span>
-                <br>
-                <label class="upload-label">
-                  Upload <input type="file" accept="image/*" (change)="uploadImage(item.id, $event)" style="display:none">
+                <div class="item-img-wrap">
+                  <img *ngIf="item.image_url" [src]="apiBase + item.image_url" class="item-thumb">
+                  <span *ngIf="!item.image_url" class="no-img">🍽</span>
+                </div>
+                <label class="upload-label" title="Upload image">
+                  📷
+                  <input type="file" accept="image/*" (change)="uploadImage(item.id, $event)" style="display:none">
                 </label>
               </td>
               <td><b>{{ item.name }}</b></td>
-              <td style="font-size:13px;color:var(--muted)">{{ item.description }}</td>
-              <td>${{ item.price.toFixed(2) }}</td>
+              <td class="desc-cell">{{ item.description || '—' }}</td>
+              <td><b style="color:var(--wine)">A${{ item.price.toFixed(2) }}</b></td>
               <td>
-                <button class="btn btn-outline btn-sm" (click)="startEdit(item)">Edit</button>
-                <button class="btn btn-danger btn-sm" style="margin-left:6px" (click)="deleteItem(item.id)">Del</button>
+                <div class="action-row">
+                  <button class="btn ghost sm" (click)="startEdit(item)">Edit</button>
+                  <button class="btn danger sm" (click)="deleteItem(item.id)">Delete</button>
+                </div>
               </td>
             </ng-container>
             <ng-container *ngIf="editingItem?.id === item.id">
-              <td colspan="5">
+              <td colspan="5" class="edit-row">
                 <div class="row2">
                   <div class="field"><label>Name</label><input type="text" [(ngModel)]="editingItem!.name"></div>
-                  <div class="field"><label>Price</label><input type="number" [(ngModel)]="editingItem!.price" step="0.01"></div>
+                  <div class="field"><label>Price (A$)</label><input type="number" [(ngModel)]="editingItem!.price" step="0.01"></div>
                 </div>
                 <div class="field"><label>Description</label><textarea [(ngModel)]="editingItem!.description" rows="2"></textarea></div>
-                <button class="btn btn-gold btn-sm" (click)="saveEdit()">Save</button>
-                <button class="btn btn-outline btn-sm" style="margin-left:8px" (click)="cancelEdit()">Cancel</button>
+                <div class="action-row">
+                  <button class="btn gold sm" (click)="saveEdit()">Save Changes</button>
+                  <button class="btn ghost sm" (click)="cancelEdit()">Cancel</button>
+                </div>
               </td>
             </ng-container>
           </tr>
           <tr *ngIf="cat.items.length === 0">
-            <td colspan="5" style="text-align:center;color:var(--muted)">No items in this category yet.</td>
+            <td colspan="5" class="empty-row">No items yet — add one above.</td>
           </tr>
         </tbody>
       </table>

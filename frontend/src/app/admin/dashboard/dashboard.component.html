@@ -1,45 +1,196 @@
 <div class="admin-layout">
+  <!-- SIDEBAR -->
   <aside class="admin-sidebar">
-    <h2>Restaurant CMS</h2>
-    <a routerLink="/admin/dashboard" routerLinkActive="active">Dashboard</a>
-    <a routerLink="/admin/config" routerLinkActive="active">Site Settings</a>
-    <a routerLink="/admin/menu" routerLinkActive="active">Menu</a>
-    <a routerLink="/admin/gallery" routerLinkActive="active">Gallery</a>
-    <a routerLink="/admin/hours" routerLinkActive="active">Hours</a>
-    <a routerLink="/admin/reservations" routerLinkActive="active">Reservations</a>
-    <a routerLink="/" style="margin-top:12px;opacity:.6">← View Site</a>
-    <div class="logout">
-      <a (click)="auth.logout()" style="cursor:pointer;color:rgba(255,255,255,.5)">Sign Out</a>
+    <div class="sidebar-brand">
+      <div class="brand-mark">F</div>
+      <div class="brand-text"><b>Fanus CMS</b><small>Admin Panel</small></div>
+    </div>
+    <span class="sidebar-section">Main</span>
+    <a routerLink="/admin/dashboard" routerLinkActive="active"><span class="nav-ic">🏠</span> Dashboard</a>
+    <a routerLink="/admin/config" routerLinkActive="active"><span class="nav-ic">⚙️</span> Site Settings</a>
+    <hr class="sidebar-divider">
+    <span class="sidebar-section">Content</span>
+    <a routerLink="/admin/menu" routerLinkActive="active"><span class="nav-ic">🍽</span> Menu</a>
+    <a routerLink="/admin/gallery" routerLinkActive="active"><span class="nav-ic">🖼</span> Gallery</a>
+    <a routerLink="/admin/hours" routerLinkActive="active"><span class="nav-ic">🕐</span> Opening Hours</a>
+    <hr class="sidebar-divider">
+    <span class="sidebar-section">Bookings</span>
+    <a routerLink="/admin/reservations" routerLinkActive="active">
+      <span class="nav-ic">📋</span> Reservations
+      <span class="badge-count" *ngIf="pending > 0">{{ pending }}</span>
+    </a>
+    <div class="sidebar-footer">
+      <a routerLink="/" style="cursor:pointer"><span class="nav-ic">↗</span> View Site</a>
+      <a (click)="auth.logout()" style="cursor:pointer;color:rgba(255,80,80,.7)"><span class="nav-ic">🚪</span> Sign Out</a>
     </div>
   </aside>
+
+  <!-- MAIN -->
   <main class="admin-main">
-    <h1 class="admin-title">Dashboard</h1>
-    <div class="dash-grid">
-      <a routerLink="/admin/config" class="dash-card">
-        <span class="dash-icon">⚙️</span>
-        <span class="dash-label">Site Settings</span>
-        <span class="dash-desc">Hero content, contact info, logo</span>
-      </a>
-      <a routerLink="/admin/menu" class="dash-card">
-        <span class="dash-icon">🍽</span>
-        <span class="dash-label">Menu</span>
-        <span class="dash-desc">Categories &amp; items with images</span>
-      </a>
-      <a routerLink="/admin/gallery" class="dash-card">
-        <span class="dash-icon">📷</span>
-        <span class="dash-label">Gallery</span>
-        <span class="dash-desc">Upload &amp; manage photos</span>
-      </a>
-      <a routerLink="/admin/hours" class="dash-card">
-        <span class="dash-icon">🕐</span>
-        <span class="dash-label">Opening Hours</span>
-        <span class="dash-desc">Set hours for each day</span>
-      </a>
-      <a routerLink="/admin/reservations" class="dash-card">
-        <span class="dash-icon">📋</span>
-        <span class="dash-label">Reservations</span>
-        <span class="dash-desc">View &amp; manage bookings</span>
-      </a>
+    <div class="admin-topbar">
+      <div>
+        <h1 class="admin-page-title">Dashboard</h1>
+        <p class="dash-date">{{ today }}</p>
+      </div>
+      <a routerLink="/admin/reservations" class="btn sm">View Reservations</a>
+    </div>
+
+    <!-- STAT CARDS -->
+    <div class="stat-grid" *ngIf="!loading">
+      <div class="stat-card stat-pending">
+        <div class="stat-icon">⏳</div>
+        <div class="stat-body">
+          <div class="stat-value">{{ pending }}</div>
+          <div class="stat-label">Pending</div>
+        </div>
+        <div class="stat-trend">Needs action</div>
+      </div>
+      <div class="stat-card stat-confirmed">
+        <div class="stat-icon">✅</div>
+        <div class="stat-body">
+          <div class="stat-value">{{ confirmed }}</div>
+          <div class="stat-label">Confirmed</div>
+        </div>
+        <div class="stat-trend">Bookings</div>
+      </div>
+      <div class="stat-card stat-cancelled">
+        <div class="stat-icon">❌</div>
+        <div class="stat-body">
+          <div class="stat-value">{{ cancelled }}</div>
+          <div class="stat-label">Cancelled</div>
+        </div>
+        <div class="stat-trend">Reservations</div>
+      </div>
+      <div class="stat-card stat-menu">
+        <div class="stat-icon">🍝</div>
+        <div class="stat-body">
+          <div class="stat-value">{{ totalMenuItems }}</div>
+          <div class="stat-label">Menu Items</div>
+        </div>
+        <div class="stat-trend">{{ totalCategories }} categories</div>
+      </div>
+      <div class="stat-card stat-gallery">
+        <div class="stat-icon">📷</div>
+        <div class="stat-body">
+          <div class="stat-value">{{ totalGallery }}</div>
+          <div class="stat-label">Gallery Photos</div>
+        </div>
+        <div class="stat-trend">Uploaded</div>
+      </div>
+    </div>
+
+    <div class="dash-row">
+      <!-- RESERVATION CHART -->
+      <div class="admin-card dash-chart-card">
+        <div class="admin-card-header">
+          <h3>Reservation Overview</h3>
+          <span class="total-badge">{{ reservations.length }} total</span>
+        </div>
+        <div class="chart-wrap" *ngIf="reservations.length > 0; else noData">
+          <!-- Donut SVG -->
+          <div class="donut-wrap">
+            <svg viewBox="0 0 120 120" class="donut-svg">
+              <circle cx="60" cy="60" r="45" fill="none" stroke="#f3ece1" stroke-width="18"/>
+              <circle cx="60" cy="60" r="45" fill="none" stroke="#f59e0b" stroke-width="18"
+                [attr.stroke-dasharray]="barWidth(pending, reservations.length) * 2.827 + ' 282.7'"
+                stroke-dashoffset="0" transform="rotate(-90 60 60)"/>
+              <circle cx="60" cy="60" r="45" fill="none" stroke="#10b981" stroke-width="18"
+                [attr.stroke-dasharray]="barWidth(confirmed, reservations.length) * 2.827 + ' 282.7'"
+                [attr.stroke-dashoffset]="'-' + barWidth(pending, reservations.length) * 2.827" transform="rotate(-90 60 60)"/>
+              <circle cx="60" cy="60" r="45" fill="none" stroke="#ef4444" stroke-width="18"
+                [attr.stroke-dasharray]="barWidth(cancelled, reservations.length) * 2.827 + ' 282.7'"
+                [attr.stroke-dashoffset]="'-' + (barWidth(pending, reservations.length) + barWidth(confirmed, reservations.length)) * 2.827" transform="rotate(-90 60 60)"/>
+              <text x="60" y="55" text-anchor="middle" font-size="20" font-weight="700" fill="#1c1512">{{ reservations.length }}</text>
+              <text x="60" y="70" text-anchor="middle" font-size="9" fill="#4a3f39">Total</text>
+            </svg>
+          </div>
+          <!-- Legend -->
+          <div class="chart-legend">
+            <div class="legend-item">
+              <span class="legend-dot" style="background:#f59e0b"></span>
+              <span class="legend-label">Pending</span>
+              <span class="legend-val">{{ pending }}</span>
+              <div class="legend-bar"><div class="legend-bar-fill pending" [style.width.%]="barWidth(pending, reservations.length)"></div></div>
+            </div>
+            <div class="legend-item">
+              <span class="legend-dot" style="background:#10b981"></span>
+              <span class="legend-label">Confirmed</span>
+              <span class="legend-val">{{ confirmed }}</span>
+              <div class="legend-bar"><div class="legend-bar-fill confirmed" [style.width.%]="barWidth(confirmed, reservations.length)"></div></div>
+            </div>
+            <div class="legend-item">
+              <span class="legend-dot" style="background:#ef4444"></span>
+              <span class="legend-label">Cancelled</span>
+              <span class="legend-val">{{ cancelled }}</span>
+              <div class="legend-bar"><div class="legend-bar-fill cancelled" [style.width.%]="barWidth(cancelled, reservations.length)"></div></div>
+            </div>
+          </div>
+        </div>
+        <ng-template #noData>
+          <div class="chart-empty">No reservations yet — they'll appear here once customers book.</div>
+        </ng-template>
+      </div>
+
+      <!-- QUICK ACTIONS -->
+      <div class="admin-card quick-card">
+        <div class="admin-card-header"><h3>Quick Actions</h3></div>
+        <div class="quick-grid">
+          <a routerLink="/admin/menu" class="quick-item">
+            <span class="quick-ic">🍽</span>
+            <span class="quick-label">Add Menu Item</span>
+          </a>
+          <a routerLink="/admin/gallery" class="quick-item">
+            <span class="quick-ic">📷</span>
+            <span class="quick-label">Upload Photo</span>
+          </a>
+          <a routerLink="/admin/hours" class="quick-item">
+            <span class="quick-ic">🕐</span>
+            <span class="quick-label">Edit Hours</span>
+          </a>
+          <a routerLink="/admin/config" class="quick-item">
+            <span class="quick-ic">⚙️</span>
+            <span class="quick-label">Site Settings</span>
+          </a>
+          <a routerLink="/admin/reservations" class="quick-item">
+            <span class="quick-ic">📋</span>
+            <span class="quick-label">Reservations</span>
+          </a>
+          <a routerLink="/" class="quick-item">
+            <span class="quick-ic">↗</span>
+            <span class="quick-label">View Site</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- RECENT RESERVATIONS -->
+    <div class="admin-card" *ngIf="recentReservations.length > 0">
+      <div class="admin-card-header">
+        <h3>Recent Reservations</h3>
+        <a routerLink="/admin/reservations" class="btn ghost sm">View All</a>
+      </div>
+      <div style="overflow-x:auto">
+        <table class="data-table">
+          <thead>
+            <tr><th>Guest</th><th>Date & Time</th><th>Party</th><th>Contact</th><th>Status</th></tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let r of recentReservations">
+              <td><b>{{ r.name }}</b></td>
+              <td>{{ r.date }} at {{ r.time }}</td>
+              <td>{{ r.party_size }} guests</td>
+              <td style="font-size:13px;color:var(--ink-soft)">{{ r.email }}</td>
+              <td><span class="badge badge-{{ r.status }}">{{ r.status }}</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- LOADING -->
+    <div *ngIf="loading" class="dash-loading">
+      <div class="spin-ring"></div>
+      <span>Loading dashboard…</span>
     </div>
   </main>
 </div>

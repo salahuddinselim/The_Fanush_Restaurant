@@ -37,7 +37,25 @@ export class GalleryManagerComponent implements OnInit {
   }
 
   delete(id: number) {
-    if (!confirm('Delete this image?')) return;
+    if (!confirm('Delete this image? This cannot be undone.')) return;
     this.api.deleteGalleryImage(id).subscribe(() => this.load());
+  }
+
+  moveUp(i: number) {
+    if (i === 0) return;
+    const a = this.images[i], b = this.images[i - 1];
+    const orderA = a.display_order, orderB = b.display_order;
+    this.api.updateGalleryImage(a.id, { display_order: orderB })
+      .subscribe(() => this.api.updateGalleryImage(b.id, { display_order: orderA })
+        .subscribe(() => this.load()));
+  }
+
+  moveDown(i: number) {
+    if (i === this.images.length - 1) return;
+    const a = this.images[i], b = this.images[i + 1];
+    const orderA = a.display_order, orderB = b.display_order;
+    this.api.updateGalleryImage(a.id, { display_order: orderB })
+      .subscribe(() => this.api.updateGalleryImage(b.id, { display_order: orderA })
+        .subscribe(() => this.load()));
   }
 }

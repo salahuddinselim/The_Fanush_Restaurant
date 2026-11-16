@@ -1,35 +1,78 @@
 <div class="admin-layout">
   <aside class="admin-sidebar">
-    <h2>Restaurant CMS</h2>
-    <a routerLink="/admin/dashboard" routerLinkActive="active">Dashboard</a>
-    <a routerLink="/admin/config" routerLinkActive="active">Site Settings</a>
-    <a routerLink="/admin/menu" routerLinkActive="active">Menu</a>
-    <a routerLink="/admin/gallery" routerLinkActive="active">Gallery</a>
-    <a routerLink="/admin/hours" routerLinkActive="active">Hours</a>
-    <a routerLink="/admin/reservations" routerLinkActive="active">Reservations</a>
-    <a routerLink="/" style="margin-top:12px;opacity:.6">← View Site</a>
-    <div class="logout"><a (click)="auth.logout()" style="cursor:pointer;color:rgba(255,255,255,.5)">Sign Out</a></div>
+    <div class="sidebar-brand">
+      <div class="brand-mark">F</div>
+      <div class="brand-text"><b>Fanus CMS</b><small>Admin Panel</small></div>
+    </div>
+    <span class="sidebar-section">Main</span>
+    <a routerLink="/admin/dashboard" routerLinkActive="active"><span class="nav-ic">🏠</span> Dashboard</a>
+    <a routerLink="/admin/config" routerLinkActive="active"><span class="nav-ic">⚙️</span> Site Settings</a>
+    <hr class="sidebar-divider">
+    <span class="sidebar-section">Content</span>
+    <a routerLink="/admin/menu" routerLinkActive="active"><span class="nav-ic">🍽</span> Menu</a>
+    <a routerLink="/admin/gallery" routerLinkActive="active"><span class="nav-ic">🖼</span> Gallery</a>
+    <a routerLink="/admin/hours" routerLinkActive="active"><span class="nav-ic">🕐</span> Opening Hours</a>
+    <hr class="sidebar-divider">
+    <span class="sidebar-section">Bookings</span>
+    <a routerLink="/admin/reservations" routerLinkActive="active"><span class="nav-ic">📋</span> Reservations</a>
+    <div class="sidebar-footer">
+      <a routerLink="/"><span class="nav-ic">↗</span> View Site</a>
+      <a (click)="auth.logout()" style="cursor:pointer;color:rgba(255,80,80,.7)"><span class="nav-ic">🚪</span> Sign Out</a>
+    </div>
   </aside>
   <main class="admin-main">
-    <h1 class="admin-title">Gallery</h1>
-    <div class="admin-card">
-      <h3 style="margin-bottom:16px">Upload New Image</h3>
-      <div class="row2">
-        <div class="field"><label>Caption</label><input type="text" [(ngModel)]="caption" placeholder="Optional caption"></div>
-        <div class="field"><label>Image File</label><input type="file" accept="image/*" (change)="onFile($event)" [disabled]="uploading"></div>
-      </div>
-      <p *ngIf="uploading" style="color:var(--muted)">Uploading…</p>
+    <div class="admin-topbar">
+      <h1 class="admin-page-title">Gallery <span>{{ images.length }} photos uploaded</span></h1>
     </div>
-    <div class="gal-admin-grid">
-      <div *ngFor="let img of images" class="gal-admin-card" [class.inactive]="!img.is_active">
-        <img [src]="apiBase + img.image_url" [alt]="img.caption || ''" class="gal-thumb">
-        <div class="gal-info">
-          <span class="gal-caption">{{ img.caption || '(no caption)' }}</span>
-          <div class="gal-actions">
-            <button class="btn btn-outline btn-sm" (click)="toggle(img)">{{ img.is_active ? 'Hide' : 'Show' }}</button>
-            <button class="btn btn-danger btn-sm" (click)="delete(img.id)">Delete</button>
+
+    <!-- Upload -->
+    <div class="admin-card">
+      <div class="admin-card-header"><h3>Upload New Photo</h3></div>
+      <div class="upload-zone" [class.uploading]="uploading">
+        <div class="upload-icon">📷</div>
+        <p>Choose an image file to upload</p>
+        <div class="row2" style="margin-top:12px">
+          <div class="field"><label>Caption (optional)</label><input type="text" [(ngModel)]="caption" placeholder="e.g. Our signature pasta"></div>
+          <div class="field">
+            <label>Image File *</label>
+            <input type="file" accept="image/*" (change)="onFile($event)" [disabled]="uploading" class="file-input">
           </div>
         </div>
+        <p *ngIf="uploading" class="upload-status">⏳ Uploading…</p>
+      </div>
+    </div>
+
+    <!-- Grid -->
+    <div class="admin-card" *ngIf="images.length > 0">
+      <div class="admin-card-header">
+        <h3>All Photos</h3>
+        <span style="font-size:.8rem;color:var(--ink-soft)">Use ↑ ↓ to reorder · toggle visibility</span>
+      </div>
+      <div class="gal-admin-grid">
+        <div *ngFor="let img of images; let i = index" class="gal-admin-card" [class.inactive]="!img.is_active">
+          <div class="gal-thumb-wrap">
+            <img [src]="apiBase + img.image_url" [alt]="img.caption || ''" class="gal-thumb">
+            <div class="gal-overlay">
+              <span class="gal-order-badge">#{{ i + 1 }}</span>
+            </div>
+          </div>
+          <div class="gal-info">
+            <span class="gal-caption">{{ img.caption || '(no caption)' }}</span>
+            <div class="gal-actions">
+              <button class="icon-btn" (click)="moveUp(i)" [disabled]="i === 0" title="Move up">↑</button>
+              <button class="icon-btn" (click)="moveDown(i)" [disabled]="i === images.length - 1" title="Move down">↓</button>
+              <button class="btn ghost sm" (click)="toggle(img)">{{ img.is_active ? 'Hide' : 'Show' }}</button>
+              <button class="btn danger sm" (click)="delete(img.id)">Delete</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="admin-card" *ngIf="images.length === 0">
+      <div class="gal-empty">
+        <span style="font-size:3rem">📷</span>
+        <p>No photos yet — upload your first one above.</p>
       </div>
     </div>
   </main>

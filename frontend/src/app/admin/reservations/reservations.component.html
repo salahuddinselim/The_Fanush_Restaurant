@@ -1,47 +1,66 @@
 <div class="admin-layout">
   <aside class="admin-sidebar">
-    <h2>Restaurant CMS</h2>
-    <a routerLink="/admin/dashboard" routerLinkActive="active">Dashboard</a>
-    <a routerLink="/admin/config" routerLinkActive="active">Site Settings</a>
-    <a routerLink="/admin/menu" routerLinkActive="active">Menu</a>
-    <a routerLink="/admin/gallery" routerLinkActive="active">Gallery</a>
-    <a routerLink="/admin/hours" routerLinkActive="active">Hours</a>
-    <a routerLink="/admin/reservations" routerLinkActive="active">Reservations</a>
-    <a routerLink="/" style="margin-top:12px;opacity:.6">← View Site</a>
-    <div class="logout"><a (click)="auth.logout()" style="cursor:pointer;color:rgba(255,255,255,.5)">Sign Out</a></div>
+    <div class="sidebar-brand">
+      <div class="brand-mark">F</div>
+      <div class="brand-text"><b>Fanus CMS</b><small>Admin Panel</small></div>
+    </div>
+    <span class="sidebar-section">Main</span>
+    <a routerLink="/admin/dashboard" routerLinkActive="active"><span class="nav-ic">🏠</span> Dashboard</a>
+    <a routerLink="/admin/config" routerLinkActive="active"><span class="nav-ic">⚙️</span> Site Settings</a>
+    <hr class="sidebar-divider">
+    <span class="sidebar-section">Content</span>
+    <a routerLink="/admin/menu" routerLinkActive="active"><span class="nav-ic">🍽</span> Menu</a>
+    <a routerLink="/admin/gallery" routerLinkActive="active"><span class="nav-ic">🖼</span> Gallery</a>
+    <a routerLink="/admin/hours" routerLinkActive="active"><span class="nav-ic">🕐</span> Opening Hours</a>
+    <hr class="sidebar-divider">
+    <span class="sidebar-section">Bookings</span>
+    <a routerLink="/admin/reservations" routerLinkActive="active"><span class="nav-ic">📋</span> Reservations</a>
+    <div class="sidebar-footer">
+      <a routerLink="/"><span class="nav-ic">↗</span> View Site</a>
+      <a (click)="auth.logout()" style="cursor:pointer;color:rgba(255,80,80,.7)"><span class="nav-ic">🚪</span> Sign Out</a>
+    </div>
   </aside>
   <main class="admin-main">
-    <h1 class="admin-title">Reservations</h1>
+    <div class="admin-topbar">
+      <h1 class="admin-page-title">Reservations <span>{{ reservations.length }} total bookings</span></h1>
+      <div class="res-filter-pills">
+        <span class="res-pill all" [class.active]="filter === 'all'" (click)="filter = 'all'">All</span>
+        <span class="res-pill pending" [class.active]="filter === 'pending'" (click)="filter = 'pending'">Pending</span>
+        <span class="res-pill confirmed" [class.active]="filter === 'confirmed'" (click)="filter = 'confirmed'">Confirmed</span>
+        <span class="res-pill cancelled" [class.active]="filter === 'cancelled'" (click)="filter = 'cancelled'">Cancelled</span>
+      </div>
+    </div>
     <div class="admin-card" style="overflow-x:auto">
       <table class="data-table">
         <thead>
           <tr>
-            <th>Date / Time</th><th>Name</th><th>Party</th><th>Contact</th><th>Notes</th><th>Status</th><th></th>
+            <th>Guest</th><th>Date &amp; Time</th><th>Party</th><th>Contact</th><th>Notes</th><th>Status</th><th>Actions</th>
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let r of reservations">
-            <td><b>{{ r.date }}</b><br><span style="color:var(--muted)">{{ r.time }}</span></td>
-            <td>{{ r.name }}</td>
-            <td>{{ r.party_size }}</td>
+          <tr *ngFor="let r of filtered">
+            <td><b>{{ r.name }}</b></td>
             <td>
+              <b>{{ r.date }}</b><br>
+              <span style="color:var(--ink-soft);font-size:12px">{{ r.time }}</span>
+            </td>
+            <td><span class="party-badge">{{ r.party_size }} guests</span></td>
+            <td style="font-size:13px">
               <div>{{ r.email }}</div>
-              <div style="color:var(--muted)">{{ r.phone }}</div>
+              <div style="color:var(--ink-soft)">{{ r.phone }}</div>
             </td>
-            <td style="max-width:160px;font-size:13px">{{ r.notes || '—' }}</td>
+            <td style="max-width:140px;font-size:12px;color:var(--ink-soft)">{{ r.notes || '—' }}</td>
+            <td><span class="badge badge-{{ r.status }}">{{ r.status }}</span></td>
             <td>
-              <span class="badge badge-{{ r.status }}">{{ r.status }}</span>
-            </td>
-            <td>
-              <div style="display:flex;gap:6px;flex-wrap:wrap">
-                <button *ngIf="r.status !== 'confirmed'" class="btn btn-gold btn-sm" (click)="setStatus(r.id, 'confirmed')">Confirm</button>
-                <button *ngIf="r.status !== 'cancelled'" class="btn btn-outline btn-sm" (click)="setStatus(r.id, 'cancelled')">Cancel</button>
-                <button class="btn btn-danger btn-sm" (click)="delete(r.id)">Del</button>
+              <div class="action-row">
+                <button *ngIf="r.status !== 'confirmed'" class="btn gold sm" (click)="setStatus(r.id, 'confirmed')">Confirm</button>
+                <button *ngIf="r.status !== 'cancelled'" class="btn ghost sm" (click)="setStatus(r.id, 'cancelled')">Cancel</button>
+                <button class="btn danger sm" (click)="delete(r.id)">Delete</button>
               </div>
             </td>
           </tr>
-          <tr *ngIf="reservations.length === 0">
-            <td colspan="7" style="text-align:center;color:var(--muted);padding:32px">No reservations yet.</td>
+          <tr *ngIf="filtered.length === 0">
+            <td colspan="7" class="empty-row">No reservations found.</td>
           </tr>
         </tbody>
       </table>

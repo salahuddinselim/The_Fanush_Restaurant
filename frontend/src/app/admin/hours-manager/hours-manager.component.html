@@ -1,29 +1,49 @@
 <div class="admin-layout">
   <aside class="admin-sidebar">
-    <h2>Restaurant CMS</h2>
-    <a routerLink="/admin/dashboard" routerLinkActive="active">Dashboard</a>
-    <a routerLink="/admin/config" routerLinkActive="active">Site Settings</a>
-    <a routerLink="/admin/menu" routerLinkActive="active">Menu</a>
-    <a routerLink="/admin/gallery" routerLinkActive="active">Gallery</a>
-    <a routerLink="/admin/hours" routerLinkActive="active">Hours</a>
-    <a routerLink="/admin/reservations" routerLinkActive="active">Reservations</a>
-    <a routerLink="/" style="margin-top:12px;opacity:.6">← View Site</a>
-    <div class="logout"><a (click)="auth.logout()" style="cursor:pointer;color:rgba(255,255,255,.5)">Sign Out</a></div>
+    <div class="sidebar-brand">
+      <div class="brand-mark">F</div>
+      <div class="brand-text"><b>Fanus CMS</b><small>Admin Panel</small></div>
+    </div>
+    <span class="sidebar-section">Main</span>
+    <a routerLink="/admin/dashboard" routerLinkActive="active"><span class="nav-ic">🏠</span> Dashboard</a>
+    <a routerLink="/admin/config" routerLinkActive="active"><span class="nav-ic">⚙️</span> Site Settings</a>
+    <hr class="sidebar-divider">
+    <span class="sidebar-section">Content</span>
+    <a routerLink="/admin/menu" routerLinkActive="active"><span class="nav-ic">🍽</span> Menu</a>
+    <a routerLink="/admin/gallery" routerLinkActive="active"><span class="nav-ic">🖼</span> Gallery</a>
+    <a routerLink="/admin/hours" routerLinkActive="active"><span class="nav-ic">🕐</span> Opening Hours</a>
+    <hr class="sidebar-divider">
+    <span class="sidebar-section">Bookings</span>
+    <a routerLink="/admin/reservations" routerLinkActive="active"><span class="nav-ic">📋</span> Reservations</a>
+    <div class="sidebar-footer">
+      <a routerLink="/"><span class="nav-ic">↗</span> View Site</a>
+      <a (click)="auth.logout()" style="cursor:pointer;color:rgba(255,80,80,.7)"><span class="nav-ic">🚪</span> Sign Out</a>
+    </div>
   </aside>
   <main class="admin-main">
-    <h1 class="admin-title">Opening Hours</h1>
+    <div class="admin-topbar">
+      <h1 class="admin-page-title">Opening Hours <span>Set times for each day of the week</span></h1>
+    </div>
     <div class="admin-card">
+      <div class="admin-card-header"><h3>Weekly Schedule</h3></div>
       <table class="data-table">
-        <thead><tr><th>Day</th><th>Open</th><th>Close</th><th>Closed</th><th></th></tr></thead>
+        <thead>
+          <tr><th>Day</th><th>Open</th><th>Close</th><th>Closed all day</th><th>Action</th></tr>
+        </thead>
         <tbody>
           <tr *ngFor="let h of hours; let i = index" [class.muted-row]="h.is_closed">
             <td><b>{{ dayName(h) }}</b></td>
-            <td><input type="time" [(ngModel)]="h.open_time" [disabled]="h.is_closed" style="width:110px"></td>
-            <td><input type="time" [(ngModel)]="h.close_time" [disabled]="h.is_closed" style="width:110px"></td>
-            <td><input type="checkbox" [(ngModel)]="h.is_closed"></td>
+            <td><input type="time" [(ngModel)]="h.open_time" [disabled]="h.is_closed" class="time-input"></td>
+            <td><input type="time" [(ngModel)]="h.close_time" [disabled]="h.is_closed" class="time-input"></td>
             <td>
-              <button class="btn btn-gold btn-sm" (click)="save(h, i)" [disabled]="saving === i">
-                {{ saving === i ? '…' : 'Save' }}
+              <label class="toggle-wrap">
+                <input type="checkbox" [(ngModel)]="h.is_closed" class="toggle-input">
+                <span class="toggle-track"></span>
+              </label>
+            </td>
+            <td>
+              <button class="btn gold sm" (click)="save(h, i)" [disabled]="saving === i">
+                {{ saving === i ? 'Saving…' : 'Save' }}
               </button>
             </td>
           </tr>
