@@ -48,12 +48,14 @@
         <h3>All Photos</h3>
         <span style="font-size:.8rem;color:var(--ink-soft)">Use ↑ ↓ to reorder · toggle visibility</span>
       </div>
+      <div *ngIf="loadError" style="color:#991b1b;background:#fee2e2;border:1px solid #fca5a5;border-radius:8px;padding:12px 16px;margin-bottom:16px;">{{ loadError }}</div>
       <div class="gal-admin-grid">
         <div *ngFor="let img of images; let i = index" class="gal-admin-card" [class.inactive]="!img.is_active">
           <div class="gal-thumb-wrap">
             <img [src]="apiBase + img.image_url" [alt]="img.caption || ''" class="gal-thumb">
             <div class="gal-overlay">
               <span class="gal-order-badge">#{{ i + 1 }}</span>
+              <button class="gal-delete-btn" (click)="delete(img.id)" title="Delete image">✕</button>
             </div>
           </div>
           <div class="gal-info">
@@ -62,7 +64,7 @@
               <button class="icon-btn" (click)="moveUp(i)" [disabled]="i === 0" title="Move up">↑</button>
               <button class="icon-btn" (click)="moveDown(i)" [disabled]="i === images.length - 1" title="Move down">↓</button>
               <button class="btn ghost sm" (click)="toggle(img)">{{ img.is_active ? 'Hide' : 'Show' }}</button>
-              <button class="btn danger sm" (click)="delete(img.id)">Delete</button>
+              <button class="btn danger sm" (click)="delete(img.id)">🗑 Delete</button>
             </div>
           </div>
         </div>

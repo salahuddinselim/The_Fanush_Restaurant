@@ -20,9 +20,17 @@ export class GalleryManagerComponent implements OnInit {
 
   constructor(private api: ApiService, public auth: AuthService) {}
 
+  loadError = '';
+
   ngOnInit() { this.load(); }
 
-  load() { this.api.getAllGallery().subscribe(imgs => this.images = imgs); }
+  load() {
+    this.loadError = '';
+    this.api.getAllGallery().subscribe({
+      next: imgs => this.images = imgs,
+      error: err => this.loadError = 'Could not load images. Please refresh or log in again.',
+    });
+  }
 
   onFile(event: Event) {
     const file = (event.target as HTMLInputElement).files?.[0];
