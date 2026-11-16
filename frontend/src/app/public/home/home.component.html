@@ -1,0 +1,293 @@
+<!-- TOPBAR -->
+<div class="topbar">
+  <div class="wrap topbar-inner">
+    <span class="topbar-left">
+      <i class="dot"></i> Italian Kitchen · {{ locationLabel }}
+    </span>
+    <span class="topbar-right">
+      {{ address }} &nbsp;·&nbsp; <a [href]="'tel:' + phone">{{ phone }}</a>
+    </span>
+  </div>
+</div>
+
+<!-- HEADER / NAV -->
+<header class="site-nav">
+  <div class="wrap nav-inner">
+    <a class="brand" (click)="scrollTo('top')" style="cursor:pointer">
+      <span class="brand-mark">
+        <img *ngIf="logoUrl" [src]="logoUrl" [alt]="name" class="brand-logo-img">
+        <span *ngIf="!logoUrl" class="brand-letter">F</span>
+      </span>
+      <span class="brand-text">
+        <b>{{ name }}</b>
+        <small>Italian Kitchen</small>
+      </span>
+    </a>
+
+    <nav class="navlinks" [class.open]="mobileMenuOpen">
+      <a (click)="scrollTo('about')">About</a>
+      <a (click)="scrollTo('menu')">Menu</a>
+      <a (click)="scrollTo('visit')">Visit</a>
+      <a (click)="scrollTo('contact')">Contact</a>
+    </nav>
+
+    <a [href]="'tel:' + phone" class="btn nav-cta">{{ ctaText }}</a>
+
+    <button class="burger" (click)="mobileMenuOpen = !mobileMenuOpen" [class.open]="mobileMenuOpen" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero">
+    <img class="hero-bg" [src]="heroImg" [alt]="name + ' dining room'">
+    <div class="hero-overlay"></div>
+    <div class="wrap hero-body">
+      <span class="eyebrow">{{ locationLabel }}</span>
+      <h1>{{ tagline }}</h1>
+      <p class="lead">{{ description }}</p>
+      <div class="hero-cta-row">
+        <a (click)="scrollTo('menu')" class="btn" style="cursor:pointer">View the Menu</a>
+        <a [href]="'tel:' + phone" class="btn ghost-white">{{ phone }}</a>
+      </div>
+      <div class="hero-stats">
+        <div><b>3.8★</b><span>Google Rating</span></div>
+        <div><b>Fresh</b><span>Made to Order</span></div>
+        <div><b>Family</b><span>Owned &amp; Run</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="about-section" id="about">
+    <div class="wrap about-grid">
+      <div class="about-imgs">
+        <img [src]="ABOUT_IMGS[0]" alt="Fresh pasta" loading="lazy">
+        <img [src]="ABOUT_IMGS[1]" alt="Chicken parmigiana" loading="lazy">
+        <img [src]="ABOUT_IMGS[2]" alt="Creamy risotto" loading="lazy">
+      </div>
+      <div class="about-copy">
+        <span class="eyebrow alt">Our Kitchen</span>
+        <h2>A neighbourhood table with an Italian heart.</h2>
+        <p>The Fanus Restaurant brings together the comfort of classic Italian cooking and the easy-going spirit of a local diner. From slow-cooked beef ragù and creamy risottos to buttermilk-fried chicken burgers, everything is prepared to order and served generously.</p>
+        <p>Whether it's a quick lunch, a family dinner, or a takeaway night in — you'll find familiar flavours, fair prices, and a warm welcome on Albany Highway.</p>
+        <div class="badges">
+          <span class="badge-pill">Italian Cuisine</span>
+          <span class="badge-pill">Pizza &amp; Burgers</span>
+          <span class="badge-pill">Dine In</span>
+          <span class="badge-pill">Takeaway</span>
+          <span class="badge-pill">Family Friendly</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MENU -->
+  <section class="menu-section" id="menu">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="eyebrow alt">Our Menu</span>
+        <h2>Every dish, every price.</h2>
+        <p>All prices in Australian dollars. Dine in or take away.</p>
+      </div>
+
+      <div class="menu-tabs" *ngIf="categories.length">
+        <button
+          *ngFor="let cat of categories"
+          [class.active]="activeCatId === cat.id"
+          (click)="scrollToCat(cat)">
+          {{ cat.name }}
+        </button>
+      </div>
+
+      <div *ngFor="let cat of categories" class="menu-block" [id]="'cat-' + cat.id">
+        <h3 class="cat-heading">{{ cat.name }}</h3>
+        <div class="items-grid">
+          <div *ngFor="let item of cat.items" class="menu-item-row">
+            <div class="item-top">
+              <span class="item-name">{{ item.name }}</span>
+              <span class="item-fill"></span>
+              <span class="item-price">A${{ item.price.toFixed(2) }}</span>
+            </div>
+            <p *ngIf="item.description" class="item-desc">{{ item.description }}</p>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="!categories.length" class="menu-empty">
+        <p>Menu loading…</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURE STRIP -->
+  <section class="feature-strip">
+    <div class="wrap feature-cells">
+      <div class="feature-cell">
+        <b>Made to Order</b>
+        <p>Every pasta, risotto and burger is cooked fresh when you order — never pre-made.</p>
+      </div>
+      <div class="feature-cell">
+        <b>Family Friendly</b>
+        <p>Kids' pasta and nuggets on the menu, with generous portions for the whole table.</p>
+      </div>
+      <div class="feature-cell">
+        <b>Dine In or Takeaway</b>
+        <p>Join us on Albany Highway, or order for pickup and delivery across Gosnells.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- VISIT -->
+  <section class="visit-section" id="visit">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="eyebrow alt">Find Us</span>
+        <h2>Visit {{ name }}</h2>
+        <p>We're on Albany Highway in Gosnells — easy to reach, easy to love.</p>
+      </div>
+      <div class="visit-grid">
+        <div class="info-card">
+          <h3>Restaurant Details</h3>
+          <div class="info-row">
+            <span class="info-ic">📍</span>
+            <span><b>Address</b><span>{{ address }}</span></span>
+          </div>
+          <div class="info-row">
+            <span class="info-ic">📞</span>
+            <span><b>Phone</b><a [href]="'tel:' + phone">{{ phone }}</a></span>
+          </div>
+          <div class="info-row">
+            <span class="info-ic">🍽️</span>
+            <span><b>Cuisine</b><span>Italian · Pizza · Burgers · Pasta</span></span>
+          </div>
+          <div class="info-row">
+            <span class="info-ic">⭐</span>
+            <span><b>Rating</b><span>3.8 / 5 on Google</span></span>
+          </div>
+
+          <h3 style="margin-top:1.8rem">Opening Hours</h3>
+          <ul class="hours-list">
+            <li *ngFor="let h of hours" [class.closed]="h.is_closed">
+              <span>{{ dayName(h) }}</span>
+              <span *ngIf="!h.is_closed">{{ h.open_time }} – {{ h.close_time }}</span>
+              <span *ngIf="h.is_closed" class="closed-tag">Closed</span>
+            </li>
+          </ul>
+          <p class="hours-note" *ngIf="hours.length">Please call ahead to confirm current hours.</p>
+        </div>
+
+        <div class="map-frame">
+          <iframe
+            title="Map to {{ name }}"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            src="https://www.openstreetmap.org/export/embed.html?bbox=115.9900,-32.0810,115.9980,-32.0750&layer=mapnik&marker=-32.0781,115.9942">
+          </iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA BAND -->
+  <section class="cta-band" id="contact">
+    <div class="wrap cta-inner">
+      <h2>Hungry? Let's get you fed.</h2>
+      <p>Call us to place a takeaway order, or drop in and grab a table at {{ address }}.</p>
+      <div class="cta-actions">
+        <a [href]="'tel:' + phone" class="btn gold">Call {{ phone }}</a>
+        <button class="btn ghost-white-wine" (click)="scrollTo('reservation')">Book a Table</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- RESERVATION FORM -->
+  <section class="reservation-section" id="reservation">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="eyebrow alt">Reserve a Table</span>
+        <h2>Make a Reservation</h2>
+        <p>Fill in your details and we'll confirm your booking.</p>
+      </div>
+      <div class="form-wrap">
+        <div *ngIf="submitted" class="success-panel">
+          <div class="success-icon">✓</div>
+          <h3>Reservation received!</h3>
+          <p>We'll confirm your booking shortly. See you soon!</p>
+        </div>
+        <form *ngIf="!submitted" [formGroup]="form" (ngSubmit)="onSubmit()" class="res-form" novalidate>
+          <div class="row2">
+            <div class="field">
+              <label>Full Name *</label>
+              <input formControlName="name" type="text" placeholder="Your name" [class.field-error]="form.get('name')!.invalid && form.get('name')!.touched">
+              <span class="field-hint" *ngIf="form.get('name')!.invalid && form.get('name')!.touched">Required</span>
+            </div>
+            <div class="field"><label>Phone</label><input formControlName="phone" type="tel" placeholder="+61 ..."></div>
+          </div>
+          <div class="row2">
+            <div class="field">
+              <label>Email *</label>
+              <input formControlName="email" type="email" placeholder="you@example.com" [class.field-error]="form.get('email')!.invalid && form.get('email')!.touched">
+              <span class="field-hint" *ngIf="form.get('email')!.invalid && form.get('email')!.touched">Valid email required</span>
+            </div>
+            <div class="field"><label>Party Size *</label><input formControlName="party_size" type="number" min="1" max="20"></div>
+          </div>
+          <div class="row2">
+            <div class="field">
+              <label>Date *</label>
+              <input formControlName="date" type="date" [class.field-error]="form.get('date')!.invalid && form.get('date')!.touched">
+              <span class="field-hint" *ngIf="form.get('date')!.invalid && form.get('date')!.touched">Required</span>
+            </div>
+            <div class="field">
+              <label>Time *</label>
+              <input formControlName="time" type="time" [class.field-error]="form.get('time')!.invalid && form.get('time')!.touched">
+              <span class="field-hint" *ngIf="form.get('time')!.invalid && form.get('time')!.touched">Required</span>
+            </div>
+          </div>
+          <div class="field"><label>Special Requests</label><textarea formControlName="notes" placeholder="Dietary requirements, special occasions…"></textarea></div>
+          <p *ngIf="submitError" class="form-error">{{ submitError }}</p>
+          <button type="submit" class="btn" style="width:100%;border-radius:8px;padding:.85rem" [disabled]="submitting">
+            {{ submitting ? 'Sending…' : 'Request Reservation' }}
+          </button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap foot-grid">
+    <div class="foot-brand">
+      <span class="foot-name">{{ name }}</span>
+      <p>Honest Italian cooking in the heart of Gosnells, Western Australia. Pasta, pizza, burgers and grill — made fresh to order.</p>
+    </div>
+    <div class="foot-col">
+      <h4>Explore</h4>
+      <ul>
+        <li><a (click)="scrollTo('about')" style="cursor:pointer">About Us</a></li>
+        <li><a (click)="scrollTo('menu')" style="cursor:pointer">Full Menu</a></li>
+        <li><a (click)="scrollTo('visit')" style="cursor:pointer">Visit &amp; Hours</a></li>
+        <li><a (click)="scrollTo('contact')" style="cursor:pointer">Contact</a></li>
+      </ul>
+    </div>
+    <div class="foot-col">
+      <h4>Contact</h4>
+      <ul>
+        <li>{{ address }}</li>
+        <li><a [href]="'tel:' + phone">{{ phone }}</a></li>
+        <li *ngIf="email"><a [href]="'mailto:' + email">{{ email }}</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="foot-bottom">
+    <span class="wrap foot-bottom-inner">
+      <span>© {{ year }} {{ name }} · Gosnells, WA</span>
+      <a routerLink="/admin/login" class="foot-admin">Admin</a>
+    </span>
+  </div>
+</footer>

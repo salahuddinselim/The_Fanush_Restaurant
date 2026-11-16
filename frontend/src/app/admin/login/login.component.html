@@ -1,0 +1,23 @@
+<div class="login-wrap">
+  <div class="login-card">
+    <div class="login-logo">
+      <div class="login-mark"><span>F</span></div>
+      <span class="login-title">Restaurant CMS</span>
+      <span class="login-sub">Admin Panel</span>
+    </div>
+    <form [formGroup]="form" (ngSubmit)="submit()">
+      <div class="field">
+        <label>Username</label>
+        <input formControlName="username" type="text" autocomplete="username">
+      </div>
+      <div class="field">
+        <label>Password</label>
+        <input formControlName="password" type="password" autocomplete="current-password">
+      </div>
+      <div *ngIf="error" class="login-error">{{ error }}</div>
+      <button type="submit" class="btn" style="width:100%;margin-top:8px;border-radius:8px;padding:.85rem" [disabled]="loading">
+        {{ loading ? 'Signing in…' : 'Sign In' }}
+      </button>
+    </form>
+  </div>
+</div>

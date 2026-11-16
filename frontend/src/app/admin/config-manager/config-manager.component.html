@@ -1,0 +1,24 @@
+<div class="admin-layout">
+  <aside class="admin-sidebar">
+    <h2>Restaurant CMS</h2>
+    <a routerLink="/admin/dashboard" routerLinkActive="active">Dashboard</a>
+    <a routerLink="/admin/config" routerLinkActive="active">Site Settings</a>
+    <a routerLink="/admin/menu" routerLinkActive="active">Menu</a>
+    <a routerLink="/admin/gallery" routerLinkActive="active">Gallery</a>
+    <a routerLink="/admin/hours" routerLinkActive="active">Hours</a>
+    <a routerLink="/admin/reservations" routerLinkActive="active">Reservations</a>
+    <a routerLink="/" style="margin-top:12px;opacity:.6">← View Site</a>
+    <div class="logout"><a (click)="auth.logout()" style="cursor:pointer;color:rgba(255,255,255,.5)">Sign Out</a></div>
+  </aside>
+  <main class="admin-main">
+    <h1 class="admin-title">Site Settings</h1>
+    <div class="admin-card">
+      <div *ngFor="let f of fields" class="field">
+        <label>{{ f.label }}</label>
+        <input type="text" [(ngModel)]="values[f.key]">
+      </div>
+      <button class="btn btn-gold" (click)="save()">Save Changes</button>
+      <span *ngIf="saved" class="toast">Saved!</span>
+    </div>
+  </main>
+</div>

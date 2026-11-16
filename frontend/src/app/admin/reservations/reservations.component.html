@@ -1,0 +1,50 @@
+<div class="admin-layout">
+  <aside class="admin-sidebar">
+    <h2>Restaurant CMS</h2>
+    <a routerLink="/admin/dashboard" routerLinkActive="active">Dashboard</a>
+    <a routerLink="/admin/config" routerLinkActive="active">Site Settings</a>
+    <a routerLink="/admin/menu" routerLinkActive="active">Menu</a>
+    <a routerLink="/admin/gallery" routerLinkActive="active">Gallery</a>
+    <a routerLink="/admin/hours" routerLinkActive="active">Hours</a>
+    <a routerLink="/admin/reservations" routerLinkActive="active">Reservations</a>
+    <a routerLink="/" style="margin-top:12px;opacity:.6">← View Site</a>
+    <div class="logout"><a (click)="auth.logout()" style="cursor:pointer;color:rgba(255,255,255,.5)">Sign Out</a></div>
+  </aside>
+  <main class="admin-main">
+    <h1 class="admin-title">Reservations</h1>
+    <div class="admin-card" style="overflow-x:auto">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Date / Time</th><th>Name</th><th>Party</th><th>Contact</th><th>Notes</th><th>Status</th><th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let r of reservations">
+            <td><b>{{ r.date }}</b><br><span style="color:var(--muted)">{{ r.time }}</span></td>
+            <td>{{ r.name }}</td>
+            <td>{{ r.party_size }}</td>
+            <td>
+              <div>{{ r.email }}</div>
+              <div style="color:var(--muted)">{{ r.phone }}</div>
+            </td>
+            <td style="max-width:160px;font-size:13px">{{ r.notes || '—' }}</td>
+            <td>
+              <span class="badge badge-{{ r.status }}">{{ r.status }}</span>
+            </td>
+            <td>
+              <div style="display:flex;gap:6px;flex-wrap:wrap">
+                <button *ngIf="r.status !== 'confirmed'" class="btn btn-gold btn-sm" (click)="setStatus(r.id, 'confirmed')">Confirm</button>
+                <button *ngIf="r.status !== 'cancelled'" class="btn btn-outline btn-sm" (click)="setStatus(r.id, 'cancelled')">Cancel</button>
+                <button class="btn btn-danger btn-sm" (click)="delete(r.id)">Del</button>
+              </div>
+            </td>
+          </tr>
+          <tr *ngIf="reservations.length === 0">
+            <td colspan="7" style="text-align:center;color:var(--muted);padding:32px">No reservations yet.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </main>
+</div>

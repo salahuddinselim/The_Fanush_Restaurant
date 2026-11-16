@@ -1,0 +1,20 @@
+.login-wrap {
+  min-height: 100vh; display: flex; align-items: center; justify-content: center;
+  background: var(--cream-2);
+}
+.login-card {
+  width: 380px; background: var(--white); padding: 44px;
+  border: 1px solid var(--line); border-radius: 16px;
+  box-shadow: var(--shadow);
+}
+.login-logo { margin-bottom: 32px; text-align: center; }
+.login-mark {
+  width: 60px; height: 60px; border-radius: 50%;
+  background: var(--wine); border: 2.5px solid var(--gold);
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 16px;
+  span { font-family: 'Playfair Display', serif; font-weight: 800; font-size: 1.6rem; color: var(--gold-soft); }
+}
+.login-title { font-family: 'Playfair Display', serif; font-size: 1.5rem; display: block; color: var(--ink); }
+.login-sub { font-size: 12px; letter-spacing: .15em; text-transform: uppercase; color: var(--ink-soft); display: block; margin-top: 4px; }
+.login-error { color: #991b1b; font-size: 13px; margin-bottom: 10px; background: #fee2e2; padding: 8px 12px; border-radius: 6px; }

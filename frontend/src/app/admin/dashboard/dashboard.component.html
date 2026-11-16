@@ -1,0 +1,45 @@
+<div class="admin-layout">
+  <aside class="admin-sidebar">
+    <h2>Restaurant CMS</h2>
+    <a routerLink="/admin/dashboard" routerLinkActive="active">Dashboard</a>
+    <a routerLink="/admin/config" routerLinkActive="active">Site Settings</a>
+    <a routerLink="/admin/menu" routerLinkActive="active">Menu</a>
+    <a routerLink="/admin/gallery" routerLinkActive="active">Gallery</a>
+    <a routerLink="/admin/hours" routerLinkActive="active">Hours</a>
+    <a routerLink="/admin/reservations" routerLinkActive="active">Reservations</a>
+    <a routerLink="/" style="margin-top:12px;opacity:.6">← View Site</a>
+    <div class="logout">
+      <a (click)="auth.logout()" style="cursor:pointer;color:rgba(255,255,255,.5)">Sign Out</a>
+    </div>
+  </aside>
+  <main class="admin-main">
+    <h1 class="admin-title">Dashboard</h1>
+    <div class="dash-grid">
+      <a routerLink="/admin/config" class="dash-card">
+        <span class="dash-icon">⚙️</span>
+        <span class="dash-label">Site Settings</span>
+        <span class="dash-desc">Hero content, contact info, logo</span>
+      </a>
+      <a routerLink="/admin/menu" class="dash-card">
+        <span class="dash-icon">🍽</span>
+        <span class="dash-label">Menu</span>
+        <span class="dash-desc">Categories &amp; items with images</span>
+      </a>
+      <a routerLink="/admin/gallery" class="dash-card">
+        <span class="dash-icon">📷</span>
+        <span class="dash-label">Gallery</span>
+        <span class="dash-desc">Upload &amp; manage photos</span>
+      </a>
+      <a routerLink="/admin/hours" class="dash-card">
+        <span class="dash-icon">🕐</span>
+        <span class="dash-label">Opening Hours</span>
+        <span class="dash-desc">Set hours for each day</span>
+      </a>
+      <a routerLink="/admin/reservations" class="dash-card">
+        <span class="dash-icon">📋</span>
+        <span class="dash-label">Reservations</span>
+        <span class="dash-desc">View &amp; manage bookings</span>
+      </a>
+    </div>
+  </main>
+</div>
