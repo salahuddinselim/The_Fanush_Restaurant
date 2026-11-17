@@ -139,20 +139,24 @@
 
   <!-- MENU -->
   <section class="menu-section" id="menu">
-    <div class="wrap">
+    <!-- STICKY CATEGORY BAR - juicy-style horizontal scrollable nav -->
+    <div class="cat-sticky-bar" *ngIf="categories.length && !searchQuery">
+      <div class="wrap cat-scroll-track">
+        <button
+          *ngFor="let cat of categories"
+          [class.active]="activeCatId === cat.id"
+          (click)="scrollToCat(cat)"
+          [attr.aria-pressed]="activeCatId === cat.id">
+          {{ cat.name }}
+        </button>
+      </div>
+    </div>
+
+    <div class="wrap menu-wrap">
       <div class="sec-head reveal">
         <span class="eyebrow alt">Our Menu</span>
         <h2>Every dish, every price.</h2>
         <p>All prices in Australian dollars. Dine in or take away.</p>
-      </div>
-
-      <div class="menu-tabs" *ngIf="categories.length">
-        <button
-          *ngFor="let cat of categories"
-          [class.active]="activeCatId === cat.id"
-          (click)="scrollToCat(cat)">
-          {{ cat.name }}
-        </button>
       </div>
 
       <div *ngFor="let cat of filteredCategories" class="menu-block" [id]="'cat-' + cat.id">

@@ -17,6 +17,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   private api = inject(ApiService);
   private fb = inject(FormBuilder);
   private observer?: IntersectionObserver;
+  private catObserver?: IntersectionObserver;
 
   config: Config = {};
   categories: MenuCategory[] = [];
@@ -55,6 +56,8 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
     this.api.getCategories().subscribe(c => {
       this.categories = c;
       if (c.length) this.activeCatId = c[0].id;
+      // Observe category sections after they render
+      setTimeout(() => this.setupCatObserver(), 100);
     });
     this.api.getGallery().subscribe(g => this.gallery = g);
     this.api.getHours().subscribe(h => this.hours = h);
@@ -72,9 +75,29 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
       .forEach(el => this.observer!.observe(el));
   }
 
+  private setupCatObserver() {
+    this.catObserver?.disconnect();
+    this.catObserver = new IntersectionObserver(
+      entries => {
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            const id = parseInt(e.target.id.replace('cat-', ''), 10);
+            if (!isNaN(id)) this.activeCatId = id;
+          }
+        });
+      },
+      { threshold: 0.25, rootMargin: '-80px 0px -60% 0px' }
+    );
+    this.categories.forEach(cat => {
+      const el = document.getElementById('cat-' + cat.id);
+      if (el) this.catObserver!.observe(el);
+    });
+  }
+
   ngOnDestroy() {
     window.removeEventListener('scroll', this.scrollHandler);
     this.observer?.disconnect();
+    this.catObserver?.disconnect();
   }
 
   get allItems() {
@@ -111,6 +134,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   clearSearch() {
     this.searchQuery = '';
     this.showSuggestions = false;
+    this.searchSuggestions = [];
   }
 
   hideSearchSuggestions() {
@@ -138,6 +162,11 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   scrollToCat(cat: MenuCategory) {
     this.activeCatId = cat.id;
     document.getElementById('cat-' + cat.id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    // Scroll the active tab button into view in the sticky bar
+    setTimeout(() => {
+      const btn = document.querySelector(`.cat-scroll-track button.active`) as HTMLElement;
+      btn?.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+    }, 50);
   }
 
   onSubmit() {
