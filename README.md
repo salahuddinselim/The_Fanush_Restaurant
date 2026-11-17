@@ -6,124 +6,48 @@ A production-quality restaurant website built with **Angular 19** (frontend) and
 
 ## Live Preview
 
-| Public Site | Admin Panel |
+Preview the actual site without starting the app:
+
+| Public site | Admin CMS |
 |---|---|
-| ![Hero section with wine/cream palette, Playfair Display headings, and food photography](https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=1200&q=80) | |
+| ![Hero section of The Fanus Restaurant](docs/screenshots/home-hero.png) | ![Admin dashboard statistics](docs/screenshots/admin-dashboard-stats.jpeg) |
+| ![Menu section with category tabs and dishes](docs/screenshots/home-menu.jpeg) | ![Admin sign-in form](docs/screenshots/admin-login-form.jpeg) |
+
+All screenshots in this README are committed under [`docs/screenshots/`](docs/screenshots/), so they render directly on GitHub.
 
 ---
 
 ## Screenshots
 
-### Hero — Full-width landing with animated entrance
+Captured at 1440×900 from the running app.
+
+### Home — hero
 
 The hero loads with a Ken Burns background zoom and staggered fade-up for each text element (eyebrow → heading → lead → CTA buttons → stats strip).
 
-```
-┌────────────────────────────────────────────────────────┐
-│  🍽  THE FANUS RESTAURANT            [Call to Order]   │
-│────────────────────────────────────────────────────────│
-│                                                        │
-│  Gosnells · Western Australia                          │
-│                                                        │
-│  Honest Italian cooking,                               │
-│  made fresh every day.                                 │
-│                                                        │
-│  Pasta, pizza, burgers and grill classics.             │
-│                                                        │
-│  [View the Menu]   [+61 411 074 381]                   │
-│                                                        │
-│  3.8★ Google  │  Fresh Made to Order  │  Family Owned  │
-└────────────────────────────────────────────────────────┘
-```
+![Home hero of The Fanus Restaurant](docs/screenshots/home-hero.png)
 
-### About — Slide-in image grid + copy
+### About — story and image grid
 
-```
-┌───────────────────────────────────────────────────────┐
-│  [Food Photo 1]  [Photo 2]   Our Kitchen              │
-│                  [Photo 3]   ─────────────            │
-│                              A neighbourhood table    │
-│                              with an Italian heart.   │
-│                                                       │
-│                              [Italian] [Pizza] [Dine] │
-│                              [Takeaway] [Family]      │
-└───────────────────────────────────────────────────────┘
-```
+![About section with kitchen photography and brand story](docs/screenshots/home-about.jpeg)
 
-### Full Menu — Tabbed categories, price-line layout
+### Full menu — tabbed categories and prices
 
-```
-┌───────────────────────────────────────────────────────┐
-│  [Pasta] [Pizza] [Burgers] [Grills] [Desserts]        │
-│  ─────────────────────────────────                    │
-│  Pasta                                                │
-│  Spaghetti Bolognese ................... A$16.90      │
-│  Slow-cooked beef ragù, parmesan                      │
-│  Fettuccine Carbonara .................. A$17.50      │
-└───────────────────────────────────────────────────────┘
-```
+![Menu section with category tabs and dish cards](docs/screenshots/home-menu.jpeg)
 
-### Feature Strip — Dark band with 3 value propositions
+### Visit — hours, contact details and map
 
-```
-┌─────────────────┬─────────────────┬──────────────────┐
-│  Made to Order  │  Family Friendly │  Dine In or      │
-│                 │                  │  Takeaway        │
-│  Every dish     │  Kids' menu &    │  Albany Hwy or   │
-│  cooked fresh   │  generous serves │  delivery        │
-└─────────────────┴─────────────────┴──────────────────┘
-```
+![Visit section with opening hours, address and OpenStreetMap](docs/screenshots/home-visit.jpeg)
 
-### Visit — Hours, contact info + OpenStreetMap
+### Reservation form — reactive validation
 
-```
-┌──────────────────────────┬──────────────────────────┐
-│  Restaurant Details      │                          │
-│  📍 2310 Albany Hwy      │      [OpenStreetMap]     │
-│  📞 +61 411 074 381      │                          │
-│  🍽 Italian · Pizza      │      (Gosnells, WA)      │
-│  ⭐ 3.8 / 5 Google       │                          │
-│                          │                          │
-│  Opening Hours           │                          │
-│  Monday  11am – 9pm      │                          │
-│  Sunday  Closed          │                          │
-└──────────────────────────┴──────────────────────────┘
-```
+![Reservation form with name, contact, date, time and party size fields](docs/screenshots/home-reservation.jpeg)
 
-### Reservation Form — Reactive form with validation
+### Admin panel — sign in and CMS dashboard
 
-```
-┌───────────────────────────────────────────────────────┐
-│  Make a Reservation                                   │
-│  ─────────────────                                    │
-│  Full Name *         Phone                            │
-│  [____________]      [____________]                   │
-│  Email *             Party Size *                     │
-│  [____________]      [    2      ]                    │
-│  Date *              Time *                           │
-│  [____________]      [____________]                   │
-│  Special Requests                                     │
-│  [__________________________________________]         │
-│                                                       │
-│  [        Request Reservation        ]                │
-└───────────────────────────────────────────────────────┘
-```
+![Admin sign-in form](docs/screenshots/admin-login-form.jpeg)
 
-### Admin Panel — Full CMS
-
-```
-┌──────────────┬────────────────────────────────────────┐
-│  🍽 Fanus    │  Dashboard                             │
-│  ─────────── │  ──────────────────────────────────── │
-│  Dashboard   │  [⚙ Site Settings] [🕐 Hours]         │
-│  Site Config │  [🍝 Menu]  [📋 Reservations]         │
-│  Hours       │  [🖼 Gallery]  [🔑 Sign Out]           │
-│  Menu        │                                        │
-│  Reservations│                                        │
-│  Gallery     │                                        │
-│  Sign Out    │                                        │
-└──────────────┴────────────────────────────────────────┘
-```
+![Admin dashboard statistics](docs/screenshots/admin-dashboard-stats.jpeg)
 
 ---
 
