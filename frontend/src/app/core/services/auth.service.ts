@@ -22,10 +22,29 @@ export class AuthService {
   }
 
   getToken(): string | null {
-    return localStorage.getItem(this.TOKEN_KEY);
+    const token = localStorage.getItem(this.TOKEN_KEY);
+    if (!token) return null;
+    if (!this.isValidToken(token)) {
+      localStorage.removeItem(this.TOKEN_KEY);
+      return null;
+    }
+    return token;
   }
 
   isLoggedIn(): boolean {
     return !!this.getToken();
+  }
+
+  private isValidToken(token: string): boolean {
+    const parts = token.split('.');
+    if (parts.length !== 3) return false;
+    try {
+      const base64 = parts[1].replace(/-/g, '+').replace(/_/g, '/');
+      const padded = base64.padEnd(Math.ceil(base64.length / 4) * 4, '=');
+      const payload = JSON.parse(atob(padded));
+      return typeof payload?.exp === 'number' && payload.exp * 1000 > Date.now();
+    } catch {
+      return false;
+    }
   }
 }

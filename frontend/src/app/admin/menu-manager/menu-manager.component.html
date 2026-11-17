@@ -59,7 +59,7 @@
         <div class="field"><label>Display Order</label><input type="number" [(ngModel)]="newItem.display_order" min="0"></div>
       </div>
       <div class="field"><label>Description</label><textarea [(ngModel)]="newItem.description" rows="2" placeholder="Optional short description"></textarea></div>
-      <button class="btn gold" (click)="addItem()" [disabled]="!newItem.name || !newItem.category_id">+ Add Item</button>
+      <button class="btn gold" (click)="addItem()" [disabled]="!newItem.name?.trim() || !newItem.category_id">+ Add Item</button>
     </div>
 
     <!-- Items per category -->
@@ -77,7 +77,7 @@
             <ng-container *ngIf="editingItem?.id !== item.id">
               <td>
                 <div class="item-img-wrap">
-                  <img *ngIf="item.image_url" [src]="apiBase + item.image_url" class="item-thumb">
+                  <img *ngIf="item.image_url" [src]="resolveImageUrl(item.image_url)" class="item-thumb">
                   <span *ngIf="!item.image_url" class="no-img">🍽</span>
                 </div>
                 <div class="img-actions">

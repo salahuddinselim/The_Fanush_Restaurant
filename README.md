@@ -237,6 +237,24 @@ ng serve
 | Username | `admin` |
 | Password | `admin123` |
 
+### Runtime Configuration
+
+The frontend uses `http://localhost:8000` when the site is served from `localhost` or `127.0.0.1`. On any other host it uses same-origin API paths, so `/config`, `/menu/categories`, and the other endpoints should be reverse-proxied to the backend.
+
+For a separate API host, override the base URL before Angular loads:
+
+```html
+<meta name="api-url" content="https://api.example.com" />
+```
+
+You can also set `window.RESTAURANT_API_URL = 'https://api.example.com'` before bootstrap. The meta tag takes precedence over the window value.
+
+The backend allows local Angular origins by default. For deployed split-host setups, set a comma-separated allowlist before starting Uvicorn:
+
+```bash
+CORS_ALLOW_ORIGINS=https://restaurant.example.com,https://admin.example.com uvicorn main:app
+```
+
 ---
 
 ## API Endpoints

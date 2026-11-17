@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { getApiUrl } from './api.config';
 
-export const API_URL = 'http://localhost:8000';
+export const API_URL = getApiUrl();
 
 export interface Config { [key: string]: string | null }
 export interface BusinessHour { id: number; day_of_week: number; open_time: string | null; close_time: string | null; is_closed: boolean }

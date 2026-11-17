@@ -139,37 +139,60 @@
 
   <!-- MENU -->
   <section class="menu-section" id="menu">
-    <!-- STICKY CATEGORY BAR - juicy-style horizontal scrollable nav -->
     <div class="cat-sticky-bar" *ngIf="categories.length && !searchQuery">
       <div class="wrap cat-scroll-track">
         <button
           *ngFor="let cat of categories"
           [class.active]="activeCatId === cat.id"
           (click)="scrollToCat(cat)"
-          [attr.aria-pressed]="activeCatId === cat.id">
+          [attr.aria-pressed]="activeCatId === cat.id"
+          [attr.data-icon]="getCategoryIcon(cat.name)"
+          [attr.data-count]="cat.items.length">
           {{ cat.name }}
         </button>
       </div>
     </div>
 
     <div class="wrap menu-wrap">
-      <div class="sec-head reveal">
-        <span class="eyebrow alt">Our Menu</span>
-        <h2>Every dish, every price.</h2>
-        <p>All prices in Australian dollars. Dine in or take away.</p>
+      <div class="menu-head reveal">
+        <div>
+          <span class="eyebrow alt">Our Menu</span>
+          <h2>Fresh from the kitchen.</h2>
+          <p>Every dish, every price.</p>
+        </div>
+        <span class="menu-count">{{ menuItemCount }} items</span>
       </div>
 
       <div *ngFor="let cat of filteredCategories" class="menu-block" [id]="'cat-' + cat.id">
-        <h3 class="cat-heading">{{ cat.name }}</h3>
+        <h3 class="cat-heading">
+          <span class="cat-heading-icon" aria-hidden="true">{{ getCategoryIcon(cat.name) }}</span>
+          <span>{{ cat.name }}</span>
+          <span class="cat-heading-count">{{ cat.items.length }}</span>
+        </h3>
         <div class="items-grid">
-          <div *ngFor="let item of cat.items" class="menu-item-row">
-            <div class="item-top">
-              <span class="item-name">{{ item.name }}</span>
-              <span class="item-fill"></span>
-              <span class="item-price">A${{ item.price.toFixed(2) }}</span>
+          <article *ngFor="let item of cat.items" class="menu-card" tabindex="0" [attr.aria-label]="item.name + ' — A$' + item.price.toFixed(2)">
+            <div class="card-img-wrap">
+              <div *ngIf="!menuImageLoaded[item.id]" class="card-img-placeholder" aria-hidden="true">
+                <span>{{ getCategoryIcon(cat.name) }}</span>
+              </div>
+              <img
+                [src]="menuItemImage(item, cat.name)"
+                [alt]="item.name"
+                loading="lazy"
+                [class.loaded]="menuImageLoaded[item.id]"
+                (load)="onMenuImageLoad(item.id)"
+                (error)="onMenuImageError(item.id)">
+              <div class="card-img-overlay"></div>
             </div>
-            <p *ngIf="item.description" class="item-desc">{{ item.description }}</p>
-          </div>
+            <div class="card-body">
+              <h4 class="card-name">{{ item.name }}</h4>
+              <p *ngIf="item.description" class="card-desc">{{ item.description }}</p>
+              <div class="card-price-row">
+                <span class="price-label">Price</span>
+                <span class="card-price">A${{ item.price.toFixed(2) }}</span>
+              </div>
+            </div>
+          </article>
         </div>
       </div>
 
@@ -209,7 +232,7 @@
         <p>We're on Albany Highway in Gosnells — easy to reach, easy to love.</p>
       </div>
       <div class="visit-grid">
-        <div class="info-card reveal-left">
+        <div class="info-card details-card reveal-left">
           <h3>Restaurant Details</h3>
           <div class="info-row">
             <span class="info-ic">📍</span>
@@ -227,8 +250,10 @@
             <span class="info-ic">⭐</span>
             <span><b>Rating</b><span>3.8 / 5 on Google</span></span>
           </div>
+        </div>
 
-          <h3 style="margin-top:1.8rem">Opening Hours</h3>
+        <div class="info-card hours-card reveal">
+          <h3>Opening Hours</h3>
           <ul class="hours-list">
             <li *ngFor="let h of hours" [class.closed]="h.is_closed">
               <span>{{ dayName(h) }}</span>

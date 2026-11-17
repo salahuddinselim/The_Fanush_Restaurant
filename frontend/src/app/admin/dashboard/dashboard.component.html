@@ -35,6 +35,8 @@
       <a routerLink="/admin/reservations" class="btn sm">View Reservations</a>
     </div>
 
+    <div *ngIf="loadError" class="dash-error">{{ loadError }}</div>
+
     <!-- STAT CARDS -->
     <div class="stat-grid" *ngIf="!loading">
       <div class="stat-card stat-pending">

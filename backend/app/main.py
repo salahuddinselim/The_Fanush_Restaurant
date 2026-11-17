@@ -9,9 +9,17 @@ Base.metadata.create_all(bind=engine)
 
 app = FastAPI(title="Restaurant CMS API", version="1.0.0")
 
+
+def configured_cors_origins() -> list[str]:
+    configured = os.getenv("CORS_ALLOW_ORIGINS")
+    if configured is None:
+        return ["http://localhost:4200", "http://127.0.0.1:4200"]
+    return [origin.strip() for origin in configured.split(",") if origin.strip()]
+
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:4200"],
+    allow_origins=configured_cors_origins(),
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

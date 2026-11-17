@@ -22,11 +22,28 @@ export class MenuManagerComponent implements OnInit {
   constructor(private api: ApiService, public auth: AuthService) {}
 
   ngOnInit() { this.load(); }
-  load() { this.api.getAllCategories().subscribe(c => { this.categories = c; if (c.length && !this.newItem.category_id) this.newItem.category_id = c[0].id; }); }
+
+  load() {
+    this.api.getAllCategories().subscribe(c => {
+      this.categories = c;
+      if (!c.length) {
+        this.newItem.category_id = 0;
+      } else if (!c.some(category => category.id === this.newItem.category_id)) {
+        this.newItem.category_id = c[0].id;
+      }
+    });
+  }
+
+  resolveImageUrl(url: string | null): string {
+    if (!url) return '';
+    if (/^(https?:)?\/\//i.test(url)) return url;
+    return this.apiBase + (url.startsWith('/') ? '' : '/') + url;
+  }
 
   addCategory() {
-    if (!this.newCatName.trim()) return;
-    this.api.createCategory({ name: this.newCatName, display_order: this.categories.length + 1 }).subscribe(() => { this.newCatName = ''; this.load(); });
+    const name = this.newCatName.trim();
+    if (!name) return;
+    this.api.createCategory({ name, display_order: this.categories.length + 1 }).subscribe(() => { this.newCatName = ''; this.load(); });
   }
 
   deleteCategory(id: number) {
@@ -35,8 +52,9 @@ export class MenuManagerComponent implements OnInit {
   }
 
   addItem() {
-    if (!this.newItem.name || !this.newItem.category_id) return;
-    this.api.createItem(this.newItem).subscribe(() => { this.newItem = { category_id: this.categories[0]?.id || 0, name: '', price: 0, description: '', display_order: 0 }; this.load(); });
+    const name = this.newItem.name?.trim();
+    if (!name || !this.newItem.category_id) return;
+    this.api.createItem({ ...this.newItem, name }).subscribe(() => { this.newItem = { category_id: this.categories[0]?.id || 0, name: '', price: 0, description: '', display_order: 0 }; this.load(); });
   }
 
   startEdit(item: MenuItem) { this.editingItem = { ...item }; }

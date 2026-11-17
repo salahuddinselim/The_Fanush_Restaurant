@@ -24,6 +24,7 @@
     <div class="admin-topbar">
       <h1 class="admin-page-title">Site Settings <span>Restaurant info, hero content &amp; contact</span></h1>
     </div>
+    <div *ngIf="loadError" class="load-error">{{ loadError }}</div>
     <div class="admin-card">
       <div class="admin-card-header"><h3>Restaurant Details</h3></div>
       <div class="settings-grid">
@@ -33,7 +34,7 @@
         </div>
       </div>
       <div style="display:flex;align-items:center;gap:14px;margin-top:8px">
-        <button class="btn gold" (click)="save()" style="min-width:140px">Save Changes</button>
+        <button class="btn gold" (click)="save()" [disabled]="loading" style="min-width:140px">Save Changes</button>
         <span *ngIf="saved" class="inline-success">✓ Saved successfully</span>
       </div>
     </div>

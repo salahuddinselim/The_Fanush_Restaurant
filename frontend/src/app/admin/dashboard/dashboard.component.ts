@@ -18,6 +18,7 @@ export class DashboardComponent implements OnInit {
   totalCategories = 0;
   totalGallery = 0;
   loading = true;
+  loadError = '';
 
   constructor(public auth: AuthService, private api: ApiService) {}
 
@@ -26,12 +27,19 @@ export class DashboardComponent implements OnInit {
       reservations: this.api.getReservations(),
       categories: this.api.getAllCategories(),
       gallery: this.api.getAllGallery(),
-    }).subscribe(({ reservations, categories, gallery }) => {
-      this.reservations = reservations;
-      this.totalCategories = categories.length;
-      this.totalMenuItems = categories.reduce((s, c) => s + (c.items?.length || 0), 0);
-      this.totalGallery = gallery.length;
-      this.loading = false;
+    }).subscribe({
+      next: ({ reservations, categories, gallery }) => {
+        this.reservations = reservations;
+        this.totalCategories = categories.length;
+        this.totalMenuItems = categories.reduce((s, c) => s + (c.items?.length || 0), 0);
+        this.totalGallery = gallery.length;
+        this.loadError = '';
+        this.loading = false;
+      },
+      error: () => {
+        this.loadError = 'Could not load dashboard data. Please refresh.';
+        this.loading = false;
+      },
     });
   }
 

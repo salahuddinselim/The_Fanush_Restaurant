@@ -26,13 +26,27 @@ export class ConfigManagerComponent implements OnInit {
   ];
   values: Config = {};
   saved = false;
+  loading = true;
+  loadError = '';
 
   constructor(private api: ApiService, public auth: AuthService) {}
 
-  ngOnInit() { this.api.getConfig().subscribe(c => this.values = c); }
+  ngOnInit() {
+    this.api.getConfig().subscribe({
+      next: c => {
+        this.values = c;
+        this.loading = false;
+      },
+      error: () => {
+        this.loadError = 'Could not load site settings. Please refresh.';
+        this.loading = false;
+      },
+    });
+  }
 
   save() {
-    const items = this.fields.map(f => ({ key: f.key, value: this.values[f.key] || '' }));
+    if (this.loading) return;
+    const items = this.fields.map(f => ({ key: f.key, value: this.values[f.key] ?? '' }));
     this.api.updateConfig(items).subscribe(() => {
       this.saved = true;
       setTimeout(() => this.saved = false, 2500);

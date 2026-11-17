@@ -50,13 +50,13 @@ if not db.query(models.MenuCategory).first():
     db.add_all([pasta, pizza, grill, drinks])
     db.flush()
     db.add_all([
-        models.MenuItem(category_id=pasta.id, name="Spaghetti Bolognese", description="Classic beef ragù with fresh pasta", price=18.90, display_order=1),
-        models.MenuItem(category_id=pasta.id, name="Penne Arrabbiata", description="Spicy tomato sauce, garlic, chilli", price=16.90, display_order=2),
-        models.MenuItem(category_id=pizza.id, name="Margherita", description="San Marzano tomato, fior di latte, basil", price=19.90, display_order=1),
-        models.MenuItem(category_id=pizza.id, name="Pepperoni", description="Spicy salami, mozzarella, tomato", price=21.90, display_order=2),
-        models.MenuItem(category_id=grill.id, name="Chicken Parmigiana", description="Crumbed chicken, napoli sauce, melted cheese", price=24.90, display_order=1),
-        models.MenuItem(category_id=drinks.id, name="House Wine (glass)", description="Red or white", price=9.00, display_order=1),
-        models.MenuItem(category_id=drinks.id, name="Sparkling Water", description="500 ml", price=4.50, display_order=2),
+        models.MenuItem(category_id=pasta.id, name="Spaghetti Bolognese", description="Classic beef ragù with fresh pasta", price=18.90, display_order=1, image_url="https://images.unsplash.com/photo-1551183053-bf91a1d81141?w=400&q=70&auto=format&fit=crop"),
+        models.MenuItem(category_id=pasta.id, name="Penne Arrabbiata", description="Spicy tomato sauce, garlic, chilli", price=16.90, display_order=2, image_url="https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?w=400&q=70&auto=format&fit=crop"),
+        models.MenuItem(category_id=pizza.id, name="Margherita", description="San Marzano tomato, fior di latte, basil", price=19.90, display_order=1, image_url="https://images.unsplash.com/photo-1513104890138-7c749659a591?w=400&q=70&auto=format&fit=crop"),
+        models.MenuItem(category_id=pizza.id, name="Pepperoni", description="Spicy salami, mozzarella, tomato", price=21.90, display_order=2, image_url="https://images.unsplash.com/photo-1513104890138-7c749659a591?w=400&q=70&auto=format&fit=crop"),
+        models.MenuItem(category_id=grill.id, name="Chicken Parmigiana", description="Crumbed chicken, napoli sauce, melted cheese", price=24.90, display_order=1, image_url="https://images.unsplash.com/photo-1600891964092-4316c288032e?w=400&q=70&auto=format&fit=crop"),
+        models.MenuItem(category_id=drinks.id, name="House Wine (glass)", description="Red or white", price=9.00, display_order=1, image_url="https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?w=400&q=70&auto=format&fit=crop"),
+        models.MenuItem(category_id=drinks.id, name="Sparkling Water", description="500 ml", price=4.50, display_order=2, image_url="https://images.unsplash.com/photo-1556679343-c7306c1976bc?w=400&q=70&auto=format&fit=crop"),
     ])
 
 db.commit()

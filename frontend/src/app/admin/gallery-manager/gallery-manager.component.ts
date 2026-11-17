@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterLink, RouterLinkActive } from '@angular/router';
+import { forkJoin } from 'rxjs';
 import { ApiService, GalleryImage } from '../../core/services/api.service';
 import { AuthService } from '../../core/services/auth.service';
 
@@ -17,10 +18,9 @@ export class GalleryManagerComponent implements OnInit {
   caption = '';
   uploading = false;
   apiBase = 'http://localhost:8000';
+  loadError = '';
 
   constructor(private api: ApiService, public auth: AuthService) {}
-
-  loadError = '';
 
   ngOnInit() { this.load(); }
 
@@ -32,11 +32,18 @@ export class GalleryManagerComponent implements OnInit {
     });
   }
 
+  resolveImageUrl(url: string | null): string {
+    if (!url) return '';
+    if (/^(https?:)?\/\//i.test(url)) return url;
+    return this.apiBase + (url.startsWith('/') ? '' : '/') + url;
+  }
+
   onFile(event: Event) {
     const file = (event.target as HTMLInputElement).files?.[0];
     if (!file) return;
+    const nextOrder = this.images.reduce((max, img) => Math.max(max, img.display_order || 0), 0) + 1;
     this.uploading = true;
-    this.api.uploadGalleryImage(file, this.caption, this.images.length)
+    this.api.uploadGalleryImage(file, this.caption, nextOrder)
       .subscribe({ next: () => { this.load(); this.uploading = false; this.caption = ''; }, error: () => this.uploading = false });
   }
 
@@ -50,20 +57,26 @@ export class GalleryManagerComponent implements OnInit {
   }
 
   moveUp(i: number) {
-    if (i === 0) return;
-    const a = this.images[i], b = this.images[i - 1];
-    const orderA = a.display_order, orderB = b.display_order;
-    this.api.updateGalleryImage(a.id, { display_order: orderB })
-      .subscribe(() => this.api.updateGalleryImage(b.id, { display_order: orderA })
-        .subscribe(() => this.load()));
+    this.move(i, i - 1);
   }
 
   moveDown(i: number) {
-    if (i === this.images.length - 1) return;
-    const a = this.images[i], b = this.images[i + 1];
-    const orderA = a.display_order, orderB = b.display_order;
-    this.api.updateGalleryImage(a.id, { display_order: orderB })
-      .subscribe(() => this.api.updateGalleryImage(b.id, { display_order: orderA })
-        .subscribe(() => this.load()));
+    this.move(i, i + 1);
+  }
+
+  private move(from: number, to: number) {
+    if (from === to || from < 0 || from >= this.images.length || to < 0 || to >= this.images.length) return;
+    const reordered = [...this.images];
+    const [moved] = reordered.splice(from, 1);
+    reordered.splice(to, 0, moved);
+    const start = Math.min(from, to);
+    const end = Math.max(from, to);
+    const updates = reordered.slice(start, end + 1).map((img, index) =>
+      this.api.updateGalleryImage(img.id, { display_order: start + index + 1 })
+    );
+    forkJoin(updates).subscribe({
+      next: () => this.load(),
+      error: () => this.loadError = 'Could not reorder images. Please refresh.',
+    });
   }
 }

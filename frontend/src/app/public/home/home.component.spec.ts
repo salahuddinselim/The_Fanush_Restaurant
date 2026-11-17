@@ -70,6 +70,42 @@ describe('HomeComponent', () => {
     expect(buttons.length).toBe(2);
   });
 
+  it('should render menu cards for items', () => {
+    const cards = fixture.nativeElement.querySelectorAll('.menu-card');
+    expect(cards.length).toBe(2); // one per item across all categories
+  });
+
+  it('menu card should contain card-name and card-price', () => {
+    const card = fixture.nativeElement.querySelector('.menu-card');
+    expect(card.querySelector('.card-name')).not.toBeNull();
+    expect(card.querySelector('.card-price')).not.toBeNull();
+  });
+
+  it('menu card should show an image with fallback when item has no image_url', () => {
+    const image = fixture.nativeElement.querySelector('.card-img-wrap img') as HTMLImageElement;
+    expect(image).not.toBeNull();
+    expect(image.getAttribute('src')).toContain('images.unsplash.com');
+  });
+
+  it('menuItemImage should use uploaded image URLs and resolve relative paths', () => {
+    const item = { ...MOCK_CATEGORIES[0].items[0] };
+    expect(component.menuItemImage(item, 'Pizza')).toContain('images.unsplash.com');
+    item.image_url = '/static/uploads/menu/pizza.png';
+    expect(component.menuItemImage(item, 'Pizza')).toBe('http://localhost:8000/static/uploads/menu/pizza.png');
+    item.image_url = 'https://example.com/pizza.png';
+    expect(component.menuItemImage(item, 'Pizza')).toBe('https://example.com/pizza.png');
+  });
+
+  it('menu card price should include A$ prefix', () => {
+    const price = fixture.nativeElement.querySelector('.card-price');
+    expect(price?.textContent).toContain('A$');
+  });
+
+  it('menu card should have aria-label with item name and price', () => {
+    const card = fixture.nativeElement.querySelector('.menu-card');
+    expect(card?.getAttribute('aria-label')).toContain('A$');
+  });
+
   it('should mark first category as active by default', () => {
     const activeBtn = fixture.nativeElement.querySelector('.cat-scroll-track button.active');
     expect(activeBtn?.textContent?.trim()).toBe('Pizza');
@@ -121,6 +157,25 @@ describe('HomeComponent', () => {
     expect(component.showSuggestions).toBeFalse();
     expect(component.searchQuery).toBe('');
   });
+
+  it('should refresh category observers after search filters the menu', fakeAsync(() => {
+    const setupSpy = spyOn<any>(component, 'setupCatObserver');
+
+    component.onSearchInput('pizza');
+    tick();
+
+    expect(setupSpy).toHaveBeenCalled();
+  }));
+
+  it('should refresh category observers after search is cleared', fakeAsync(() => {
+    component.onSearchInput('pizza');
+    const setupSpy = spyOn<any>(component, 'setupCatObserver');
+
+    component.clearSearch();
+    tick();
+
+    expect(setupSpy).toHaveBeenCalled();
+  }));
 
   it('selectSuggestion sets query and scrolls to menu', () => {
     spyOn(document, 'getElementById').and.returnValue(null);
@@ -187,13 +242,61 @@ describe('HomeComponent', () => {
     expect(component.navScrolled).toBeFalse();
   });
 
+  it('should render nav CTA with white text on wine background', () => {
+    const cta = fixture.nativeElement.querySelector('.nav-cta') as HTMLElement;
+    expect(cta.textContent?.trim()).toBe(component.ctaText);
+    const style = getComputedStyle(cta);
+    expect(style.color).toBe('rgb(255, 255, 255)');
+    expect(style.backgroundColor).toBe('rgb(122, 31, 43)');
+  });
+
+  it('should render restaurant details, opening hours, and map as separate visit cards', () => {
+    const visitGrid = fixture.nativeElement.querySelector('.visit-grid') as HTMLElement;
+    const detailsCard = visitGrid.querySelector('.details-card') as HTMLElement;
+    const hoursCard = visitGrid.querySelector('.hours-card') as HTMLElement;
+    const mapFrame = visitGrid.querySelector('.map-frame') as HTMLElement;
+
+    expect(visitGrid.children.length).toBe(3);
+    expect(detailsCard.textContent).toContain('Restaurant Details');
+    expect(detailsCard.textContent).not.toContain('Opening Hours');
+    expect(hoursCard.textContent).toContain('Opening Hours');
+    expect(hoursCard.querySelector('.hours-list')).not.toBeNull();
+    expect(mapFrame.querySelector('iframe')).not.toBeNull();
+  });
+
   // ── COMPUTED PROPERTIES ───────────────────────────────────────────────────
   it('allItems should return flat list of all items across categories', () => {
     expect(component.allItems.length).toBe(2);
   });
 
+  it('menuItemCount should count all items across categories', () => {
+    expect(component.menuItemCount).toBe(2);
+  });
+
   it('logoUrl should return empty string when not in config', () => {
     expect(component.logoUrl).toBe('');
+  });
+
+  it('logoUrl should resolve a relative configured image URL', () => {
+    component.config['logo_url'] = '/static/uploads/logo.png';
+
+    expect(component.logoUrl).toBe('http://localhost:8000/static/uploads/logo.png');
+  });
+
+  it('logoUrl should preserve an absolute configured image URL', () => {
+    component.config['logo_url'] = 'https://cdn.example.com/logo.png';
+
+    expect(component.logoUrl).toBe('https://cdn.example.com/logo.png');
+  });
+
+  it('heroImg should resolve a relative configured image URL', () => {
+    component.config['hero_image_url'] = 'static/uploads/hero.jpg';
+
+    expect(component.heroImg).toBe('http://localhost:8000/static/uploads/hero.jpg');
+  });
+
+  it('heroImg should keep the fallback when no image is configured', () => {
+    expect(component.heroImg).toBe(component.HERO_FALLBACK);
   });
 
   it('should have correct current year', () => {
