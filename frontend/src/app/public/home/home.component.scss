@@ -692,3 +692,37 @@ footer { background: var(--ink); color: #b9ab9c; padding: 3.4rem 0 0; font-size:
   font-weight: 700;
   color: var(--wine, #8b1a1a);
 }
+
+/* ---- ICONIFY ICON OVERRIDES ---- */
+iconify-icon {
+  display: inline-flex;
+  vertical-align: middle;
+}
+
+/* Search bar icon */
+.search-ic iconify-icon {
+  color: #888;
+}
+
+/* Info row icons — wine-toned circle badge */
+.info-ic {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.4rem;
+  height: 2.4rem;
+  min-width: 2.4rem;
+  border-radius: 50%;
+  background: rgba(139,26,26,.08);
+  color: #8b1a1a;
+}
+
+/* Category heading 3D icons */
+.cat-heading-icon iconify-icon {
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,.18));
+}
+
+/* Card placeholder 3D icons */
+.card-img-placeholder iconify-icon {
+  filter: drop-shadow(0 3px 6px rgba(0,0,0,.2));
+}

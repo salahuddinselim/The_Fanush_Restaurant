@@ -29,7 +29,7 @@
     <!-- Search bar (desktop) -->
     <div class="nav-search-wrap">
       <div class="nav-search-box">
-        <span class="search-ic" aria-hidden="true">🔍</span>
+        <span class="search-ic" aria-hidden="true"><iconify-icon icon="lucide:search" width="16" height="16"></iconify-icon></span>
         <input
           type="text"
           class="nav-search-input"
@@ -70,7 +70,7 @@
   <!-- Mobile panel -->
   <div class="mobile-panel" [class.open]="mobileMenuOpen">
     <div class="mobile-search-wrap">
-      <span class="search-ic">🔍</span>
+      <span class="search-ic" aria-hidden="true"><iconify-icon icon="lucide:search" width="16" height="16"></iconify-icon></span>
       <input
         type="text"
         placeholder="Search menu items…"
@@ -170,7 +170,7 @@
 
       <div *ngFor="let cat of filteredCategories" class="menu-block" [id]="'cat-' + cat.id">
         <h3 class="cat-heading">
-          <span class="cat-heading-icon" aria-hidden="true">{{ getCategoryIcon(cat.name) }}</span>
+          <span class="cat-heading-icon" aria-hidden="true"><iconify-icon [attr.icon]="getCategoryIcon(cat.name)" width="28" height="28"></iconify-icon></span>
           <span>{{ cat.name }}</span>
           <span class="cat-heading-count">{{ cat.items.length }}</span>
         </h3>
@@ -178,7 +178,7 @@
           <article *ngFor="let item of cat.items" class="menu-card" tabindex="0" [attr.aria-label]="item.name + ' — A$' + item.price.toFixed(2)" (click)="openMenuItem(item)" (keydown.enter)="openMenuItem(item)" style="cursor:pointer">
             <div class="card-img-wrap">
               <div *ngIf="!menuImageLoaded[item.id]" class="card-img-placeholder" aria-hidden="true">
-                <span>{{ getCategoryIcon(cat.name) }}</span>
+                <iconify-icon [attr.icon]="getCategoryIcon(cat.name)" width="52" height="52"></iconify-icon>
               </div>
               <img
                 [src]="menuItemImage(item, cat.name)"
@@ -240,19 +240,19 @@
         <div class="info-card details-card reveal-left">
           <h3>Restaurant Details</h3>
           <div class="info-row">
-            <span class="info-ic">📍</span>
+            <span class="info-ic"><iconify-icon icon="lucide:map-pin" width="20" height="20"></iconify-icon></span>
             <span><b>Address</b><span>{{ address }}</span></span>
           </div>
           <div class="info-row">
-            <span class="info-ic">📞</span>
+            <span class="info-ic"><iconify-icon icon="lucide:phone" width="20" height="20"></iconify-icon></span>
             <span><b>Phone</b><a [href]="'tel:' + phone">{{ phone }}</a></span>
           </div>
           <div class="info-row">
-            <span class="info-ic">🍽️</span>
+            <span class="info-ic"><iconify-icon icon="lucide:utensils" width="20" height="20"></iconify-icon></span>
             <span><b>Cuisine</b><span>Italian · Pizza · Burgers · Pasta</span></span>
           </div>
           <div class="info-row">
-            <span class="info-ic">⭐</span>
+            <span class="info-ic"><iconify-icon icon="lucide:star" width="20" height="20"></iconify-icon></span>
             <span><b>Rating</b><span>3.8 / 5 on Google</span></span>
           </div>
         </div>

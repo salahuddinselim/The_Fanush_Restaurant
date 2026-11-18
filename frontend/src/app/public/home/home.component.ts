@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, OnDestroy, inject, HostListener } from '@angular/core';
+import { Component, OnInit, AfterViewInit, OnDestroy, inject, HostListener, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
@@ -12,6 +12,7 @@ const DAYS = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'
   selector: 'app-home',
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule, RouterLink],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
 })
@@ -193,18 +194,18 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
     }, 50);
   }
 
-  getCategoryIcon(categoryName: string) {
+  getCategoryIcon(categoryName: string): string {
     const key = categoryName.toLowerCase();
-    if (key.includes('pizza')) return '🍕';
-    if (key.includes('pasta')) return '🍝';
-    if (key.includes('burger')) return '🍔';
-    if (key.includes('salad')) return '🥗';
-    if (key.includes('drink') || key.includes('juice') || key.includes('smoothie')) return '🥤';
-    if (key.includes('coffee')) return '☕';
-    if (key.includes('dessert') || key.includes('cake')) return '🍰';
-    if (key.includes('breakfast')) return '🍳';
-    if (key.includes('chicken')) return '🍗';
-    return '🍽️';
+    if (key.includes('pizza'))  return 'fluent-emoji:pizza';
+    if (key.includes('pasta'))  return 'fluent-emoji:spaghetti';
+    if (key.includes('burger')) return 'fluent-emoji:hamburger';
+    if (key.includes('salad'))  return 'fluent-emoji:green-salad';
+    if (key.includes('drink') || key.includes('juice') || key.includes('smoothie')) return 'fluent-emoji:cup-with-straw';
+    if (key.includes('coffee')) return 'fluent-emoji:hot-beverage';
+    if (key.includes('dessert') || key.includes('cake')) return 'fluent-emoji:shortcake';
+    if (key.includes('breakfast')) return 'fluent-emoji:cooking';
+    if (key.includes('chicken')) return 'fluent-emoji:poultry-leg';
+    return 'fluent-emoji:fork-and-knife-with-plate';
   }
 
   onMenuImageLoad(itemId: number) {
