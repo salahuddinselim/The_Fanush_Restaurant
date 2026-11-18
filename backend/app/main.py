@@ -2,13 +2,18 @@ from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import Response
 from fastapi.staticfiles import StaticFiles
+from slowapi import _rate_limit_exceeded_handler
+from slowapi.errors import RateLimitExceeded
 import os
 from .database import engine, Base
+from .limiter import limiter
 from .routers import auth, config, hours, menu, gallery, reservations
 
 Base.metadata.create_all(bind=engine)
 
 app = FastAPI(title="Restaurant CMS API", version="1.0.0")
+app.state.limiter = limiter
+app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
 
 
 def configured_cors_origins() -> list[str]:

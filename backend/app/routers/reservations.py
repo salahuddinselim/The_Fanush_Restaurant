@@ -18,8 +18,19 @@ def create_reservation(body: schemas.ReservationCreate, db: Session = Depends(ge
 
 
 @router.get("", response_model=List[schemas.ReservationOut])
-def list_reservations(db: Session = Depends(get_db), _: models.User = Depends(get_current_user)):
-    return db.query(models.Reservation).order_by(models.Reservation.created_at.desc()).all()
+def list_reservations(
+    skip: int = 0,
+    limit: int = 50,
+    db: Session = Depends(get_db),
+    _: models.User = Depends(get_current_user),
+):
+    return (
+        db.query(models.Reservation)
+        .order_by(models.Reservation.created_at.desc())
+        .offset(skip)
+        .limit(limit)
+        .all()
+    )
 
 
 @router.put("/{reservation_id}", response_model=schemas.ReservationOut)

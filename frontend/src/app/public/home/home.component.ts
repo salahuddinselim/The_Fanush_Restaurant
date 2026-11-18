@@ -1,9 +1,10 @@
-import { Component, OnInit, AfterViewInit, OnDestroy, inject } from '@angular/core';
+import { Component, OnInit, AfterViewInit, OnDestroy, inject, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
 import { forkJoin } from 'rxjs';
 import { API_URL, ApiService, Config, MenuCategory, MenuItem, GalleryImage, BusinessHour } from '../../core/services/api.service';
+import { MENU_IMAGES, DEFAULT_MENU_IMAGE } from './menu-images';
 
 const DAYS = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
@@ -37,23 +38,8 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   selectedMenuItem: MenuCategory['items'][number] | null = null;
   menuImageLoaded: Record<number, boolean> = {};
 
-  private readonly MENU_IMAGES: Record<string, string> = {
-    'pizza': 'https://images.unsplash.com/photo-1513104890138-7c749659a591?w=400&q=70&auto=format&fit=crop',
-    'pasta': 'https://images.unsplash.com/photo-1551183053-bf91a1d81141?w=400&q=70&auto=format&fit=crop',
-    'spaghetti': 'https://images.unsplash.com/photo-1551183053-bf91a1d81141?w=400&q=70&auto=format&fit=crop',
-    'penne': 'https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?w=400&q=70&auto=format&fit=crop',
-    'bolognese': 'https://images.unsplash.com/photo-1551183053-bf91a1d81141?w=400&q=70&auto=format&fit=crop',
-    'arrabbiata': 'https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?w=400&q=70&auto=format&fit=crop',
-    'carbonara': 'https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?w=400&q=70&auto=format&fit=crop',
-    'grill': 'https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=400&q=70&auto=format&fit=crop',
-    'chicken': 'https://images.unsplash.com/photo-1600891964092-4316c288032e?w=400&q=70&auto=format&fit=crop',
-    'burger': 'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=400&q=70&auto=format&fit=crop',
-    'drink': 'https://images.unsplash.com/photo-1544145945-f90425340c7e?w=400&q=70&auto=format&fit=crop',
-    'wine': 'https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?w=400&q=70&auto=format&fit=crop',
-    'water': 'https://images.unsplash.com/photo-1556679343-c7306c1976bc?w=400&q=70&auto=format&fit=crop',
-    'dessert': 'https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=400&q=70&auto=format&fit=crop',
-  };
-  private readonly DEFAULT_MENU_IMAGE = 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400&q=70&auto=format&fit=crop';
+  private readonly MENU_IMAGES = MENU_IMAGES;
+  private readonly DEFAULT_MENU_IMAGE = DEFAULT_MENU_IMAGE;
 
   form = this.fb.group({
     name: ['', Validators.required],
@@ -249,9 +235,17 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
     return url.startsWith('/') ? `${API_URL}${url}` : `${API_URL}/${url}`;
   }
 
+  @HostListener('document:keydown.escape')
+  onEscapeKey() {
+    if (this.selectedMenuItem) this.closeMenuItem();
+  }
+
   openMenuItem(item: MenuCategory['items'][number]) {
     this.selectedMenuItem = item;
     document.body.style.overflow = 'hidden';
+    setTimeout(() => {
+      (document.querySelector('.item-modal-close') as HTMLElement)?.focus();
+    }, 50);
   }
 
   closeMenuItem() {

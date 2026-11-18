@@ -29,7 +29,7 @@
     <!-- Search bar (desktop) -->
     <div class="nav-search-wrap">
       <div class="nav-search-box">
-        <span class="search-ic">🔍</span>
+        <span class="search-ic" aria-hidden="true">🔍</span>
         <input
           type="text"
           class="nav-search-input"
@@ -39,11 +39,16 @@
           (focus)="showSuggestions = searchSuggestions.length > 0"
           (blur)="hideSearchSuggestions()"
           aria-label="Search menu"
+          role="combobox"
+          aria-autocomplete="list"
+          [attr.aria-expanded]="showSuggestions"
+          aria-controls="nav-search-suggestions"
+          aria-haspopup="listbox"
         >
-        <button *ngIf="searchQuery" class="search-clear" (click)="clearSearch()">✕</button>
+        <button *ngIf="searchQuery" class="search-clear" (click)="clearSearch()" aria-label="Clear search">✕</button>
       </div>
-      <div class="search-suggestions" *ngIf="showSuggestions">
-        <button *ngFor="let s of searchSuggestions" (mousedown)="selectSuggestion(s)">{{ s }}</button>
+      <div id="nav-search-suggestions" class="search-suggestions" role="listbox" *ngIf="showSuggestions" aria-label="Search suggestions">
+        <button role="option" *ngFor="let s of searchSuggestions" (mousedown)="selectSuggestion(s)">{{ s }}</button>
       </div>
     </div>
 
@@ -170,7 +175,7 @@
           <span class="cat-heading-count">{{ cat.items.length }}</span>
         </h3>
         <div class="items-grid">
-          <article *ngFor="let item of cat.items" class="menu-card" tabindex="0" [attr.aria-label]="item.name + ' — A$' + item.price.toFixed(2)">
+          <article *ngFor="let item of cat.items" class="menu-card" tabindex="0" [attr.aria-label]="item.name + ' — A$' + item.price.toFixed(2)" (click)="openMenuItem(item)" (keydown.enter)="openMenuItem(item)" style="cursor:pointer">
             <div class="card-img-wrap">
               <div *ngIf="!menuImageLoaded[item.id]" class="card-img-placeholder" aria-hidden="true">
                 <span>{{ getCategoryIcon(cat.name) }}</span>
@@ -342,6 +347,35 @@
   </section>
 
 </main>
+
+<!-- MENU ITEM MODAL -->
+<div
+  *ngIf="selectedMenuItem"
+  class="item-modal-overlay"
+  role="dialog"
+  aria-modal="true"
+  [attr.aria-label]="selectedMenuItem.name"
+  (click)="closeMenuItem()"
+>
+  <div class="item-modal" (click)="$event.stopPropagation()">
+    <button class="item-modal-close" (click)="closeMenuItem()" aria-label="Close item details">✕</button>
+    <div class="item-modal-img-wrap">
+      <img
+        [src]="menuItemImage(selectedMenuItem)"
+        [alt]="selectedMenuItem.name"
+        class="item-modal-img"
+      >
+    </div>
+    <div class="item-modal-body">
+      <h2 class="item-modal-name">{{ selectedMenuItem.name }}</h2>
+      <p *ngIf="selectedMenuItem.description" class="item-modal-desc">{{ selectedMenuItem.description }}</p>
+      <div class="item-modal-price">
+        <span class="price-label">Price</span>
+        <span class="item-modal-amount">A${{ selectedMenuItem.price.toFixed(2) }}</span>
+      </div>
+    </div>
+  </div>
+</div>
 
 <!-- FOOTER -->
 <footer>
