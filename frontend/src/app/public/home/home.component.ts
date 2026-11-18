@@ -205,6 +205,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
     if (key.includes('dessert') || key.includes('cake')) return 'fluent-emoji:shortcake';
     if (key.includes('breakfast')) return 'fluent-emoji:cooking';
     if (key.includes('chicken')) return 'fluent-emoji:poultry-leg';
+    if (key.includes('grill') || key.includes('bbq') || key.includes('steak')) return 'fluent-emoji:cut-of-meat';
     return 'fluent-emoji:fork-and-knife-with-plate';
   }
 

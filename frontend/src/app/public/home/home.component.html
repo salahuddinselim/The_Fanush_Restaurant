@@ -151,8 +151,8 @@
           [class.active]="activeCatId === cat.id"
           (click)="scrollToCat(cat)"
           [attr.aria-pressed]="activeCatId === cat.id"
-          [attr.data-icon]="getCategoryIcon(cat.name)"
           [attr.data-count]="cat.items.length">
+          <iconify-icon [attr.icon]="getCategoryIcon(cat.name)" width="18" height="18" aria-hidden="true"></iconify-icon>
           {{ cat.name }}
         </button>
       </div>
