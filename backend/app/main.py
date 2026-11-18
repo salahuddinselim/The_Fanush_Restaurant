@@ -41,10 +41,11 @@ async def add_security_headers(request: Request, call_next) -> Response:
     response.headers["Permissions-Policy"] = "camera=(), microphone=(), geolocation=()"
     response.headers["Content-Security-Policy"] = (
         "default-src 'self'; "
-        "img-src 'self' https://images.unsplash.com data: blob:; "
-        "script-src 'self'; "
+        "img-src 'self' https://images.unsplash.com https://api.iconify.design data: blob:; "
+        "script-src 'self' https://cdn.jsdelivr.net; "
         "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; "
-        "font-src 'self' https://fonts.gstatic.com;"
+        "font-src 'self' https://fonts.gstatic.com; "
+        "connect-src 'self' https://api.iconify.design;"
     )
     return response
 
