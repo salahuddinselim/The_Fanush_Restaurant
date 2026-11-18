@@ -1,10 +1,11 @@
 from fastapi import APIRouter, Depends, HTTPException, UploadFile, File
 from sqlalchemy.orm import Session
 from typing import List
-import shutil, os, uuid
+import os
 from ..database import get_db
 from .. import models, schemas
 from ..auth import get_current_user
+from ..utils.upload import save_upload
 
 router = APIRouter(prefix="/menu", tags=["menu"])
 
@@ -99,11 +100,7 @@ async def upload_item_image(item_id: int, file: UploadFile = File(...), db: Sess
     item = db.query(models.MenuItem).filter(models.MenuItem.id == item_id).first()
     if not item:
         raise HTTPException(status_code=404, detail="Item not found")
-    ext = os.path.splitext(file.filename)[1]
-    filename = f"{uuid.uuid4()}{ext}"
-    path = os.path.join(UPLOAD_DIR, filename)
-    with open(path, "wb") as f:
-        shutil.copyfileobj(file.file, f)
+    filename = await save_upload(file, UPLOAD_DIR)
     item.image_url = f"/static/uploads/menu/{filename}"
     db.commit()
     return {"image_url": item.image_url}

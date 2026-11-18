@@ -1,4 +1,5 @@
-from pydantic import BaseModel, EmailStr
+from enum import Enum
+from pydantic import BaseModel, EmailStr, Field
 from typing import Optional, List
 from datetime import datetime
 
@@ -105,13 +106,13 @@ class GalleryImageUpdate(BaseModel):
 
 
 class ReservationCreate(BaseModel):
-    name: str
+    name: str = Field(min_length=1, max_length=200)
     email: EmailStr
-    phone: Optional[str] = None
-    date: str
-    time: str
-    party_size: int
-    notes: Optional[str] = None
+    phone: Optional[str] = Field(None, max_length=30)
+    date: str = Field(pattern=r"^\d{4}-\d{2}-\d{2}$")
+    time: str = Field(pattern=r"^\d{2}:\d{2}$")
+    party_size: int = Field(ge=1, le=50)
+    notes: Optional[str] = Field(None, max_length=1000)
 
 
 class ReservationOut(ReservationCreate):
@@ -121,5 +122,12 @@ class ReservationOut(ReservationCreate):
     model_config = {"from_attributes": True}
 
 
+class ReservationStatus(str, Enum):
+    pending = "pending"
+    confirmed = "confirmed"
+    cancelled = "cancelled"
+    completed = "completed"
+
+
 class ReservationStatusUpdate(BaseModel):
-    status: str
+    status: ReservationStatus

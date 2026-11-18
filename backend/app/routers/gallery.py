@@ -1,10 +1,11 @@
 from fastapi import APIRouter, Depends, HTTPException, UploadFile, File, Form
 from sqlalchemy.orm import Session
 from typing import List
-import shutil, os, uuid
+import os
 from ..database import get_db
 from .. import models, schemas
 from ..auth import get_current_user
+from ..utils.upload import save_upload
 
 router = APIRouter(prefix="/gallery", tags=["gallery"])
 
@@ -35,11 +36,7 @@ async def upload_image(
     db: Session = Depends(get_db),
     _: models.User = Depends(get_current_user),
 ):
-    ext = os.path.splitext(file.filename)[1]
-    filename = f"{uuid.uuid4()}{ext}"
-    path = os.path.join(UPLOAD_DIR, filename)
-    with open(path, "wb") as f:
-        shutil.copyfileobj(file.file, f)
+    filename = await save_upload(file, UPLOAD_DIR)
     image = models.GalleryImage(
         image_url=f"/static/uploads/gallery/{filename}",
         caption=caption or None,

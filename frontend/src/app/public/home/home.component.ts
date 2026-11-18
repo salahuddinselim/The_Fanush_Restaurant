@@ -2,6 +2,7 @@ import { Component, OnInit, AfterViewInit, OnDestroy, inject } from '@angular/co
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
+import { forkJoin } from 'rxjs';
 import { API_URL, ApiService, Config, MenuCategory, MenuItem, GalleryImage, BusinessHour } from '../../core/services/api.service';
 
 const DAYS = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
@@ -72,15 +73,19 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   ];
 
   ngOnInit() {
-    this.api.getConfig().subscribe(c => this.config = c);
-    this.api.getCategories().subscribe(c => {
-      this.categories = c;
-      if (c.length) this.activeCatId = c[0].id;
-      // Observe category sections after they render
+    forkJoin({
+      config: this.api.getConfig(),
+      categories: this.api.getCategories(),
+      gallery: this.api.getGallery(),
+      hours: this.api.getHours(),
+    }).subscribe(({ config, categories, gallery, hours }) => {
+      this.config = config;
+      this.categories = categories;
+      if (categories.length) this.activeCatId = categories[0].id;
+      this.gallery = gallery;
+      this.hours = hours;
       setTimeout(() => this.setupCatObserver(), 100);
     });
-    this.api.getGallery().subscribe(g => this.gallery = g);
-    this.api.getHours().subscribe(h => this.hours = h);
   }
 
   private scrollHandler = () => { this.navScrolled = window.scrollY > 60; };
