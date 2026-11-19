@@ -1,15 +1,17 @@
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException, Request
 from sqlalchemy.orm import Session
 from typing import List
 from ..database import get_db
 from .. import models, schemas
 from ..auth import get_current_user
+from ..limiter import limiter
 
 router = APIRouter(prefix="/reservations", tags=["reservations"])
 
 
 @router.post("", response_model=schemas.ReservationOut, status_code=201)
-def create_reservation(body: schemas.ReservationCreate, db: Session = Depends(get_db)):
+@limiter.limit("10/hour")
+def create_reservation(request: Request, body: schemas.ReservationCreate, db: Session = Depends(get_db)):
     reservation = models.Reservation(**body.model_dump())
     db.add(reservation)
     db.commit()
