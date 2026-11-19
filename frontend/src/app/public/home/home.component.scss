@@ -469,6 +469,11 @@ section { padding: 5.5rem 0; }
   &:hover b { color: #f0cc72; }
   p { font-size: .9rem; color: #c9bcac; line-height: 1.6; }
 }
+.feature-ic {
+  display: inline-flex; color: var(--gold-soft); opacity: .85; margin-bottom: .9rem;
+  transition: opacity .2s;
+  .feature-cell:hover & { opacity: 1; }
+}
 
 /* ===== VISIT ===== */
 .visit-section { background: var(--white); }
