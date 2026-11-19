@@ -117,10 +117,7 @@ class ReservationCreate(BaseModel):
     @field_validator("date")
     @classmethod
     def date_must_be_future(cls, v: str) -> str:
-        try:
-            parsed = date_type.fromisoformat(v)
-        except ValueError:
-            raise ValueError("Invalid date format")
+        parsed = date_type.fromisoformat(v)
         if parsed < date_type.today():
             raise ValueError("Reservation date must be today or in the future")
         return v

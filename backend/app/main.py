@@ -16,16 +16,16 @@ app.state.limiter = limiter
 app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
 
 
-def configured_cors_origins() -> list[str]:
-    configured = os.getenv("CORS_ALLOW_ORIGINS")
-    if configured is None:
-        return ["http://localhost:4200", "http://127.0.0.1:4200"]
-    return [origin.strip() for origin in configured.split(",") if origin.strip()]
-
+_cors_env = os.getenv("CORS_ALLOW_ORIGINS")
+_cors_origins = (
+    [o.strip() for o in _cors_env.split(",") if o.strip()]
+    if _cors_env
+    else ["http://localhost:4200", "http://127.0.0.1:4200"]
+)
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=configured_cors_origins(),
+    allow_origins=_cors_origins,
     allow_credentials=True,
     allow_methods=["GET", "POST", "PUT", "DELETE"],
     allow_headers=["Content-Type", "Authorization"],

@@ -28,10 +28,6 @@ def update_config(
     _: models.User = Depends(get_current_user),
 ):
     for item in body.items:
-        existing = db.query(models.SiteConfig).filter(models.SiteConfig.key == item.key).first()
-        if existing:
-            existing.value = item.value
-        else:
-            db.add(models.SiteConfig(key=item.key, value=item.value))
+        db.merge(models.SiteConfig(key=item.key, value=item.value))
     db.commit()
     return {"detail": "Config updated"}
