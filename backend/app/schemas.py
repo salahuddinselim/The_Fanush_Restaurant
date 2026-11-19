@@ -1,7 +1,7 @@
 from enum import Enum
-from pydantic import BaseModel, EmailStr, Field
+from pydantic import BaseModel, EmailStr, Field, field_validator
 from typing import Optional, List
-from datetime import datetime
+from datetime import datetime, date as date_type
 
 
 class LoginRequest(BaseModel):
@@ -111,8 +111,19 @@ class ReservationCreate(BaseModel):
     phone: Optional[str] = Field(None, max_length=30)
     date: str = Field(pattern=r"^\d{4}-\d{2}-\d{2}$")
     time: str = Field(pattern=r"^\d{2}:\d{2}$")
-    party_size: int = Field(ge=1, le=50)
+    party_size: int = Field(ge=1, le=20)
     notes: Optional[str] = Field(None, max_length=1000)
+
+    @field_validator("date")
+    @classmethod
+    def date_must_be_future(cls, v: str) -> str:
+        try:
+            parsed = date_type.fromisoformat(v)
+        except ValueError:
+            raise ValueError("Invalid date format")
+        if parsed < date_type.today():
+            raise ValueError("Reservation date must be today or in the future")
+        return v
 
 
 class ReservationOut(ReservationCreate):
