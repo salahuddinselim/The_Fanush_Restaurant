@@ -32,6 +32,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   submitError = '';
   submitting = false;
   year = new Date().getFullYear();
+  readonly minDate = new Date().toISOString().split('T')[0];
   navScrolled = false;
   searchQuery = '';
   searchSuggestions: string[] = [];

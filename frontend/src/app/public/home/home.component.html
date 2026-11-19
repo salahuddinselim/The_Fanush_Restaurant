@@ -327,7 +327,7 @@
           <div class="row2">
             <div class="field">
               <label>Date *</label>
-              <input formControlName="date" type="date" [class.field-error]="form.get('date')!.invalid && form.get('date')!.touched">
+              <input formControlName="date" type="date" [min]="minDate" [class.field-error]="form.get('date')!.invalid && form.get('date')!.touched">
               <span class="field-hint" *ngIf="form.get('date')!.invalid && form.get('date')!.touched">Required</span>
             </div>
             <div class="field">
@@ -336,7 +336,7 @@
               <span class="field-hint" *ngIf="form.get('time')!.invalid && form.get('time')!.touched">Required</span>
             </div>
           </div>
-          <div class="field"><label>Special Requests</label><textarea formControlName="notes" placeholder="Dietary requirements, special occasions…"></textarea></div>
+          <div class="field"><label>Special Requests</label><textarea formControlName="notes" placeholder="Dietary requirements, special occasions…" maxlength="1000"></textarea></div>
           <p *ngIf="submitError" class="form-error">{{ submitError }}</p>
           <button type="submit" class="btn" style="width:100%;border-radius:8px;padding:.85rem" [disabled]="submitting">
             {{ submitting ? 'Sending…' : 'Request Reservation' }}
