@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { tap } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
+import { tap, map, catchError } from 'rxjs/operators';
 import { API_URL } from './api.service';
 
 const SESSION_LIFETIME_MS = 30 * 60 * 1000; // matches ACCESS_TOKEN_EXPIRE_MINUTES
@@ -35,6 +36,16 @@ export class AuthService {
       complete: () => this.router.navigate(['/admin/login']),
       error: () => this.router.navigate(['/admin/login']),
     });
+  }
+
+  verify(): Observable<boolean> {
+    return this.http.get(`${API_URL}/auth/me`, { withCredentials: true }).pipe(
+      map(() => true),
+      catchError(() => {
+        try { localStorage.removeItem(this.SESSION_FLAG); localStorage.removeItem(this.SESSION_EXPIRY); } catch {}
+        return of(false);
+      })
+    );
   }
 
   isLoggedIn(): boolean {

@@ -9,7 +9,7 @@ from sqlalchemy.orm import Session
 
 from ..database import get_db
 from .. import models, schemas
-from ..auth import verify_password, create_access_token, decode_token, COOKIE_NAME, ACCESS_TOKEN_EXPIRE_MINUTES
+from ..auth import verify_password, create_access_token, decode_token, COOKIE_NAME, ACCESS_TOKEN_EXPIRE_MINUTES, get_current_user
 from ..limiter import limiter
 
 router = APIRouter(prefix="/auth", tags=["auth"])
@@ -56,6 +56,11 @@ def login(
         path="/",
     )
     return {"access_token": token, "token_type": "bearer"}
+
+
+@router.get("/me")
+def me(current_user: models.User = Depends(get_current_user)):
+    return {"username": current_user.username}
 
 
 @router.post("/logout")

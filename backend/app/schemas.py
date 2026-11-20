@@ -5,8 +5,8 @@ from datetime import datetime, date as date_type
 
 
 class LoginRequest(BaseModel):
-    username: str
-    password: str
+    username: str = Field(max_length=150)
+    password: str = Field(max_length=200)
 
 
 class Token(BaseModel):
