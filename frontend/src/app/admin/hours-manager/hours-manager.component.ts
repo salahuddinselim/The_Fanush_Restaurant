@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterLink, RouterLinkActive } from '@angular/router';
@@ -11,6 +11,7 @@ const DAYS = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'
   selector: 'app-hours-manager',
   standalone: true,
   imports: [CommonModule, FormsModule, RouterLink, RouterLinkActive],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   templateUrl: './hours-manager.component.html',
   styleUrl: './hours-manager.component.scss',
 })

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterLink, RouterLinkActive } from '@angular/router';
@@ -9,6 +9,7 @@ import { AuthService } from '../../core/services/auth.service';
   selector: 'app-config-manager',
   standalone: true,
   imports: [CommonModule, FormsModule, RouterLink, RouterLinkActive],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   templateUrl: './config-manager.component.html',
 })
 export class ConfigManagerComponent implements OnInit {
