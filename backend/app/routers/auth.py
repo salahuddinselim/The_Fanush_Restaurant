@@ -21,8 +21,12 @@ _MAX = 10       # max failed attempts before lockout
 
 def _check_lockout(username: str) -> None:
     now = time.time()
-    _failed[username] = [t for t in _failed[username] if now - t < _WINDOW]
-    if len(_failed[username]) >= _MAX:
+    recent = [t for t in _failed[username] if now - t < _WINDOW]
+    if recent:
+        _failed[username] = recent
+    else:
+        _failed.pop(username, None)
+    if len(recent) >= _MAX:
         raise HTTPException(status_code=429, detail="Too many failed attempts. Try again in 5 minutes.")
 
 
@@ -60,6 +64,7 @@ def logout(
     session_token: Optional[str] = Cookie(default=None),
     db: Session = Depends(get_db),
 ):
+    response.delete_cookie(key=COOKIE_NAME, path="/")  # always clear, even if revocation fails
     if session_token:
         try:
             payload = decode_token(session_token)
@@ -71,7 +76,6 @@ def logout(
                     expires_at=datetime.fromtimestamp(exp, tz=timezone.utc),
                 ))
                 db.commit()
-        except HTTPException:
+        except Exception:
             pass
-    response.delete_cookie(key=COOKIE_NAME, path="/")
     return {"detail": "Logged out"}
