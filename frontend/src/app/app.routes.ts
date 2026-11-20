@@ -13,6 +13,7 @@ export const routes: Routes = [
       { path: 'hours', canActivate: [authGuard], loadComponent: () => import('./admin/hours-manager/hours-manager.component').then(m => m.HoursManagerComponent) },
       { path: 'config', canActivate: [authGuard], loadComponent: () => import('./admin/config-manager/config-manager.component').then(m => m.ConfigManagerComponent) },
       { path: 'reservations', canActivate: [authGuard], loadComponent: () => import('./admin/reservations/reservations.component').then(m => m.ReservationsComponent) },
+      { path: 'reviews', canActivate: [authGuard], loadComponent: () => import('./admin/reviews/reviews.component').then(m => m.ReviewsComponent) },
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
     ]
   },

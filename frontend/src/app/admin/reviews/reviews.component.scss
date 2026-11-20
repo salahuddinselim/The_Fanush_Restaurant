@@ -1,0 +1,6 @@
+.reviews-sub { font-size: .82rem; color: var(--ink-soft); margin-top: 2px; }
+.reviews-empty { color: var(--ink-soft); padding: 3rem 0; text-align: center; }
+.stars-cell { display: flex; gap: 2px; }
+.star-filled { color: #c8973a; font-size: .95rem; }
+.star-empty { color: var(--line); font-size: .95rem; }
+.review-comment-cell { max-width: 320px; color: var(--ink-soft); font-size: .88rem; }

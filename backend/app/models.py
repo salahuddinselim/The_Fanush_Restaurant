@@ -75,3 +75,12 @@ class RevokedToken(Base):
     __tablename__ = "revoked_tokens"
     jti = Column(String, primary_key=True)
     expires_at = Column(DateTime, nullable=False)
+
+
+class Review(Base):
+    __tablename__ = "reviews"
+    id = Column(Integer, primary_key=True, index=True)
+    name = Column(String, nullable=False)
+    rating = Column(Integer, nullable=False)   # 1–5
+    comment = Column(Text, nullable=True)
+    created_at = Column(DateTime, default=datetime.utcnow)

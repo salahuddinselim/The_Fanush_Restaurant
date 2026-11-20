@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
 import { forkJoin } from 'rxjs';
-import { API_URL, ApiService, Config, MenuCategory, MenuItem, GalleryImage, BusinessHour } from '../../core/services/api.service';
+import { API_URL, ApiService, Config, MenuCategory, MenuItem, GalleryImage, BusinessHour, Review } from '../../core/services/api.service';
 import { MENU_IMAGES, DEFAULT_MENU_IMAGE } from './menu-images';
 
 const DAYS = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
@@ -31,6 +31,10 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   submitted = false;
   submitError = '';
   submitting = false;
+  reviews: Review[] = [];
+  reviewSubmitted = false;
+  reviewError = '';
+  reviewSubmitting = false;
   year = new Date().getFullYear();
   readonly minDate = new Date().toISOString().split('T')[0];
   navScrolled = false;
@@ -53,6 +57,12 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
     notes: [''],
   });
 
+  reviewForm = this.fb.group({
+    name: ['', Validators.required],
+    rating: [0],
+    comment: [''],
+  });
+
   readonly HERO_FALLBACK = 'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=1920&q=85';
   readonly ABOUT_IMGS = [
     'https://images.unsplash.com/photo-1555949258-eb67b1ef0ceb?auto=format&fit=crop&w=600&q=80',
@@ -66,12 +76,14 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
       categories: this.api.getCategories(),
       gallery: this.api.getGallery(),
       hours: this.api.getHours(),
-    }).subscribe(({ config, categories, gallery, hours }) => {
+      reviews: this.api.getReviews(),
+    }).subscribe(({ config, categories, gallery, hours, reviews }) => {
       this.config = config;
       this.categories = categories;
       if (categories.length) this.activeCatId = categories[0].id;
       this.gallery = gallery;
       this.hours = hours;
+      this.reviews = reviews;
       setTimeout(() => this.setupCatObserver(), 100);
     });
   }
@@ -266,6 +278,28 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
     this.api.createReservation(this.form.value).subscribe({
       next: () => { this.submitted = true; this.submitting = false; },
       error: () => { this.submitError = 'Something went wrong. Please call us directly.'; this.submitting = false; },
+    });
+  }
+
+  setRating(n: number) { this.reviewForm.patchValue({ rating: n }); }
+
+  starsArray(n: number): number[] { return Array(Math.max(0, n)); }
+
+  submitReview() {
+    const { name, rating, comment } = this.reviewForm.value;
+    if (!name || !rating) {
+      this.reviewForm.markAllAsTouched();
+      return;
+    }
+    this.reviewSubmitting = true;
+    this.reviewError = '';
+    this.api.createReview({ name: name!, rating: rating!, comment: comment || undefined }).subscribe({
+      next: (r) => {
+        this.reviews = [r, ...this.reviews];
+        this.reviewSubmitted = true;
+        this.reviewSubmitting = false;
+      },
+      error: () => { this.reviewError = 'Could not post review. Please try again.'; this.reviewSubmitting = false; },
     });
   }
 }

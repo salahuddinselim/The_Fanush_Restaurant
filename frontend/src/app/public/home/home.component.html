@@ -349,6 +349,62 @@
     </div>
   </section>
 
+  <!-- REVIEWS -->
+  <section class="reviews-section" id="reviews">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="eyebrow">What our guests say</span>
+        <h2>Reviews</h2>
+      </div>
+
+      <!-- Review cards -->
+      <div class="reviews-grid" *ngIf="reviews.length > 0">
+        <div class="review-card" *ngFor="let r of reviews">
+          <div class="review-stars">
+            <span *ngFor="let s of starsArray(r.rating)" class="star filled">★</span>
+            <span *ngFor="let s of starsArray(5 - r.rating)" class="star">★</span>
+          </div>
+          <p class="review-comment" *ngIf="r.comment">{{ r.comment }}</p>
+          <div class="review-meta">
+            <span class="review-name">{{ r.name }}</span>
+            <span class="review-date">{{ r.created_at | date:'MMM d, y' }}</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Leave a review -->
+      <div class="review-form-wrap">
+        <h3>Leave a review</h3>
+        <div *ngIf="reviewSubmitted" class="success-panel">
+          <div class="success-icon">✓</div>
+          <h3>Thank you!</h3>
+          <p>Your review has been posted.</p>
+        </div>
+        <form *ngIf="!reviewSubmitted" (ngSubmit)="submitReview()" class="review-form" [formGroup]="reviewForm">
+          <div class="review-stars-input">
+            <button type="button" *ngFor="let n of [1,2,3,4,5]"
+              class="star-btn" [class.active]="(reviewForm.get('rating')?.value ?? 0) >= n"
+              (click)="setRating(n)" [attr.aria-label]="n + ' star'">★</button>
+          </div>
+          <p *ngIf="reviewForm.get('rating')?.touched && reviewForm.get('rating')?.value === 0" class="form-error">Please select a rating</p>
+          <div class="field">
+            <label>Name</label>
+            <input type="text" formControlName="name" placeholder="Your name" maxlength="100">
+            <p *ngIf="reviewForm.get('name')?.invalid && reviewForm.get('name')?.touched" class="form-error">Name is required</p>
+          </div>
+          <div class="field">
+            <label>Comment <span style="font-weight:400;opacity:.6">(optional)</span></label>
+            <textarea formControlName="comment" rows="3" placeholder="Tell us about your experience" maxlength="1000"></textarea>
+          </div>
+          <p *ngIf="reviewError" class="form-error">{{ reviewError }}</p>
+          <button type="submit" class="btn" style="width:100%;border-radius:8px;padding:.85rem" [disabled]="reviewSubmitting">
+            {{ reviewSubmitting ? 'Posting…' : 'Post Review' }}
+          </button>
+        </form>
+      </div>
+    </div>
+  </section>
+
 </main>
 
 <!-- MENU ITEM MODAL -->

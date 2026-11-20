@@ -139,3 +139,15 @@ class ReservationStatus(str, Enum):
 
 class ReservationStatusUpdate(BaseModel):
     status: ReservationStatus
+
+
+class ReviewCreate(BaseModel):
+    name: str = Field(min_length=1, max_length=100)
+    rating: int = Field(ge=1, le=5)
+    comment: Optional[str] = Field(None, max_length=1000)
+
+
+class ReviewOut(ReviewCreate):
+    id: int
+    created_at: datetime
+    model_config = {"from_attributes": True}

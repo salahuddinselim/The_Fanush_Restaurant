@@ -1,0 +1,78 @@
+<div class="admin-layout">
+  <!-- SIDEBAR -->
+  <aside class="admin-sidebar">
+    <div class="sidebar-brand">
+      <div class="brand-mark">F</div>
+      <div class="brand-text"><b>Fanus CMS</b><small>Admin Panel</small></div>
+    </div>
+    <span class="sidebar-section">Main</span>
+    <a routerLink="/admin/dashboard" routerLinkActive="active"><span class="nav-ic"><iconify-icon icon="lucide:layout-dashboard" width="16" height="16"></iconify-icon></span> Dashboard</a>
+    <a routerLink="/admin/config" routerLinkActive="active"><span class="nav-ic"><iconify-icon icon="lucide:settings" width="16" height="16"></iconify-icon></span> Site Settings</a>
+    <hr class="sidebar-divider">
+    <span class="sidebar-section">Content</span>
+    <a routerLink="/admin/menu" routerLinkActive="active"><span class="nav-ic"><iconify-icon icon="lucide:utensils" width="16" height="16"></iconify-icon></span> Menu</a>
+    <a routerLink="/admin/gallery" routerLinkActive="active"><span class="nav-ic"><iconify-icon icon="lucide:images" width="16" height="16"></iconify-icon></span> Gallery</a>
+    <a routerLink="/admin/hours" routerLinkActive="active"><span class="nav-ic"><iconify-icon icon="lucide:clock" width="16" height="16"></iconify-icon></span> Opening Hours</a>
+    <hr class="sidebar-divider">
+    <span class="sidebar-section">Engagement</span>
+    <a routerLink="/admin/reservations" routerLinkActive="active"><span class="nav-ic"><iconify-icon icon="lucide:calendar-check" width="16" height="16"></iconify-icon></span> Reservations</a>
+    <a routerLink="/admin/reviews" routerLinkActive="active"><span class="nav-ic"><iconify-icon icon="lucide:star" width="16" height="16"></iconify-icon></span> Reviews</a>
+    <div class="sidebar-footer">
+      <a routerLink="/" style="cursor:pointer"><span class="nav-ic"><iconify-icon icon="lucide:arrow-up-right" width="16" height="16"></iconify-icon></span> View Site</a>
+      <a (click)="auth.logout()" style="cursor:pointer;color:rgba(255,80,80,.7)"><span class="nav-ic"><iconify-icon icon="lucide:log-out" width="16" height="16"></iconify-icon></span> Sign Out</a>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="admin-main">
+    <div class="admin-topbar">
+      <div>
+        <h1 class="admin-page-title">Reviews</h1>
+        <p class="reviews-sub">{{ reviews.length }} public review{{ reviews.length !== 1 ? 's' : '' }}
+          <span *ngIf="reviews.length"> · avg {{ avgRating | number:'1.1-1' }} ★</span>
+        </p>
+      </div>
+    </div>
+
+    <div *ngIf="error" class="dash-error">{{ error }}</div>
+
+    <div *ngIf="loading" class="dash-loading">
+      <div class="spin-ring"></div>
+      <span>Loading…</span>
+    </div>
+
+    <div *ngIf="!loading && reviews.length === 0 && !error" class="reviews-empty">
+      No reviews yet — they appear here once customers post them on the site.
+    </div>
+
+    <div *ngIf="!loading" class="admin-card">
+      <table class="data-table" *ngIf="reviews.length > 0">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Rating</th>
+            <th>Comment</th>
+            <th>Date</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let r of reviews">
+            <td><b>{{ r.name }}</b></td>
+            <td>
+              <span class="stars-cell">
+                <span *ngFor="let s of starsArray(r.rating)" class="star-filled">★</span>
+                <span *ngFor="let s of starsArray(5 - r.rating)" class="star-empty">★</span>
+              </span>
+            </td>
+            <td class="review-comment-cell">{{ r.comment || '—' }}</td>
+            <td style="font-size:13px;color:var(--ink-soft)">{{ r.created_at | date:'MMM d, y' }}</td>
+            <td>
+              <button class="btn ghost sm" (click)="delete(r.id)">Delete</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </main>
+</div>

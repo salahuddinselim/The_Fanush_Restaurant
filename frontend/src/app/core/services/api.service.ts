@@ -11,6 +11,8 @@ export interface MenuCategory { id: number; name: string; display_order: number;
 export interface MenuItem { id: number; category_id: number; name: string; description: string | null; price: number; image_url: string | null; is_available: boolean; display_order: number }
 export interface GalleryImage { id: number; image_url: string; caption: string | null; display_order: number; is_active: boolean }
 export interface Reservation { id: number; name: string; email: string; phone: string | null; date: string; time: string; party_size: number; notes: string | null; status: string; created_at: string }
+export interface Review { id: number; name: string; rating: number; comment: string | null; created_at: string }
+export interface ReviewCreate { name: string; rating: number; comment?: string }
 
 @Injectable({ providedIn: 'root' })
 export class ApiService {
@@ -55,4 +57,9 @@ export class ApiService {
   getReservations(): Observable<Reservation[]> { return this.http.get<Reservation[]>(`${API_URL}/reservations`); }
   updateReservation(id: number, status: string): Observable<Reservation> { return this.http.put<Reservation>(`${API_URL}/reservations/${id}`, { status }); }
   deleteReservation(id: number): Observable<any> { return this.http.delete(`${API_URL}/reservations/${id}`); }
+
+  // Reviews
+  getReviews(): Observable<Review[]> { return this.http.get<Review[]>(`${API_URL}/reviews`); }
+  createReview(data: ReviewCreate): Observable<Review> { return this.http.post<Review>(`${API_URL}/reviews`, data); }
+  deleteReview(id: number): Observable<any> { return this.http.delete(`${API_URL}/reviews/${id}`); }
 }

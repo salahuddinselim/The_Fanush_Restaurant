@@ -7,7 +7,7 @@ from slowapi.errors import RateLimitExceeded
 import os
 from .database import engine, Base
 from .limiter import limiter
-from .routers import auth, config, hours, menu, gallery, reservations
+from .routers import auth, config, hours, menu, gallery, reservations, reviews
 
 Base.metadata.create_all(bind=engine)
 
@@ -65,6 +65,7 @@ app.include_router(hours.router)
 app.include_router(menu.router)
 app.include_router(gallery.router)
 app.include_router(reservations.router)
+app.include_router(reviews.router)
 
 
 @app.get("/health")
