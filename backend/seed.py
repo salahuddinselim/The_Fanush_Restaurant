@@ -14,9 +14,13 @@ if not init_password:
     print("ERROR: Set ADMIN_INIT_PASSWORD environment variable before seeding.", file=sys.stderr)
     sys.exit(1)
 
-if not db.query(models.User).filter(models.User.username == "admin").first():
+admin_user = db.query(models.User).filter(models.User.username == "admin").first()
+if not admin_user:
     db.add(models.User(username="admin", hashed_password=hash_password(init_password)))
     print("Created admin user  username=admin")
+else:
+    admin_user.hashed_password = hash_password(init_password)
+    print("Updated admin password  username=admin")
 
 defaults = {
     "restaurant_name": "The Fanus Restaurant",

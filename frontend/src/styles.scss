@@ -77,25 +77,32 @@ img { max-width: 100%; display: block; }
 }
 
 /* Scroll-reveal utility — applied by IntersectionObserver in home component */
+@keyframes revealFallback {
+  to { opacity: 1; transform: none; }
+}
 .reveal {
   opacity: 0; transform: translateY(28px);
   transition: opacity .65s cubic-bezier(.22,.61,.36,1), transform .65s cubic-bezier(.22,.61,.36,1);
-  &.revealed { opacity: 1; transform: none; }
+  animation: revealFallback 0s 3s forwards; /* safety net: visible after 3s even if observer missed it */
+  &.revealed { opacity: 1; transform: none; animation: none; }
 }
 .reveal-left {
   opacity: 0; transform: translateX(-28px);
   transition: opacity .65s cubic-bezier(.22,.61,.36,1), transform .65s cubic-bezier(.22,.61,.36,1);
-  &.revealed { opacity: 1; transform: none; }
+  animation: revealFallback 0s 3s forwards;
+  &.revealed { opacity: 1; transform: none; animation: none; }
 }
 .reveal-right {
   opacity: 0; transform: translateX(28px);
   transition: opacity .65s cubic-bezier(.22,.61,.36,1), transform .65s cubic-bezier(.22,.61,.36,1);
-  &.revealed { opacity: 1; transform: none; }
+  animation: revealFallback 0s 3s forwards;
+  &.revealed { opacity: 1; transform: none; animation: none; }
 }
 .reveal-scale {
   opacity: 0; transform: scale(.94);
   transition: opacity .6s cubic-bezier(.22,.61,.36,1), transform .6s cubic-bezier(.22,.61,.36,1);
-  &.revealed { opacity: 1; transform: none; }
+  animation: revealFallback 0s 3s forwards;
+  &.revealed { opacity: 1; transform: none; animation: none; }
 }
 /* Stagger children delay helpers */
 .stagger > *:nth-child(1) { transition-delay: 0s; }

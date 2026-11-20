@@ -60,4 +60,8 @@ export class AuthService {
       return true;
     } catch { return false; }
   }
+
+  getToken(): string | null {
+    return null;
+  }
 }

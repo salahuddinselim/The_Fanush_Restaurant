@@ -2,6 +2,7 @@ from fastapi import APIRouter, Depends, HTTPException, UploadFile, File
 from sqlalchemy.orm import Session
 from typing import List
 import os
+from pathlib import Path
 from ..database import get_db
 from .. import models, schemas
 from ..auth import get_current_user
@@ -9,8 +10,8 @@ from ..utils.upload import save_upload
 
 router = APIRouter(prefix="/menu", tags=["menu"])
 
-UPLOAD_DIR = "static/uploads/menu"
-os.makedirs(UPLOAD_DIR, exist_ok=True)
+UPLOAD_DIR = Path(__file__).resolve().parents[2] / "static" / "uploads" / "menu"
+UPLOAD_DIR.mkdir(parents=True, exist_ok=True)
 
 
 @router.get("/categories", response_model=List[schemas.MenuCategoryOut])
@@ -100,7 +101,7 @@ async def upload_item_image(item_id: int, file: UploadFile = File(...), db: Sess
     item = db.query(models.MenuItem).filter(models.MenuItem.id == item_id).first()
     if not item:
         raise HTTPException(status_code=404, detail="Item not found")
-    filename = await save_upload(file, UPLOAD_DIR)
+    filename = await save_upload(file, str(UPLOAD_DIR))
     item.image_url = f"/static/uploads/menu/{filename}"
     db.commit()
     return {"image_url": item.image_url}

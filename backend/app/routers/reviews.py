@@ -8,11 +8,13 @@ from ..limiter import limiter
 router = APIRouter(prefix="/reviews", tags=["reviews"])
 
 
+@router.get("", response_model=List[schemas.ReviewOut])
 @router.get("/", response_model=List[schemas.ReviewOut])
 def get_reviews(db: Session = Depends(get_db)):
     return db.query(models.Review).order_by(models.Review.created_at.desc()).all()
 
 
+@router.post("", response_model=schemas.ReviewOut, status_code=201)
 @router.post("/", response_model=schemas.ReviewOut, status_code=201)
 @limiter.limit("5/minute")
 def create_review(request: Request, review: schemas.ReviewCreate, db: Session = Depends(get_db)):

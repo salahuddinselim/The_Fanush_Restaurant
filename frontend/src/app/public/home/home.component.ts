@@ -98,20 +98,53 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   });
 
   ngOnInit() {
-    forkJoin({
-      config: this.api.getConfig().pipe(catchError(() => of({} as Config))),
-      categories: this.api.getCategories().pipe(catchError(() => of([] as MenuCategory[]))),
-      gallery: this.api.getGallery().pipe(catchError(() => of([] as GalleryImage[]))),
-      hours: this.api.getHours().pipe(catchError(() => of([] as BusinessHour[]))),
-      reviews: this.api.getReviews().pipe(catchError(() => of([] as Review[]))),
-    }).subscribe(({ config, categories, gallery, hours, reviews }) => {
+    const homeRequest = typeof this.api.getPageHome === 'function'
+      ? this.api.getPageHome()
+      : forkJoin({
+          config: this.api.getConfig().pipe(catchError(() => of({} as Config))),
+          categories: this.api.getCategories().pipe(catchError(() => of([] as MenuCategory[]))),
+          gallery: this.api.getGallery().pipe(catchError(() => of([] as GalleryImage[]))),
+          hours: this.api.getHours().pipe(catchError(() => of([] as BusinessHour[]))),
+          reviews: of([] as Review[]),
+        });
+
+    homeRequest.pipe(
+      catchError(() =>
+        forkJoin({
+          config: this.api.getConfig().pipe(catchError(() => of({} as Config))),
+          categories: this.api.getCategories().pipe(catchError(() => of([] as MenuCategory[]))),
+          gallery: this.api.getGallery().pipe(catchError(() => of([] as GalleryImage[]))),
+          hours: this.api.getHours().pipe(catchError(() => of([] as BusinessHour[]))),
+          reviews: this.api.getReviews().pipe(catchError(() => of([] as Review[]))),
+        })
+      )
+    ).subscribe((data: any) => {
+      const config    = data.config    ?? {};
+      const categories = data.categories ?? [];
+      const gallery   = data.gallery   ?? [];
+      const hours     = data.hours     ?? [];
+      const reviews   = data.reviews   ?? [];
+
       this.config = config;
       this.categories = categories.length ? categories : [];
       if (this.categories.length) this.activeCatId = this.categories[0].id;
       this.gallery = gallery.length ? gallery : this.DEFAULT_GALLERY;
       this.hours = hours;
       this.reviews = reviews.length ? reviews : this.DEFAULT_REVIEWS;
-      setTimeout(() => this.setupCatObserver(), 100);
+      // 250ms gives Angular two CD cycles to render *ngFor items into DOM.
+      setTimeout(() => {
+        this.setupCatObserver();
+        document.querySelectorAll('.reveal:not(.revealed), .reveal-left:not(.revealed), .reveal-right:not(.revealed), .reveal-scale:not(.revealed)')
+          .forEach(el => this.observer?.observe(el));
+        // Fix cached-image race: if the browser already loaded an image before
+        // the (load) event listener was attached, the event never fires.
+        document.querySelectorAll<HTMLImageElement>('.card-img-wrap img').forEach(img => {
+          if (img.complete && img.naturalWidth > 0) {
+            const id = Number((img.closest('[data-item-id]') as HTMLElement)?.dataset['itemId']);
+            if (id) this.menuImageLoaded[id] = true;
+          }
+        });
+      }, 250);
     });
   }
 

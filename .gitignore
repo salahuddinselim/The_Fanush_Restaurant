@@ -14,6 +14,7 @@ dist/
 # Env
 .env
 *.env.local
+.jwt-secret
 
 # IDE
 .vscode/settings.json

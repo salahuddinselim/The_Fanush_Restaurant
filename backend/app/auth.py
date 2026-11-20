@@ -1,5 +1,7 @@
 import os
 import uuid
+import secrets
+from pathlib import Path
 import bcrypt as _bcrypt
 import jwt as _jwt
 from datetime import datetime, timedelta, timezone
@@ -10,6 +12,16 @@ from .database import get_db
 from . import models
 
 SECRET_KEY = os.environ.get("JWT_SECRET_KEY")
+if not SECRET_KEY:
+    _secret_file = Path(__file__).resolve().parent.parent / ".jwt-secret"
+    try:
+        if _secret_file.exists():
+            SECRET_KEY = _secret_file.read_text(encoding="utf-8").strip()
+        if not SECRET_KEY:
+            SECRET_KEY = secrets.token_hex(32)
+            _secret_file.write_text(SECRET_KEY, encoding="utf-8")
+    except OSError:
+        SECRET_KEY = secrets.token_hex(32)
 
 ALGORITHM = "HS256"
 ACCESS_TOKEN_EXPIRE_MINUTES = 30

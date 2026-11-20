@@ -11,8 +11,22 @@ export function getApiUrl(locationHostname = typeof window !== 'undefined' ? win
     ''
   ).trim().replace(/\/+$/, '');
 
-  const hostname = locationHostname.toLowerCase();
-  return configured || (hostname === 'localhost' || hostname === '127.0.0.1' ? 'http://localhost:8000' : '');
+  if (configured) return configured;
+
+  const hostname = (locationHostname || 'localhost').toLowerCase();
+  if (hostname === 'localhost' || hostname === '127.0.0.1') {
+    return 'http://localhost:8000';
+  }
+  if (
+    /^192\.168\.\d+\.\d+$/.test(hostname) ||
+    /^10\.\d+\.\d+\.\d+$/.test(hostname) ||
+    /^172\.(1[6-9]|2\d|3[01])\.\d+\.\d+$/.test(hostname) ||
+    hostname.endsWith('.local')
+  ) {
+    return `http://${hostname}:8000`;
+  }
+
+  return '';
 }
 
 export const API_URL = getApiUrl();

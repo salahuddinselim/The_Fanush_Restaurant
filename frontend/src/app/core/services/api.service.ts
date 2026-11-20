@@ -18,6 +18,11 @@ export interface ReviewCreate { name: string; rating: number; comment?: string }
 export class ApiService {
   constructor(private http: HttpClient) {}
 
+  // Aggregated home page — single round-trip
+  getPageHome(): Observable<{ config: Config; categories: MenuCategory[]; gallery: GalleryImage[]; hours: BusinessHour[]; reviews: Review[] }> {
+    return this.http.get<any>(`${API_URL}/page/home`);
+  }
+
   // Config
   getConfig(): Observable<Config> { return this.http.get<Config>(`${API_URL}/config`); }
   updateConfig(items: { key: string; value: string }[]): Observable<any> { return this.http.put(`${API_URL}/config`, { items }); }
