@@ -24,6 +24,7 @@ export class ConfigManagerComponent implements OnInit {
     { key: 'cta_text', label: 'CTA Button Text' },
     { key: 'hero_image_url', label: 'Hero Image URL' },
     { key: 'logo_url', label: 'Logo URL' },
+    { key: 'parking_info', label: 'Parking & Access' },
   ];
   values: Config = {};
   saved = false;

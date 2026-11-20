@@ -1,12 +1,20 @@
 <!-- TOPBAR -->
 <div class="topbar">
   <div class="wrap topbar-inner">
-    <span class="topbar-left">
-      <i class="dot"></i> Italian Kitchen · {{ locationLabel }}
-    </span>
-    <span class="topbar-right">
-      {{ address }} &nbsp;·&nbsp; <a [href]="'tel:' + phone">{{ phone }}</a>
-    </span>
+    <div class="topbar-left">
+      <span class="live-status-pill" [class.is-open]="openStatus.isOpen">
+        <span class="status-beacon"></span>
+        <b>{{ openStatus.label }}</b> — {{ openStatus.detail }}
+      </span>
+    </div>
+    <div class="topbar-right">
+      <span class="loc-text">{{ address }}</span>
+      <span class="topbar-divider">·</span>
+      <a [href]="'tel:' + phone" class="topbar-phone" aria-label="Call restaurant">
+        <iconify-icon icon="lucide:phone-call" width="13" height="13" aria-hidden="true"></iconify-icon>
+        {{ phone }}
+      </a>
+    </div>
   </div>
 </div>
 
@@ -21,8 +29,8 @@
         <span *ngIf="!logoUrl" class="brand-letter">F</span>
       </span>
       <span class="brand-text">
-        <b>{{ name }}</b>
-        <small>Italian Kitchen</small>
+        <b class="brand-name">{{ name }}</b>
+        <small class="brand-sub">Italian Kitchen &amp; Wood-Fired</small>
       </span>
     </a>
 
@@ -33,7 +41,7 @@
         <input
           type="text"
           class="nav-search-input"
-          placeholder="Search"
+          placeholder="Search pasta, pizza, grill…"
           [value]="searchQuery"
           (input)="onSearchInput($any($event.target).value)"
           (focus)="showSuggestions = searchSuggestions.length > 0"
@@ -45,20 +53,33 @@
           aria-controls="nav-search-suggestions"
           aria-haspopup="listbox"
         >
-        <button *ngIf="searchQuery" class="search-clear" (click)="clearSearch()" aria-label="Clear search">✕</button>
+        <button *ngIf="searchQuery" class="search-clear" (click)="clearSearch()" aria-label="Clear search">
+          <iconify-icon icon="lucide:x" width="14" height="14" aria-hidden="true"></iconify-icon>
+        </button>
       </div>
       <div id="nav-search-suggestions" class="search-suggestions" role="listbox" *ngIf="showSuggestions" aria-label="Search suggestions">
-        <button role="option" *ngFor="let s of searchSuggestions" (mousedown)="selectSuggestion(s)">{{ s }}</button>
+        <button role="option" *ngFor="let s of searchSuggestions" (mousedown)="selectSuggestion(s)">
+          <iconify-icon icon="lucide:arrow-right" width="14" height="14"></iconify-icon>
+          {{ s }}
+        </button>
       </div>
     </div>
 
     <!-- Desktop nav links -->
     <nav class="navlinks">
       <a (click)="scrollTo('about')">About</a>
+      <a (click)="scrollTo('gallery')">Ambiance</a>
       <a (click)="scrollTo('menu')">Menu</a>
-      <a (click)="scrollTo('visit')">Visit</a>
-      <a (click)="scrollTo('contact')">Contact</a>
-      <a [href]="'tel:' + phone" class="btn nav-cta">{{ ctaText }}</a>
+      <a (click)="scrollTo('visit')">Visit &amp; Hours</a>
+      <a (click)="scrollTo('reviews')">Reviews</a>
+      <a (click)="scrollTo('reservation')" class="btn nav-book-btn">
+        <iconify-icon icon="lucide:calendar-check" width="14" height="14" aria-hidden="true"></iconify-icon>
+        Book Table
+      </a>
+      <a [href]="'tel:' + phone" class="btn nav-cta">
+        <iconify-icon icon="lucide:phone-call" width="14" height="14" aria-hidden="true"></iconify-icon>
+        {{ ctaText }}
+      </a>
     </nav>
 
     <!-- Burger -->
@@ -73,70 +94,152 @@
       <span class="search-ic" aria-hidden="true"><iconify-icon icon="lucide:search" width="16" height="16"></iconify-icon></span>
       <input
         type="text"
-        placeholder="Search"
+        placeholder="Search menu…"
         [value]="searchQuery"
         (input)="onSearchInput($any($event.target).value)"
         aria-label="Search menu"
       >
-      <button *ngIf="searchQuery" (click)="clearSearch()">✕</button>
+      <button *ngIf="searchQuery" (click)="clearSearch()" aria-label="Clear search">
+        <iconify-icon icon="lucide:x" width="14" height="14" aria-hidden="true"></iconify-icon>
+      </button>
     </div>
     <div class="mobile-links">
       <a (click)="scrollTo('about'); mobileMenuOpen=false">About</a>
+      <a (click)="scrollTo('gallery'); mobileMenuOpen=false">Ambiance &amp; Gallery</a>
       <a (click)="scrollTo('menu'); mobileMenuOpen=false">Menu</a>
-      <a (click)="scrollTo('visit'); mobileMenuOpen=false">Visit</a>
-      <a (click)="scrollTo('contact'); mobileMenuOpen=false">Contact</a>
+      <a (click)="scrollTo('visit'); mobileMenuOpen=false">Visit &amp; Hours</a>
+      <a (click)="scrollTo('reviews'); mobileMenuOpen=false">Guest Reviews</a>
+      <a (click)="scrollTo('reservation'); mobileMenuOpen=false" class="mobile-highlight">Reserve a Table</a>
     </div>
     <div class="mobile-cats" *ngIf="categories.length">
-      <p class="cats-label">Categories</p>
+      <p class="cats-label">Menu Categories</p>
       <div class="cats-grid">
         <a *ngFor="let c of categories" (click)="scrollToCat(c); mobileMenuOpen=false" [class.active]="activeCatId === c.id">{{ c.name }}</a>
       </div>
     </div>
-    <a [href]="'tel:' + phone" class="btn" style="margin:0 1rem 1rem">{{ ctaText }}</a>
+    <div class="mobile-cta-row">
+      <a (click)="scrollTo('reservation'); mobileMenuOpen=false" class="mobile-book-btn">
+        <iconify-icon icon="lucide:calendar-check" width="14" height="14" aria-hidden="true"></iconify-icon>
+        Book a Table
+      </a>
+      <a [href]="'tel:' + phone" class="mobile-call-btn">
+        <iconify-icon icon="lucide:phone-call" width="14" height="14" aria-hidden="true"></iconify-icon>
+        {{ ctaText }}
+      </a>
+    </div>
   </div>
 </header>
+
+<div class="mobile-backdrop" *ngIf="mobileMenuOpen" (click)="mobileMenuOpen = false" aria-hidden="true"></div>
 
 <main id="top">
 
   <!-- HERO -->
   <section class="hero">
-    <img class="hero-bg" [src]="heroImg" [alt]="name + ' dining room'">
-    <div class="hero-overlay"></div>
-    <div class="wrap hero-body">
-      <span class="eyebrow">{{ locationLabel }}</span>
-      <h1>{{ tagline }}</h1>
-      <p class="lead">{{ description }}</p>
-      <div class="hero-cta-row">
-        <a (click)="scrollTo('menu')" class="btn" style="cursor:pointer">View the Menu</a>
-        <a [href]="'tel:' + phone" class="btn ghost-white">{{ phone }}</a>
-      </div>
-      <div class="hero-stats">
-        <div><b>Est. 1985</b><span>Serving Gosnells</span></div>
-        <div><b>Fresh</b><span>Made to Order</span></div>
-        <div><b>Family</b><span>Owned &amp; Run</span></div>
-      </div>
+    <div class="hero-bg-container">
+      <img class="hero-bg" [src]="heroImg" [alt]="name + ' dining room'" fetchpriority="high">
+      <div class="hero-ambient-glow"></div>
+      <div class="hero-overlay"></div>
     </div>
+    <div class="wrap hero-body">
+      <div class="hero-badge-wrap">
+        <span class="hero-pill-badge">
+          <iconify-icon icon="lucide:sparkles" width="14" height="14"></iconify-icon>
+          {{ locationLabel }}
+        </span>
+      </div>
+      <h1 class="hero-title">{{ tagline }}</h1>
+      <p class="lead">{{ description }}</p>
+
+      <div class="hero-cta-row">
+        <button (click)="scrollTo('reservation')" class="btn btn-gold-glow">
+          <iconify-icon icon="lucide:calendar" width="17" height="17"></iconify-icon>
+          Reserve a Table
+        </button>
+        <button (click)="scrollTo('menu')" class="btn ghost-white">
+          <iconify-icon icon="lucide:utensils" width="17" height="17"></iconify-icon>
+          View Full Menu
+        </button>
+        <a [href]="'tel:' + phone" class="btn ghost-glass">
+          <iconify-icon icon="lucide:phone" width="16" height="16"></iconify-icon>
+          {{ phone }}
+        </a>
+      </div>
+
+    </div>
+
+    <!-- Scroll Down Indicator -->
+    <a (click)="scrollTo('about')" class="hero-scroll-indicator" aria-label="Scroll to about section">
+      <span class="scroll-mouse">
+        <span class="scroll-wheel"></span>
+      </span>
+      <span class="scroll-label">Explore</span>
+    </a>
   </section>
 
   <!-- ABOUT -->
   <section class="about-section" id="about">
     <div class="wrap about-grid">
       <div class="about-imgs reveal-left">
-        <img [src]="ABOUT_IMGS[0]" alt="Fresh pasta" loading="lazy">
-        <img [src]="ABOUT_IMGS[1]" alt="Chicken parmigiana" loading="lazy">
-        <img [src]="ABOUT_IMGS[2]" alt="Creamy risotto" loading="lazy">
+        <div class="about-img-frame primary">
+          <img [src]="ABOUT_IMGS[0]" alt="Fresh pasta with slow-cooked ragu" loading="lazy">
+          <div class="img-badge-floating">
+            <span class="badge-num">100%</span>
+            <span class="badge-lbl">Handmade Daily</span>
+          </div>
+        </div>
+        <div class="about-img-frame sub-1">
+          <img [src]="ABOUT_IMGS[1]" alt="Crispy chicken parmigiana" loading="lazy">
+        </div>
+        <div class="about-img-frame sub-2">
+          <img [src]="ABOUT_IMGS[2]" alt="Wood-fired artisanal pizza" loading="lazy">
+        </div>
       </div>
       <div class="about-copy reveal-right">
-        <span class="eyebrow alt">Our Kitchen</span>
-        <h2>A neighbourhood table with an Italian heart</h2>
-        <p>The Fanus Restaurant brings together the comfort of classic Italian cooking and the easy-going spirit of a local diner. From slow-cooked beef ragù and creamy risottos to buttermilk-fried chicken burgers, everything is prepared to order and served generously.</p>
-        <p>Whether it's a quick lunch, a family dinner, or a takeaway night in — you'll find familiar flavours, fair prices, and a warm welcome on Albany Highway.</p>
-        <div class="badges stagger">
-          <span class="badge-pill reveal">Italian Cuisine</span>
-          <span class="badge-pill reveal">Pizza &amp; Burgers</span>
-          <span class="badge-pill reveal">Dine In</span>
-          <span class="badge-pill reveal">Takeaway</span>
-          <span class="badge-pill reveal">Family Friendly</span>
+        <span class="eyebrow alt">Authentic Cucina Italiana</span>
+        <h2>A neighbourhood table with a generous Italian heart</h2>
+        <p>The Fanus Restaurant brings together time-honoured Italian culinary craftsmanship with the warm, relaxed hospitality of Western Australia. From 6-hour braised beef ragù and handmade gnocchi to crisp wood-fired pizza and golden chicken parmigianas, every dish is cooked to order from scratch.</p>
+        <p>Whether you are dining in for a romantic dinner, gathering the whole family for Sunday lunch, or collecting a Friday night takeaway feast — you will always receive generous portions, honest prices, and a welcoming smile on Albany Highway.</p>
+
+        <div class="about-highlights">
+          <div class="hl-item">
+            <span class="hl-icon"><iconify-icon icon="lucide:flame" width="20" height="20"></iconify-icon></span>
+            <div>
+              <b>Wood-Fired &amp; Fresh</b>
+              <small>Cooked over high heat with authentic crust</small>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- AMBIANCE & GALLERY SECTION -->
+  <section class="gallery-section" id="gallery">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="eyebrow alt">Moments &amp; Ambiance</span>
+        <h2>Inside {{ name }}</h2>
+        <p>Take a glimpse into our kitchen, dining room, and artisanal dishes.</p>
+      </div>
+
+      <div class="gallery-grid reveal-scale">
+        <div
+          *ngFor="let img of displayGallery; let i = index"
+          class="gallery-item"
+          (click)="openLightbox(img, i)"
+          tabindex="0"
+          (keydown.enter)="openLightbox(img, i)"
+          [attr.aria-label]="img.caption || 'View gallery photo ' + (i + 1)"
+        >
+          <div class="gallery-img-wrap">
+            <img [src]="resolveImageUrl(img.image_url)" [alt]="img.caption || 'Restaurant image'" loading="lazy">
+            <div class="gallery-overlay">
+              <span class="gallery-zoom-ic"><iconify-icon icon="lucide:maximize-2" width="22" height="22"></iconify-icon></span>
+              <p class="gallery-caption">{{ img.caption || 'The Fanus Experience' }}</p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -144,6 +247,7 @@
 
   <!-- MENU -->
   <section class="menu-section" id="menu">
+    <!-- Sticky category navigation -->
     <div class="cat-sticky-bar" *ngIf="categories.length && !searchQuery">
       <div class="wrap cat-scroll-track">
         <button
@@ -152,8 +256,8 @@
           (click)="scrollToCat(cat)"
           [attr.aria-pressed]="activeCatId === cat.id"
           [attr.data-count]="cat.items.length">
-          <iconify-icon [attr.icon]="getCategoryIcon(cat.name)" width="18" height="18" aria-hidden="true"></iconify-icon>
-          {{ cat.name }}
+          <span class="cat-btn-ic"><iconify-icon [attr.icon]="getCategoryIcon(cat.name)" width="18" height="18" aria-hidden="true"></iconify-icon></span>
+          <span class="cat-btn-name">{{ cat.name }}</span>
         </button>
       </div>
     </div>
@@ -161,24 +265,38 @@
     <div class="wrap menu-wrap">
       <div class="menu-head reveal">
         <div>
-          <span class="eyebrow alt">Our Menu</span>
-          <h2>Fresh from the kitchen</h2>
-          <p>Every dish, every price.</p>
+          <span class="eyebrow alt">Handcrafted Menu</span>
+          <h2>Fresh from the Kitchen</h2>
+          <p>Every dish is prepared upon order using quality local produce.</p>
         </div>
-        <span class="menu-count">{{ menuItemCount }} items</span>
+        <div class="menu-header-meta">
+          <span class="menu-count">
+            <iconify-icon icon="lucide:utensils" width="14" height="14"></iconify-icon>
+            {{ menuItemCount }} Dishes Available
+          </span>
+        </div>
       </div>
 
       <div *ngFor="let cat of filteredCategories" class="menu-block" [id]="'cat-' + cat.id">
-        <h3 class="cat-heading">
-          <span class="cat-heading-icon" aria-hidden="true"><iconify-icon [attr.icon]="getCategoryIcon(cat.name)" width="28" height="28"></iconify-icon></span>
-          <span>{{ cat.name }}</span>
+        <div class="cat-heading">
+          <span class="cat-heading-icon" aria-hidden="true"><iconify-icon [attr.icon]="getCategoryIcon(cat.name)" width="24" height="24"></iconify-icon></span>
+          <h3>{{ cat.name }}</h3>
           <span class="cat-heading-count">{{ cat.items.length }}</span>
-        </h3>
+        </div>
+
         <div class="items-grid">
-          <article *ngFor="let item of cat.items" class="menu-card" tabindex="0" [attr.aria-label]="item.name + ' — A$' + item.price.toFixed(2)" (click)="openMenuItem(item)" (keydown.enter)="openMenuItem(item)" style="cursor:pointer">
+          <article
+            *ngFor="let item of cat.items"
+            class="menu-card"
+            tabindex="0"
+            [attr.aria-label]="item.name + ' — A$' + item.price.toFixed(2)"
+            (click)="openMenuItem(item)"
+            (keydown.enter)="openMenuItem(item)"
+            style="cursor:pointer"
+          >
             <div class="card-img-wrap">
               <div *ngIf="!menuImageLoaded[item.id]" class="card-img-placeholder" aria-hidden="true">
-                <iconify-icon [attr.icon]="getCategoryIcon(cat.name)" width="52" height="52"></iconify-icon>
+                <iconify-icon [attr.icon]="getCategoryIcon(cat.name)" width="44" height="44"></iconify-icon>
               </div>
               <img
                 [src]="menuItemImage(item, cat.name)"
@@ -187,11 +305,26 @@
                 [class.loaded]="menuImageLoaded[item.id]"
                 (load)="onMenuImageLoad(item.id)"
                 (error)="onMenuImageError(item.id)">
-              <div class="card-img-overlay"></div>
+              <div class="card-img-overlay">
+                <span class="view-item-pill">
+                  <iconify-icon icon="lucide:eye" width="13" height="13"></iconify-icon>
+                  Quick View
+                </span>
+              </div>
             </div>
+
             <div class="card-body">
+              <!-- Item Tags (Dietary / Highlights) -->
+              <div class="card-tags" *ngIf="getItemTags(item).length">
+                <span *ngFor="let tag of getItemTags(item)" class="item-tag" [class]="tag.cssClass">
+                  <iconify-icon [attr.icon]="tag.icon" width="12" height="12"></iconify-icon>
+                  {{ tag.label }}
+                </span>
+              </div>
+
               <h4 class="card-name">{{ item.name }}</h4>
               <p *ngIf="item.description" class="card-desc">{{ item.description }}</p>
+
               <div class="card-price-row">
                 <span class="price-label">Price</span>
                 <span class="card-price">A${{ item.price.toFixed(2) }}</span>
@@ -202,10 +335,13 @@
       </div>
 
       <div *ngIf="searchQuery && !filteredCategories.length" class="menu-empty">
-        <p>No items found for "<b>{{ searchQuery }}</b>" — <a (click)="clearSearch()" style="cursor:pointer;color:var(--wine)">clear search</a></p>
+        <iconify-icon icon="lucide:search-x" width="48" height="48" style="opacity:.4;margin-bottom:1rem"></iconify-icon>
+        <p>No dishes found matching "<b>{{ searchQuery }}</b>"</p>
+        <button class="btn gold sm" (click)="clearSearch()" style="margin-top:1rem">Clear Search Filter</button>
       </div>
+
       <div *ngIf="!searchQuery && !categories.length" class="menu-empty">
-        <p>Menu loading…</p>
+        <p>Loading kitchen menu…</p>
       </div>
     </div>
   </section>
@@ -214,75 +350,119 @@
   <section class="feature-strip">
     <div class="wrap feature-cells">
       <div class="feature-cell reveal" style="transition-delay:.05s">
-        <span class="feature-ic" aria-hidden="true"><iconify-icon icon="lucide:utensils" width="24" height="24"></iconify-icon></span>
+        <span class="feature-ic" aria-hidden="true"><iconify-icon icon="lucide:flame" width="26" height="26"></iconify-icon></span>
         <b>Made to Order</b>
-        <p>Every pasta, risotto and burger is cooked fresh when you order — never pre-made.</p>
+        <p>Every pasta, risotto and pizza is cooked fresh when you order — never pre-made or reheated.</p>
       </div>
-      <div class="feature-cell reveal" style="transition-delay:.18s">
-        <span class="feature-ic" aria-hidden="true"><iconify-icon icon="lucide:users" width="24" height="24"></iconify-icon></span>
+      <div class="feature-cell reveal" style="transition-delay:.15s">
+        <span class="feature-ic" aria-hidden="true"><iconify-icon icon="lucide:users" width="26" height="26"></iconify-icon></span>
         <b>Family Friendly</b>
-        <p>Kids' pasta and nuggets on the menu, with generous portions for the whole table.</p>
+        <p>High chairs available, delicious kids' menus, and large tables ready to host your celebrations.</p>
       </div>
-      <div class="feature-cell reveal" style="transition-delay:.31s">
-        <span class="feature-ic" aria-hidden="true"><iconify-icon icon="lucide:shopping-bag" width="24" height="24"></iconify-icon></span>
-        <b>Dine In or Takeaway</b>
-        <p>Join us on Albany Highway, or order for pickup and delivery across Gosnells.</p>
+      <div class="feature-cell reveal" style="transition-delay:.25s">
+        <span class="feature-ic" aria-hidden="true"><iconify-icon icon="lucide:wine" width="26" height="26"></iconify-icon></span>
+        <b>Fully Licensed Bar</b>
+        <p>Pair your dinner with curated Italian Chiantis, local Margaret River wines, and ice-cold Peroni.</p>
+      </div>
+      <div class="feature-cell reveal" style="transition-delay:.35s">
+        <span class="feature-ic" aria-hidden="true"><iconify-icon icon="lucide:shopping-bag" width="26" height="26"></iconify-icon></span>
+        <b>Takeaway &amp; Pickup</b>
+        <p>Order hot, fresh Italian dinners straight to your home across Gosnells and surrounding suburbs.</p>
       </div>
     </div>
   </section>
 
-  <!-- VISIT -->
+  <!-- VISIT & HOURS -->
   <section class="visit-section" id="visit">
     <div class="wrap">
       <div class="sec-head reveal">
         <span class="eyebrow alt">Find Us</span>
         <h2>Visit {{ name }}</h2>
-        <p>We're on Albany Highway in Gosnells — easy to reach, easy to love.</p>
+        <p>Conveniently located on Albany Highway with ample complimentary parking.</p>
       </div>
+
       <div class="visit-grid">
+        <!-- Restaurant Details Card -->
         <div class="info-card details-card reveal-left">
-          <h3>Restaurant Details</h3>
+          <div class="card-top-header">
+            <h3>Contact &amp; Location</h3>
+            <span class="live-status-badge" [class.is-open]="openStatus.isOpen">
+              <span class="beacon"></span> {{ openStatus.label }}
+            </span>
+          </div>
+
           <div class="info-row">
             <span class="info-ic"><iconify-icon icon="lucide:map-pin" width="20" height="20"></iconify-icon></span>
-            <span><b>Address</b><span>{{ address }}</span></span>
+            <span>
+              <b>Address</b>
+              <span>{{ address }}</span>
+              <a [href]="directionsUrl" target="_blank" rel="noopener noreferrer" class="directions-link">
+                <iconify-icon icon="lucide:navigation" width="13" height="13"></iconify-icon>
+                Get Directions (Google Maps)
+              </a>
+            </span>
           </div>
+
           <div class="info-row">
             <span class="info-ic"><iconify-icon icon="lucide:phone" width="20" height="20"></iconify-icon></span>
-            <span><b>Phone</b><a [href]="'tel:' + phone">{{ phone }}</a></span>
+            <span>
+              <b>Direct Phone</b>
+              <a [href]="'tel:' + phone" class="phone-link">{{ phone }}</a>
+            </span>
           </div>
+
           <div class="info-row" *ngIf="email">
             <span class="info-ic"><iconify-icon icon="lucide:mail" width="20" height="20"></iconify-icon></span>
-            <span><b>Email</b><a [href]="'mailto:' + email">{{ email }}</a></span>
+            <span>
+              <b>Email Bookings</b>
+              <a [href]="'mailto:' + email">{{ email }}</a>
+            </span>
           </div>
-          <div class="info-row">
-            <span class="info-ic"><iconify-icon icon="lucide:pizza" width="20" height="20"></iconify-icon></span>
-            <span><b>Cuisine</b><span>Italian · Pizza · Burgers · Pasta</span></span>
-          </div>
-          <div class="info-row">
-            <span class="info-ic"><iconify-icon icon="lucide:clock" width="20" height="20"></iconify-icon></span>
-            <span><b>Service</b><span>Dine In &amp; Takeaway</span></span>
+
+          <div class="info-row" *ngIf="parkingInfo">
+            <span class="info-ic"><iconify-icon icon="lucide:parking-circle" width="20" height="20"></iconify-icon></span>
+            <span>
+              <b>Parking &amp; Access</b>
+              <span>{{ parkingInfo }}</span>
+            </span>
           </div>
         </div>
 
+        <!-- Hours Card -->
         <div class="info-card hours-card reveal">
-          <h3>Opening Hours</h3>
+          <div class="card-top-header">
+            <h3>Opening Hours</h3>
+            <span class="hours-subtag">Weekly Trading</span>
+          </div>
+
           <ul class="hours-list">
-            <li *ngFor="let h of hours" [class.closed]="h.is_closed">
-              <span>{{ dayName(h) }}</span>
-              <span *ngIf="!h.is_closed">{{ h.open_time }} – {{ h.close_time }}</span>
-              <span *ngIf="h.is_closed" class="closed-tag">Closed</span>
+            <li *ngFor="let h of hours" [class.is-today]="isToday(h)" [class.closed]="h.is_closed">
+              <span class="day-col">
+                {{ dayName(h) }}
+                <span *ngIf="isToday(h)" class="today-indicator">Today</span>
+              </span>
+              <span class="time-col" *ngIf="!h.is_closed">{{ h.open_time }} – {{ h.close_time }}</span>
+              <span class="time-col closed-tag" *ngIf="h.is_closed">Closed</span>
             </li>
           </ul>
-          <p class="hours-note" *ngIf="hours.length">Please call ahead to confirm current hours.</p>
+          <p class="hours-note">Walk-ins always welcome, reservations recommended for weekend evenings.</p>
         </div>
 
+        <!-- Responsive Map Frame -->
         <div class="map-frame reveal-right">
           <iframe
             title="Map to {{ name }}"
             loading="lazy"
             referrerpolicy="no-referrer-when-downgrade"
-            src="https://www.openstreetmap.org/export/embed.html?bbox=115.9900,-32.0810,115.9980,-32.0750&layer=mapnik&marker=-32.0781,115.9942">
+            [src]="mapEmbedUrl">
           </iframe>
+          <div class="map-overlay-card">
+            <b>{{ name }}</b>
+            <p>{{ address }}</p>
+            <a [href]="directionsUrl" target="_blank" rel="noopener noreferrer" class="btn gold sm">
+              <iconify-icon icon="lucide:map" width="14" height="14"></iconify-icon> Open Navigation
+            </a>
+          </div>
         </div>
       </div>
     </div>
@@ -291,11 +471,18 @@
   <!-- CTA BAND -->
   <section class="cta-band" id="contact">
     <div class="wrap cta-inner reveal-scale">
-      <h2>Hungry? Let's get you fed.</h2>
-      <p>Call us to place a takeaway order, or drop in and grab a table at {{ address }}.</p>
+      <span class="cta-eyebrow">A Warm Welcome Awaits</span>
+      <h2>Ready for an unforgettable dining experience?</h2>
+      <p>Reserve your table online in seconds, or call our friendly team directly on {{ phone }}.</p>
       <div class="cta-actions">
-        <a [href]="'tel:' + phone" class="btn gold">Call {{ phone }}</a>
-        <button class="btn ghost-white" (click)="scrollTo('reservation')">Book a Table</button>
+        <button class="btn gold" (click)="scrollTo('reservation')">
+          <iconify-icon icon="lucide:calendar-check" width="18" height="18"></iconify-icon>
+          Reserve Online
+        </button>
+        <a [href]="'tel:' + phone" class="btn ghost-white">
+          <iconify-icon icon="lucide:phone" width="18" height="18"></iconify-icon>
+          Call {{ phone }}
+        </a>
       </div>
     </div>
   </section>
@@ -303,106 +490,243 @@
   <!-- RESERVATION FORM -->
   <section class="reservation-section" id="reservation">
     <div class="wrap">
-      <div class="sec-head">
-        <span class="eyebrow alt">Reserve a Table</span>
+      <div class="sec-head reveal">
+        <span class="eyebrow alt">Instant Table Booking</span>
         <h2>Make a Reservation</h2>
-        <p>Fill in your details and we'll confirm your booking</p>
+        <p>Bookings are instantly confirmed. No upfront credit card required.</p>
       </div>
+
       <div class="form-wrap reveal">
+        <!-- Success State -->
         <div *ngIf="submitted" class="success-panel">
-          <div class="success-icon">✓</div>
-          <h3>Reservation received!</h3>
-          <p>We'll confirm your booking shortly. See you soon!</p>
+          <div class="success-icon">
+            <iconify-icon icon="lucide:check-circle-2" width="48" height="48"></iconify-icon>
+          </div>
+          <h3>Reservation Confirmed!</h3>
+          <p class="ref-badge">Booking Ref: <b>{{ bookingReference }}</b></p>
+          <p class="success-desc">Grazie! We have received your booking details and have prepared a table for you at {{ name }}. A confirmation notification has been sent.</p>
+          <div class="success-actions">
+            <button class="btn gold sm" (click)="submitted = false; form.reset({party_size: 2})">Make Another Booking</button>
+            <button class="btn ghost sm" (click)="scrollTo('menu')">Browse Menu</button>
+          </div>
         </div>
+
+        <!-- Booking Form -->
         <form *ngIf="!submitted" [formGroup]="form" (ngSubmit)="onSubmit()" class="res-form" novalidate>
-          <div class="row2">
-            <div class="field">
-              <label>Full Name *</label>
-              <input formControlName="name" type="text" placeholder="Your name" [class.field-error]="form.get('name')!.invalid && form.get('name')!.touched">
-              <span class="field-hint" *ngIf="form.get('name')!.invalid && form.get('name')!.touched">Required</span>
-            </div>
-            <div class="field"><label>Phone</label><input formControlName="phone" type="tel" placeholder="+61 ..."></div>
-          </div>
-          <div class="row2">
-            <div class="field">
-              <label>Email *</label>
-              <input formControlName="email" type="email" placeholder="you@example.com" [class.field-error]="form.get('email')!.invalid && form.get('email')!.touched">
-              <span class="field-hint" *ngIf="form.get('email')!.invalid && form.get('email')!.touched">Valid email required</span>
-            </div>
-            <div class="field"><label>Party Size *</label><input formControlName="party_size" type="number" min="1" max="20"></div>
-          </div>
-          <div class="row2">
-            <div class="field">
-              <label>Date *</label>
-              <input formControlName="date" type="date" [min]="minDate" [class.field-error]="form.get('date')!.invalid && form.get('date')!.touched">
-              <span class="field-hint" *ngIf="form.get('date')!.invalid && form.get('date')!.touched">Required</span>
-            </div>
-            <div class="field">
-              <label>Time *</label>
-              <input formControlName="time" type="time" [class.field-error]="form.get('time')!.invalid && form.get('time')!.touched">
-              <span class="field-hint" *ngIf="form.get('time')!.invalid && form.get('time')!.touched">Required</span>
+          <!-- Party size pills -->
+          <div class="booking-step-group">
+            <label class="step-label">1. Number of Guests *</label>
+            <div class="party-pills-row">
+              <button
+                type="button"
+                *ngFor="let s of partySizes"
+                class="party-pill"
+                [class.active]="form.get('party_size')?.value === s"
+                (click)="setPartySize(s)"
+              >
+                <iconify-icon icon="lucide:user" width="14" height="14" *ngIf="s === 1"></iconify-icon>
+                <iconify-icon icon="lucide:users" width="14" height="14" *ngIf="s > 1"></iconify-icon>
+                {{ s === 8 ? '8+ Guests' : s + (s === 1 ? ' Guest' : ' Guests') }}
+              </button>
             </div>
           </div>
-          <div class="field"><label>Special Requests</label><textarea formControlName="notes" placeholder="Dietary requirements, special occasions…" maxlength="1000"></textarea></div>
+
+          <!-- Date & Time Chips -->
+          <div class="booking-step-group">
+            <label class="step-label">2. Date &amp; Preferred Time *</label>
+            <div class="row2">
+              <div class="field">
+                <label>Date *</label>
+                <input
+                  formControlName="date"
+                  type="date"
+                  [min]="minDate"
+                  [class.field-error]="form.get('date')!.invalid && form.get('date')!.touched"
+                >
+                <span class="field-hint" *ngIf="form.get('date')!.invalid && form.get('date')!.touched">Booking date required</span>
+              </div>
+              <div class="field">
+                <label>Exact Time *</label>
+                <input
+                  formControlName="time"
+                  type="time"
+                  [class.field-error]="form.get('time')!.invalid && form.get('time')!.touched"
+                >
+                <span class="field-hint" *ngIf="form.get('time')!.invalid && form.get('time')!.touched">Time required</span>
+              </div>
+            </div>
+
+            <!-- Quick Time Slot Chips -->
+            <div class="quick-time-chips">
+              <span class="quick-chips-lbl">Popular Times:</span>
+              <div class="chips-container">
+                <button
+                  type="button"
+                  *ngFor="let slot of timeSlots"
+                  class="time-chip"
+                  [class.active]="form.get('time')?.value === slot"
+                  (click)="setTimeSlot(slot)"
+                >
+                  {{ slot }}
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Guest Contact Details -->
+          <div class="booking-step-group">
+            <label class="step-label">3. Contact Details *</label>
+            <div class="row2">
+              <div class="field">
+                <label>Full Name *</label>
+                <input
+                  formControlName="name"
+                  type="text"
+                  placeholder="e.g. Leonardo Rossi"
+                  [class.field-error]="form.get('name')!.invalid && form.get('name')!.touched"
+                >
+                <span class="field-hint" *ngIf="form.get('name')!.invalid && form.get('name')!.touched">Please enter your name</span>
+              </div>
+              <div class="field">
+                <label>Phone Number</label>
+                <input formControlName="phone" type="tel" placeholder="+61 400 000 000">
+              </div>
+            </div>
+
+            <div class="field">
+              <label>Email Address *</label>
+              <input
+                formControlName="email"
+                type="email"
+                placeholder="your.email@example.com"
+                [class.field-error]="form.get('email')!.invalid && form.get('email')!.touched"
+              >
+              <span class="field-hint" *ngIf="form.get('email')!.invalid && form.get('email')!.touched">Valid email required for confirmation</span>
+            </div>
+
+            <div class="field">
+              <label>Special Requests or Dietary Requirements</label>
+              <textarea
+                formControlName="notes"
+                placeholder="Birthdays, anniversaries, outdoor seating, gluten-free requests…"
+                maxlength="1000"
+                rows="3"
+              ></textarea>
+            </div>
+          </div>
+
           <p *ngIf="submitError" class="form-error">{{ submitError }}</p>
-          <button type="submit" class="btn" style="width:100%;border-radius:8px;padding:.85rem" [disabled]="submitting">
-            {{ submitting ? 'Sending…' : 'Request Reservation' }}
+
+          <button
+            type="submit"
+            class="btn btn-gold-glow"
+            style="width:100%;border-radius:12px;padding:1rem;font-size:1.02rem"
+            [disabled]="submitting"
+          >
+            <iconify-icon icon="lucide:check" width="18" height="18" *ngIf="!submitting"></iconify-icon>
+            {{ submitting ? 'Confirming Table…' : 'Complete Table Reservation' }}
           </button>
         </form>
       </div>
     </div>
   </section>
 
-  <!-- REVIEWS -->
+  <!-- REVIEWS & TESTIMONIALS -->
   <section class="reviews-section" id="reviews">
     <div class="wrap">
-      <div class="sec-head">
-        <span class="eyebrow">What our guests say</span>
-        <h2>Reviews</h2>
+      <div class="sec-head reveal">
+        <span class="eyebrow alt">Guest Testimonials</span>
+        <h2>What Our Guests Say</h2>
+        <p>Honest reviews from families, couples, and food lovers who dine with us.</p>
       </div>
 
-      <!-- Review cards -->
-      <div class="reviews-grid" *ngIf="reviews.length > 0">
-        <div class="review-card" *ngFor="let r of reviews">
-          <div class="review-stars">
-            <span *ngFor="let s of starsArray(r.rating)" class="star filled">★</span>
-            <span *ngFor="let s of starsArray(5 - r.rating)" class="star">★</span>
+      <!-- Rating Scoreboard -->
+      <div class="review-scoreboard reveal-scale">
+        <div class="score-overall">
+          <div class="score-big">{{ averageRating }}</div>
+          <div class="score-stars">
+            <span *ngFor="let s of starsArray(5)" class="star filled">★</span>
           </div>
-          <p class="review-comment" *ngIf="r.comment">{{ r.comment }}</p>
+          <p class="score-count">Based on {{ displayReviews.length }} Verified Reviews</p>
+        </div>
+        <div class="score-breakdown">
+          <div class="breakdown-row" *ngFor="let n of [5, 4, 3, 2, 1]">
+            <span class="row-star-lbl">{{ n }} ★</span>
+            <div class="score-bar-bg">
+              <div class="score-bar-fill" [style.width.%]="ratingPercent(n)"></div>
+            </div>
+            <span class="row-star-pct">{{ ratingPercent(n) }}%</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Review cards grid -->
+      <div class="reviews-grid">
+        <div class="review-card reveal" *ngFor="let r of displayReviews">
+          <div class="review-card-top">
+            <div class="review-stars">
+              <span *ngFor="let s of starsArray(r.rating)" class="star filled">★</span>
+              <span *ngFor="let s of starsArray(5 - r.rating)" class="star">★</span>
+            </div>
+            <span class="verified-pill">
+              <iconify-icon icon="lucide:shield-check" width="13" height="13"></iconify-icon> Verified Diner
+            </span>
+          </div>
+          <p class="review-comment" *ngIf="r.comment">"{{ r.comment }}"</p>
           <div class="review-meta">
-            <span class="review-name">{{ r.name }}</span>
-            <span class="review-date">{{ r.created_at | date:'MMM d, y' }}</span>
+            <span class="review-avatar">{{ r.name.charAt(0) }}</span>
+            <div class="review-author">
+              <b class="review-name">{{ r.name }}</b>
+              <small class="review-date">{{ r.created_at | date:'MMMM d, y' }}</small>
+            </div>
           </div>
         </div>
       </div>
 
-      <!-- Leave a review -->
-      <div class="review-form-wrap">
-        <h3>Leave a review</h3>
-        <div *ngIf="reviewSubmitted" class="success-panel">
-          <div class="success-icon">✓</div>
-          <h3>Thank you!</h3>
-          <p>Your review has been posted.</p>
+      <!-- Leave a review interactive card -->
+      <div class="review-form-wrap reveal">
+        <div class="review-form-header">
+          <span class="eyebrow alt">Share Your Experience</span>
+          <h3>Dined with us recently?</h3>
+          <p>We value every feedback and strive to make every visit memorable.</p>
         </div>
+
+        <div *ngIf="reviewSubmitted" class="success-panel" style="padding:2rem">
+          <div class="success-icon" style="width:44px;height:44px">✓</div>
+          <h4>Thank you for your review!</h4>
+          <p>Your feedback helps our kitchen family grow.</p>
+        </div>
+
         <form *ngIf="!reviewSubmitted" (ngSubmit)="submitReview()" class="review-form" [formGroup]="reviewForm">
-          <div class="review-stars-input">
-            <button type="button" *ngFor="let n of [1,2,3,4,5]"
-              class="star-btn" [class.active]="(reviewForm.get('rating')?.value ?? 0) >= n"
-              (click)="setRating(n)" [attr.aria-label]="n + ' star'">★</button>
+          <div class="rating-picker-box">
+            <label class="rating-picker-lbl">Your Rating:</label>
+            <div class="review-stars-input">
+              <button
+                type="button"
+                *ngFor="let n of [1,2,3,4,5]"
+                class="star-btn"
+                [class.active]="(reviewForm.get('rating')?.value ?? 0) >= n"
+                (click)="setRating(n)"
+                [attr.aria-label]="n + ' star rating'"
+              >★</button>
+            </div>
           </div>
-          <p *ngIf="reviewForm.get('rating')?.touched && reviewForm.get('rating')?.value === 0" class="form-error">Please select a rating</p>
-          <div class="field">
-            <label>Name</label>
-            <input type="text" formControlName="name" placeholder="Your name" maxlength="100">
-            <p *ngIf="reviewForm.get('name')?.invalid && reviewForm.get('name')?.touched" class="form-error">Name is required</p>
+
+          <div class="row2">
+            <div class="field">
+              <label>Your Name *</label>
+              <input type="text" formControlName="name" placeholder="e.g. Maria G." maxlength="100">
+              <p *ngIf="reviewForm.get('name')?.invalid && reviewForm.get('name')?.touched" class="form-error">Name is required</p>
+            </div>
+            <div class="field">
+              <label>Experience Details</label>
+              <input formControlName="comment" placeholder="What dish did you love?" maxlength="1000">
+            </div>
           </div>
-          <div class="field">
-            <label>Comment <span style="font-weight:400;opacity:.6">(optional)</span></label>
-            <textarea formControlName="comment" rows="3" placeholder="Tell us about your experience" maxlength="1000"></textarea>
-          </div>
+
           <p *ngIf="reviewError" class="form-error">{{ reviewError }}</p>
-          <button type="submit" class="btn" style="width:100%;border-radius:8px;padding:.85rem" [disabled]="reviewSubmitting">
-            {{ reviewSubmitting ? 'Posting…' : 'Post Review' }}
+          <button type="submit" class="btn gold" style="border-radius:8px;padding:.85rem;align-self:flex-start" [disabled]="reviewSubmitting">
+            {{ reviewSubmitting ? 'Posting…' : 'Submit Review' }}
           </button>
         </form>
       </div>
@@ -411,7 +735,7 @@
 
 </main>
 
-<!-- MENU ITEM MODAL -->
+<!-- MENU ITEM DETAIL MODAL -->
 <div
   *ngIf="selectedMenuItem"
   class="item-modal-overlay"
@@ -430,45 +754,124 @@
       >
     </div>
     <div class="item-modal-body">
+      <div class="card-tags" *ngIf="getItemTags(selectedMenuItem).length" style="margin-bottom:.6rem">
+        <span *ngFor="let tag of getItemTags(selectedMenuItem)" class="item-tag" [class]="tag.cssClass">
+          <iconify-icon [attr.icon]="tag.icon" width="12" height="12"></iconify-icon>
+          {{ tag.label }}
+        </span>
+      </div>
       <h2 class="item-modal-name">{{ selectedMenuItem.name }}</h2>
       <p *ngIf="selectedMenuItem.description" class="item-modal-desc">{{ selectedMenuItem.description }}</p>
-      <div class="item-modal-price">
-        <span class="price-label">Price</span>
-        <span class="item-modal-amount">A${{ selectedMenuItem.price.toFixed(2) }}</span>
+
+      <div class="item-modal-footer">
+        <div class="item-modal-price">
+          <span class="price-label">Price</span>
+          <span class="item-modal-amount">A${{ selectedMenuItem.price.toFixed(2) }}</span>
+        </div>
+        <button class="btn gold sm" (click)="closeMenuItem(); scrollTo('reservation')">
+          <iconify-icon icon="lucide:calendar-plus" width="14" height="14"></iconify-icon>
+          Reserve to Taste
+        </button>
       </div>
     </div>
   </div>
 </div>
 
+<!-- GALLERY FULLSCREEN LIGHTBOX -->
+<div
+  *ngIf="selectedGalleryImage"
+  class="lightbox-overlay"
+  role="dialog"
+  aria-modal="true"
+  aria-label="Photo Lightbox"
+  (click)="closeLightbox()"
+>
+  <button class="lightbox-close" (click)="closeLightbox()" aria-label="Close photo view">✕</button>
+  <button class="lightbox-nav prev" (click)="$event.stopPropagation(); prevLightbox()" aria-label="Previous image">‹</button>
+  <button class="lightbox-nav next" (click)="$event.stopPropagation(); nextLightbox()" aria-label="Next image">›</button>
+
+  <div class="lightbox-content" (click)="$event.stopPropagation()">
+    <img [src]="resolveImageUrl(selectedGalleryImage.image_url)" [alt]="selectedGalleryImage.caption || 'Gallery photo'" class="lightbox-img">
+    <div class="lightbox-caption-bar" *ngIf="selectedGalleryImage.caption">
+      <span>{{ selectedGalleryImage.caption }}</span>
+      <small>{{ lightboxIndex + 1 }} / {{ displayGallery.length }}</small>
+    </div>
+  </div>
+</div>
+
+<!-- FLOATING BACK TO TOP BUTTON -->
+<button
+  class="back-to-top"
+  [class.visible]="navScrolled"
+  (click)="scrollToTop()"
+  aria-label="Back to top of page"
+>
+  <iconify-icon icon="lucide:chevron-up" width="20" height="20"></iconify-icon>
+</button>
+
 <!-- FOOTER -->
 <footer>
   <div class="wrap foot-grid">
     <div class="foot-brand">
-      <span class="foot-name">{{ name }}</span>
-      <p>Honest Italian cooking in the heart of Gosnells, Western Australia. Pasta, pizza, burgers and grill — made fresh to order.</p>
+      <div class="foot-logo-row">
+        <span class="foot-mark">F</span>
+        <span class="foot-name">{{ name }}</span>
+      </div>
+      <p>Authentic Italian trattoria flavours cooked with passion and served generously in Gosnells, Western Australia since 1985.</p>
+      <div class="social-links">
+        <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+          <iconify-icon icon="lucide:instagram" width="18" height="18"></iconify-icon>
+        </a>
+        <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+          <iconify-icon icon="lucide:facebook" width="18" height="18"></iconify-icon>
+        </a>
+        <a [href]="directionsUrl" target="_blank" rel="noopener noreferrer" aria-label="Google Maps Reviews">
+          <iconify-icon icon="lucide:map-pin" width="18" height="18"></iconify-icon>
+        </a>
+      </div>
     </div>
+
     <div class="foot-col">
-      <h4>Explore</h4>
+      <h4>Navigation</h4>
       <ul>
-        <li><a (click)="scrollTo('about')" style="cursor:pointer">About Us</a></li>
-        <li><a (click)="scrollTo('menu')" style="cursor:pointer">Full Menu</a></li>
+        <li><a (click)="scrollTo('about')" style="cursor:pointer">Our Story</a></li>
+        <li><a (click)="scrollTo('gallery')" style="cursor:pointer">Ambiance Gallery</a></li>
+        <li><a (click)="scrollTo('menu')" style="cursor:pointer">Kitchen Menu</a></li>
         <li><a (click)="scrollTo('visit')" style="cursor:pointer">Visit &amp; Hours</a></li>
-        <li><a (click)="scrollTo('contact')" style="cursor:pointer">Contact</a></li>
+        <li><a (click)="scrollTo('reviews')" style="cursor:pointer">Guest Reviews</a></li>
+        <li><a (click)="scrollTo('reservation')" style="cursor:pointer">Book a Table</a></li>
       </ul>
     </div>
+
     <div class="foot-col">
-      <h4>Contact</h4>
-      <ul>
-        <li>{{ address }}</li>
-        <li><a [href]="'tel:' + phone">{{ phone }}</a></li>
-        <li *ngIf="email"><a [href]="'mailto:' + email">{{ email }}</a></li>
+      <h4>Contact &amp; Hours</h4>
+      <ul class="foot-contact-list">
+        <li>
+          <iconify-icon icon="lucide:map-pin" width="15" height="15"></iconify-icon>
+          <span>{{ address }}</span>
+        </li>
+        <li>
+          <iconify-icon icon="lucide:phone" width="15" height="15"></iconify-icon>
+          <a [href]="'tel:' + phone">{{ phone }}</a>
+        </li>
+        <li *ngIf="email">
+          <iconify-icon icon="lucide:mail" width="15" height="15"></iconify-icon>
+          <a [href]="'mailto:' + email">{{ email }}</a>
+        </li>
+        <li class="foot-hours-pill">
+          <span class="beacon"></span>
+          <span>{{ openStatus.label }} — {{ openStatus.detail }}</span>
+        </li>
       </ul>
     </div>
   </div>
+
   <div class="foot-bottom">
-    <span class="wrap foot-bottom-inner">
-      <span>© {{ year }} {{ name }} · Gosnells, WA</span>
-      <a routerLink="/admin/login" class="foot-admin">Admin</a>
-    </span>
+    <div class="wrap foot-bottom-inner">
+      <span>© {{ year }} {{ name }} · Gosnells, Western Australia. All rights reserved.</span>
+      <div class="foot-bottom-links">
+        <a routerLink="/admin/login" class="foot-admin">Staff CMS Login</a>
+      </div>
+    </div>
   </div>
 </footer>
