@@ -732,17 +732,9 @@ iconify-icon {
   color: #888;
 }
 
-/* Info row icons — wine-toned circle badge */
-.info-ic {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 2.4rem;
-  height: 2.4rem;
-  min-width: 2.4rem;
-  border-radius: 50%;
-  background: rgba(139,26,26,.08);
-  color: #8b1a1a;
+/* Info row icons — white icon on wine badge */
+.info-row .info-ic {
+  color: #fff;
 }
 
 /* Category heading 3D icons */

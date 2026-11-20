@@ -250,13 +250,17 @@
             <span class="info-ic"><iconify-icon icon="lucide:phone" width="20" height="20"></iconify-icon></span>
             <span><b>Phone</b><a [href]="'tel:' + phone">{{ phone }}</a></span>
           </div>
+          <div class="info-row" *ngIf="email">
+            <span class="info-ic"><iconify-icon icon="lucide:mail" width="20" height="20"></iconify-icon></span>
+            <span><b>Email</b><a [href]="'mailto:' + email">{{ email }}</a></span>
+          </div>
           <div class="info-row">
-            <span class="info-ic"><iconify-icon icon="lucide:utensils" width="20" height="20"></iconify-icon></span>
+            <span class="info-ic"><iconify-icon icon="lucide:pizza" width="20" height="20"></iconify-icon></span>
             <span><b>Cuisine</b><span>Italian · Pizza · Burgers · Pasta</span></span>
           </div>
           <div class="info-row">
-            <span class="info-ic"><iconify-icon icon="lucide:star" width="20" height="20"></iconify-icon></span>
-            <span><b>Rating</b><span>3.8 / 5 on Google</span></span>
+            <span class="info-ic"><iconify-icon icon="lucide:clock" width="20" height="20"></iconify-icon></span>
+            <span><b>Service</b><span>Dine In &amp; Takeaway</span></span>
           </div>
         </div>
 
