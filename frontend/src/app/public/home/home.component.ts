@@ -229,10 +229,12 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   get mapEmbedUrl(): SafeResourceUrl {
-    const q = encodeURIComponent(this.address);
-    return this.sanitizer.bypassSecurityTrustResourceUrl(
-      `https://maps.google.com/maps?q=${q}&output=embed&z=16`
-    );
+    // OpenStreetMap embed — no API key needed, works reliably
+    // Coordinates for 2310 Albany Hwy, Gosnells WA 6110
+    const lat = -32.0781, lon = 115.9942;
+    const bbox = `${lon - 0.008},${lat - 0.006},${lon + 0.008},${lat + 0.006}`;
+    const url = `https://www.openstreetmap.org/export/embed.html?bbox=${bbox}&layer=mapnik&marker=${lat},${lon}`;
+    return this.sanitizer.bypassSecurityTrustResourceUrl(url);
   }
 
   dayName(h: BusinessHour) { return DAYS[h.day_of_week]; }

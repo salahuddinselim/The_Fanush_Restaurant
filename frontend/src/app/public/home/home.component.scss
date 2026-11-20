@@ -1702,12 +1702,26 @@ footer {
 
 /* ===== RESPONSIVE BREAKPOINTS (MOBILE FIRST FOCUS) ===== */
 @media (max-width: 1024px) {
+  /* Hide search to prevent nav overflow on tablets */
+  .nav-search-wrap { display: none; }
   .items-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .feature-cells { grid-template-columns: repeat(2, 1fr); }
   .feature-cell { border-bottom: 1px solid rgba(255, 255, 255, 0.08); }
 }
 
 @media (max-width: 860px) {
+  /* Nav collapses to hamburger at 860px */
+  .navlinks, .nav-search-wrap { display: none; }
+  .burger { display: flex; }
+  .mobile-panel {
+    display: flex;
+    max-height: calc(100dvh - 64px);
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .cat-sticky-bar { top: 64px; }
+
+  /* Content grid changes */
   .about-grid { grid-template-columns: 1fr; gap: 3rem; }
   .gallery-grid { grid-template-columns: repeat(2, 1fr); }
   .visit-grid { grid-template-columns: 1fr; }
@@ -1720,7 +1734,7 @@ footer {
 
 @media (max-width: 760px) {
   .topbar-inner {
-    padding: 0.45rem 1rem;
+    padding: 0.4rem 0;
   }
   .loc-text, .topbar-divider { display: none; }
   .live-status-pill {
@@ -1731,17 +1745,6 @@ footer {
     font-size: 0.78rem;
   }
 
-  .navlinks, .nav-search-wrap { display: none; }
-  .burger { display: flex; }
-  .mobile-panel {
-    display: flex;
-    max-height: calc(100vh - 64px);
-    overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
-  }
-  .cat-sticky-bar {
-    top: 58px;
-  }
   .cat-scroll-track {
     padding: 0.65rem 1rem;
     -webkit-overflow-scrolling: touch;
@@ -1993,12 +1996,27 @@ footer {
 }
 
 @media (max-width: 480px) {
+  /* Hide topbar right on tiny phones — phone is in mobile nav */
+  .topbar-right { display: none; }
+  .live-status-pill { max-width: 100%; }
+
+  /* Hide brand subtitle to save nav space */
+  .brand-sub { display: none !important; }
+
   .gallery-grid {
     grid-template-columns: 1fr;
     gap: 0.9rem;
   }
-  .hero-title { font-size: 2.1rem; }
-  .hero-stats { gap: 0.4rem; }
-  .stat-item b { font-size: 1.15rem; }
-  .stat-item span { font-size: 0.65rem; }
+  .hero-title { font-size: clamp(1.9rem, 7vw, 2.3rem); }
+  .lead { font-size: 0.9rem; }
+
+  /* Menu card full-width on tiny screens */
+  .items-grid { grid-template-columns: 1fr; }
+
+  /* Section headings */
+  .sec-head h2 { font-size: 1.75rem; }
+  .about-copy h2 { font-size: 1.6rem; }
+
+  /* Reservation form field font size forces browser not to zoom */
+  .field input, .field select, .field textarea { font-size: 16px !important; }
 }
