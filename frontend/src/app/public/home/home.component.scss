@@ -626,9 +626,8 @@ footer { background: var(--ink); color: #b9ab9c; padding: 3.4rem 0 0; font-size:
   .nav-search-wrap { display: none; }
   .mobile-panel { display: flex; }
   .burger { display: flex; }
-  .site-nav { position: relative; }
-  .cat-sticky-bar { position: sticky; top: 0; } /* no sticky nav on mobile */
-  .menu-block { scroll-margin-top: 60px; }
+  .cat-sticky-bar { top: 64px; }
+  .menu-block { scroll-margin-top: 128px; }
   .hero { min-height: 90vh; }
   .hero-body { padding: 4rem 0 3rem; }
   .cta-actions { flex-direction: column; align-items: center; }
