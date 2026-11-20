@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 from typing import Dict, Optional
 from ..database import get_db
@@ -27,6 +27,9 @@ def update_config(
     db: Session = Depends(get_db),
     _: models.User = Depends(get_current_user),
 ):
+    invalid = [item.key for item in body.items if item.key not in _PUBLIC_KEYS]
+    if invalid:
+        raise HTTPException(status_code=400, detail=f"Invalid config key(s): {invalid}")
     for item in body.items:
         db.merge(models.SiteConfig(key=item.key, value=item.value))
     db.commit()

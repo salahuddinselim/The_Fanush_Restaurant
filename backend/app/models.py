@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, Boolean, Float, Text, DateTime, ForeignKey
+from sqlalchemy import Column, Integer, String, Boolean, Float, Text, DateTime, ForeignKey, Index
 from sqlalchemy.orm import relationship
 from datetime import datetime
 from .database import Base
@@ -69,3 +69,9 @@ class Reservation(Base):
     notes = Column(Text, nullable=True)
     status = Column(String, default="pending")
     created_at = Column(DateTime, default=datetime.utcnow)
+
+
+class RevokedToken(Base):
+    __tablename__ = "revoked_tokens"
+    jti = Column(String, primary_key=True)
+    expires_at = Column(DateTime, nullable=False)

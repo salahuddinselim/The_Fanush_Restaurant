@@ -9,9 +9,14 @@ from app.auth import hash_password
 Base.metadata.create_all(bind=engine)
 db = SessionLocal()
 
+init_password = os.environ.get("ADMIN_INIT_PASSWORD")
+if not init_password:
+    print("ERROR: Set ADMIN_INIT_PASSWORD environment variable before seeding.", file=sys.stderr)
+    sys.exit(1)
+
 if not db.query(models.User).filter(models.User.username == "admin").first():
-    db.add(models.User(username="admin", hashed_password=hash_password("admin123")))
-    print("Created admin user  username=admin  password=admin123")
+    db.add(models.User(username="admin", hashed_password=hash_password(init_password)))
+    print("Created admin user  username=admin")
 
 defaults = {
     "restaurant_name": "The Fanus Restaurant",

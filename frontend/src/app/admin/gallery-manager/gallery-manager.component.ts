@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { forkJoin } from 'rxjs';
-import { ApiService, GalleryImage } from '../../core/services/api.service';
+import { ApiService, GalleryImage, API_URL } from '../../core/services/api.service';
 import { AuthService } from '../../core/services/auth.service';
 
 @Component({
@@ -17,7 +17,7 @@ export class GalleryManagerComponent implements OnInit {
   images: GalleryImage[] = [];
   caption = '';
   uploading = false;
-  apiBase = 'http://localhost:8000';
+  apiBase = API_URL;
   loadError = '';
 
   constructor(private api: ApiService, public auth: AuthService) {}

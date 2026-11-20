@@ -11,7 +11,13 @@ from .routers import auth, config, hours, menu, gallery, reservations
 
 Base.metadata.create_all(bind=engine)
 
-app = FastAPI(title="Restaurant CMS API", version="1.0.0")
+_debug = os.getenv("DEBUG", "").lower() in ("1", "true", "yes")
+app = FastAPI(
+    title="Restaurant CMS API",
+    version="1.0.0",
+    docs_url="/docs" if _debug else None,
+    redoc_url="/redoc" if _debug else None,
+)
 app.state.limiter = limiter
 app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
 
@@ -43,7 +49,7 @@ async def add_security_headers(request: Request, call_next) -> Response:
     response.headers["Content-Security-Policy"] = (
         "default-src 'self'; "
         "img-src 'self' https://images.unsplash.com https://api.iconify.design data: blob:; "
-        "script-src 'self' https://cdn.jsdelivr.net; "
+        "script-src 'self'; "
         "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; "
         "font-src 'self' https://fonts.gstatic.com; "
         "connect-src 'self' https://api.iconify.design;"

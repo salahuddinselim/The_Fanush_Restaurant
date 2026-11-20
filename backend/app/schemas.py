@@ -15,7 +15,7 @@ class Token(BaseModel):
 
 
 class ConfigItem(BaseModel):
-    key: str
+    key: str = Field(max_length=100)
     value: Optional[str] = None
 
 
@@ -25,8 +25,8 @@ class ConfigBulkUpdate(BaseModel):
 
 class BusinessHourBase(BaseModel):
     day_of_week: int
-    open_time: Optional[str] = None
-    close_time: Optional[str] = None
+    open_time: Optional[str] = Field(None, pattern=r"^\d{2}:\d{2}$")
+    close_time: Optional[str] = Field(None, pattern=r"^\d{2}:\d{2}$")
     is_closed: bool = False
 
 
@@ -36,8 +36,8 @@ class BusinessHourOut(BusinessHourBase):
 
 
 class BusinessHourUpdate(BaseModel):
-    open_time: Optional[str] = None
-    close_time: Optional[str] = None
+    open_time: Optional[str] = Field(None, pattern=r"^\d{2}:\d{2}$")
+    close_time: Optional[str] = Field(None, pattern=r"^\d{2}:\d{2}$")
     is_closed: Optional[bool] = None
 
 
