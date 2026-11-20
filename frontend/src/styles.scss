@@ -151,10 +151,10 @@ img { max-width: 100%; display: block; }
     display: flex; align-items: center; gap: 10px; padding: 22px 20px 18px;
     border-bottom: 1px solid rgba(255,255,255,.08); margin-bottom: 8px;
     .brand-mark { width: 36px; height: 36px; border-radius: 50%; background: var(--wine); border: 2px solid var(--gold); display: grid; place-items: center; font-family: 'Playfair Display', serif; font-weight: 800; font-size: 1rem; color: var(--gold-soft); flex-shrink: 0; }
-    .brand-text { b { display: block; color: var(--cream-2); font-size: .95rem; font-family: 'Playfair Display', serif; } small { font-size: .7rem; letter-spacing: .12em; text-transform: uppercase; opacity: .5; } }
+    .brand-text { b { display: block; color: var(--cream-2); font-size: .95rem; font-family: 'Playfair Display', serif; } small { font-size: .7rem; letter-spacing: .06em; opacity: .5; } }
   }
 
-  .sidebar-section { padding: 6px 12px 2px; font-size: .64rem; letter-spacing: .18em; text-transform: uppercase; color: rgba(255,255,255,.25); font-weight: 700; margin-top: 8px; }
+  .sidebar-section { padding: 6px 12px 2px; font-size: .64rem; letter-spacing: .08em; color: rgba(255,255,255,.25); font-weight: 600; margin-top: 8px; }
 
   a {
     display: flex; align-items: center; gap: 10px; padding: 9px 20px;
@@ -198,7 +198,7 @@ img { max-width: 100%; display: block; }
 /* Form fields */
 .field {
   margin-bottom: 16px;
-  label { display: block; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; color: var(--ink-soft); margin-bottom: 5px; }
+  label { display: block; font-size: 11px; font-weight: 600; letter-spacing: .04em; color: var(--ink-soft); margin-bottom: 5px; }
   input, select, textarea { width: 100%; padding: 10px 12px; border: 1px solid var(--line); font-family: inherit; font-size: 14px; color: var(--ink); background: #fff; transition: border-color .15s; border-radius: 6px;
     &:focus { outline: none; border-color: var(--wine); box-shadow: 0 0 0 3px rgba(122,31,43,.12); }
   }
@@ -208,7 +208,7 @@ img { max-width: 100%; display: block; }
 
 /* Table */
 .data-table { width: 100%; border-collapse: collapse; font-size: 14px;
-  th { text-align: left; padding: 11px 14px; background: var(--admin-bg); font-weight: 700; font-size: .7rem; text-transform: uppercase; letter-spacing: .1em; color: var(--ink-soft); border-bottom: 2px solid var(--admin-border); }
+  th { text-align: left; padding: 11px 14px; background: var(--admin-bg); font-weight: 600; font-size: .7rem; letter-spacing: .04em; color: var(--ink-soft); border-bottom: 2px solid var(--admin-border); }
   td { padding: 11px 14px; border-bottom: 1px solid var(--admin-border); vertical-align: middle; }
   tr:hover td { background: #faf9f7; }
   tr:last-child td { border-bottom: none; }

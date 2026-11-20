@@ -6,22 +6,22 @@
       <div class="brand-text"><b>Fanus CMS</b><small>Admin Panel</small></div>
     </div>
     <span class="sidebar-section">Main</span>
-    <a routerLink="/admin/dashboard" routerLinkActive="active"><span class="nav-ic">🏠</span> Dashboard</a>
-    <a routerLink="/admin/config" routerLinkActive="active"><span class="nav-ic">⚙️</span> Site Settings</a>
+    <a routerLink="/admin/dashboard" routerLinkActive="active"><span class="nav-ic"><iconify-icon icon="lucide:layout-dashboard" width="16" height="16"></iconify-icon></span> Dashboard</a>
+    <a routerLink="/admin/config" routerLinkActive="active"><span class="nav-ic"><iconify-icon icon="lucide:settings" width="16" height="16"></iconify-icon></span> Site Settings</a>
     <hr class="sidebar-divider">
     <span class="sidebar-section">Content</span>
-    <a routerLink="/admin/menu" routerLinkActive="active"><span class="nav-ic">🍽</span> Menu</a>
-    <a routerLink="/admin/gallery" routerLinkActive="active"><span class="nav-ic">🖼</span> Gallery</a>
-    <a routerLink="/admin/hours" routerLinkActive="active"><span class="nav-ic">🕐</span> Opening Hours</a>
+    <a routerLink="/admin/menu" routerLinkActive="active"><span class="nav-ic"><iconify-icon icon="lucide:utensils" width="16" height="16"></iconify-icon></span> Menu</a>
+    <a routerLink="/admin/gallery" routerLinkActive="active"><span class="nav-ic"><iconify-icon icon="lucide:images" width="16" height="16"></iconify-icon></span> Gallery</a>
+    <a routerLink="/admin/hours" routerLinkActive="active"><span class="nav-ic"><iconify-icon icon="lucide:clock" width="16" height="16"></iconify-icon></span> Opening Hours</a>
     <hr class="sidebar-divider">
     <span class="sidebar-section">Bookings</span>
     <a routerLink="/admin/reservations" routerLinkActive="active">
-      <span class="nav-ic">📋</span> Reservations
+      <span class="nav-ic"><iconify-icon icon="lucide:calendar-check" width="16" height="16"></iconify-icon></span> Reservations
       <span class="badge-count" *ngIf="pending > 0">{{ pending }}</span>
     </a>
     <div class="sidebar-footer">
-      <a routerLink="/" style="cursor:pointer"><span class="nav-ic">↗</span> View Site</a>
-      <a (click)="auth.logout()" style="cursor:pointer;color:rgba(255,80,80,.7)"><span class="nav-ic">🚪</span> Sign Out</a>
+      <a routerLink="/" style="cursor:pointer"><span class="nav-ic"><iconify-icon icon="lucide:arrow-up-right" width="16" height="16"></iconify-icon></span> View Site</a>
+      <a (click)="auth.logout()" style="cursor:pointer;color:rgba(255,80,80,.7)"><span class="nav-ic"><iconify-icon icon="lucide:log-out" width="16" height="16"></iconify-icon></span> Sign Out</a>
     </div>
   </aside>
 
@@ -40,7 +40,7 @@
     <!-- STAT CARDS -->
     <div class="stat-grid" *ngIf="!loading">
       <div class="stat-card stat-pending">
-        <div class="stat-icon">⏳</div>
+        <div class="stat-icon"><iconify-icon icon="lucide:clock" width="20" height="20"></iconify-icon></div>
         <div class="stat-body">
           <div class="stat-value">{{ pending }}</div>
           <div class="stat-label">Pending</div>
@@ -48,7 +48,7 @@
         <div class="stat-trend">Needs action</div>
       </div>
       <div class="stat-card stat-confirmed">
-        <div class="stat-icon">✅</div>
+        <div class="stat-icon"><iconify-icon icon="lucide:check-circle" width="20" height="20"></iconify-icon></div>
         <div class="stat-body">
           <div class="stat-value">{{ confirmed }}</div>
           <div class="stat-label">Confirmed</div>
@@ -56,7 +56,7 @@
         <div class="stat-trend">Bookings</div>
       </div>
       <div class="stat-card stat-cancelled">
-        <div class="stat-icon">❌</div>
+        <div class="stat-icon"><iconify-icon icon="lucide:x-circle" width="20" height="20"></iconify-icon></div>
         <div class="stat-body">
           <div class="stat-value">{{ cancelled }}</div>
           <div class="stat-label">Cancelled</div>
@@ -64,7 +64,7 @@
         <div class="stat-trend">Reservations</div>
       </div>
       <div class="stat-card stat-menu">
-        <div class="stat-icon">🍝</div>
+        <div class="stat-icon"><iconify-icon icon="lucide:utensils" width="20" height="20"></iconify-icon></div>
         <div class="stat-body">
           <div class="stat-value">{{ totalMenuItems }}</div>
           <div class="stat-label">Menu Items</div>
@@ -72,7 +72,7 @@
         <div class="stat-trend">{{ totalCategories }} categories</div>
       </div>
       <div class="stat-card stat-gallery">
-        <div class="stat-icon">📷</div>
+        <div class="stat-icon"><iconify-icon icon="lucide:image" width="20" height="20"></iconify-icon></div>
         <div class="stat-body">
           <div class="stat-value">{{ totalGallery }}</div>
           <div class="stat-label">Gallery Photos</div>
@@ -138,27 +138,27 @@
         <div class="admin-card-header"><h3>Quick Actions</h3></div>
         <div class="quick-grid">
           <a routerLink="/admin/menu" class="quick-item">
-            <span class="quick-ic">🍽</span>
+            <span class="quick-ic"><iconify-icon icon="lucide:utensils" width="20" height="20"></iconify-icon></span>
             <span class="quick-label">Add Menu Item</span>
           </a>
           <a routerLink="/admin/gallery" class="quick-item">
-            <span class="quick-ic">📷</span>
+            <span class="quick-ic"><iconify-icon icon="lucide:image" width="20" height="20"></iconify-icon></span>
             <span class="quick-label">Upload Photo</span>
           </a>
           <a routerLink="/admin/hours" class="quick-item">
-            <span class="quick-ic">🕐</span>
+            <span class="quick-ic"><iconify-icon icon="lucide:clock" width="20" height="20"></iconify-icon></span>
             <span class="quick-label">Edit Hours</span>
           </a>
           <a routerLink="/admin/config" class="quick-item">
-            <span class="quick-ic">⚙️</span>
+            <span class="quick-ic"><iconify-icon icon="lucide:settings" width="20" height="20"></iconify-icon></span>
             <span class="quick-label">Site Settings</span>
           </a>
           <a routerLink="/admin/reservations" class="quick-item">
-            <span class="quick-ic">📋</span>
+            <span class="quick-ic"><iconify-icon icon="lucide:calendar-check" width="20" height="20"></iconify-icon></span>
             <span class="quick-label">Reservations</span>
           </a>
           <a routerLink="/" class="quick-item">
-            <span class="quick-ic">↗</span>
+            <span class="quick-ic"><iconify-icon icon="lucide:arrow-up-right" width="20" height="20"></iconify-icon></span>
             <span class="quick-label">View Site</span>
           </a>
         </div>

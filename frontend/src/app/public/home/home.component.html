@@ -33,7 +33,7 @@
         <input
           type="text"
           class="nav-search-input"
-          placeholder="Search menu items…"
+          placeholder="Search"
           [value]="searchQuery"
           (input)="onSearchInput($any($event.target).value)"
           (focus)="showSuggestions = searchSuggestions.length > 0"
@@ -73,7 +73,7 @@
       <span class="search-ic" aria-hidden="true"><iconify-icon icon="lucide:search" width="16" height="16"></iconify-icon></span>
       <input
         type="text"
-        placeholder="Search menu items…"
+        placeholder="Search"
         [value]="searchQuery"
         (input)="onSearchInput($any($event.target).value)"
         aria-label="Search menu"
@@ -128,7 +128,7 @@
       </div>
       <div class="about-copy reveal-right">
         <span class="eyebrow alt">Our Kitchen</span>
-        <h2>A neighbourhood table with an Italian heart.</h2>
+        <h2>A neighbourhood table with an Italian heart</h2>
         <p>The Fanus Restaurant brings together the comfort of classic Italian cooking and the easy-going spirit of a local diner. From slow-cooked beef ragù and creamy risottos to buttermilk-fried chicken burgers, everything is prepared to order and served generously.</p>
         <p>Whether it's a quick lunch, a family dinner, or a takeaway night in — you'll find familiar flavours, fair prices, and a warm welcome on Albany Highway.</p>
         <div class="badges stagger">
@@ -162,7 +162,7 @@
       <div class="menu-head reveal">
         <div>
           <span class="eyebrow alt">Our Menu</span>
-          <h2>Fresh from the kitchen.</h2>
+          <h2>Fresh from the kitchen</h2>
           <p>Every dish, every price.</p>
         </div>
         <span class="menu-count">{{ menuItemCount }} items</span>
@@ -302,7 +302,7 @@
       <div class="sec-head">
         <span class="eyebrow alt">Reserve a Table</span>
         <h2>Make a Reservation</h2>
-        <p>Fill in your details and we'll confirm your booking.</p>
+        <p>Fill in your details and we'll confirm your booking</p>
       </div>
       <div class="form-wrap reveal">
         <div *ngIf="submitted" class="success-panel">

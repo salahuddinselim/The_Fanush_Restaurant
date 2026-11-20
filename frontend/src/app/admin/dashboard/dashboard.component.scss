@@ -29,10 +29,10 @@
   &.stat-menu::before { background: var(--wine); }
   &.stat-gallery::before { background: var(--gold); }
 }
-.stat-icon { font-size: 1.5rem; }
+.stat-icon { display: flex; align-items: center; color: var(--ink-soft); }
 .stat-body { flex: 1; min-width: 0; }
-.stat-value { font-size: 1.7rem; font-weight: 800; font-family: 'Playfair Display', serif; color: var(--ink); line-height: 1; }
-.stat-label { font-size: .75rem; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; color: var(--ink-soft); margin-top: 2px; }
+.stat-value { font-size: 1.7rem; font-weight: 600; font-family: 'Playfair Display', serif; color: var(--ink); line-height: 1; }
+.stat-label { font-size: .75rem; font-weight: 500; letter-spacing: .04em; color: var(--ink-soft); margin-top: 2px; }
 .stat-trend { font-size: .7rem; color: var(--ink-soft); position: absolute; bottom: 10px; right: 12px; opacity: .6; }
 
 /* ===== DASH ROW ===== */
@@ -73,7 +73,7 @@
   text-decoration: none; transition: background .2s, border-color .2s, transform .15s;
   &:hover { background: var(--cream-2); border-color: var(--wine); transform: translateY(-2px); }
 }
-.quick-ic { font-size: 1.3rem; }
+.quick-ic { display: flex; align-items: center; color: var(--ink-soft); }
 .quick-label { font-size: .75rem; font-weight: 600; color: var(--ink); text-align: center; }
 
 /* ===== BADGE COUNT ===== */
