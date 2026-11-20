@@ -1,0 +1,177 @@
+{
+  "nodes": [
+    {
+      "id": "backend_static_uploads_menu_9e284b5b_83a7_468b_a1f6_f06158d7e7b4",
+      "label": "Menu Item Upload Photo (Thesis Defense Portrait)",
+      "file_type": "image",
+      "source_file": "C:\\Users\\User\\Desktop\\Mine\\restaurant-site\\backend\\static\\uploads\\menu\\9e284b5b-83a7-468b-a1f6-f06158d7e7b4.jpeg",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "docs_screenshots_admin_dashboard_stats",
+      "label": "Admin Dashboard Stats Screenshot",
+      "file_type": "image",
+      "source_file": "C:\\Users\\User\\Desktop\\Mine\\restaurant-site\\docs\\screenshots\\admin-dashboard-stats.jpeg",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "docs_screenshots_admin_login_form",
+      "label": "Admin Login Form Screenshot",
+      "file_type": "image",
+      "source_file": "C:\\Users\\User\\Desktop\\Mine\\restaurant-site\\docs\\screenshots\\admin-login-form.jpeg",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "docs_screenshots_home_about",
+      "label": "Home About Section Screenshot",
+      "file_type": "image",
+      "source_file": "C:\\Users\\User\\Desktop\\Mine\\restaurant-site\\docs\\screenshots\\home-about.jpeg",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "docs_screenshots_home_hero",
+      "label": "Home Hero Section Screenshot",
+      "file_type": "image",
+      "source_file": "C:\\Users\\User\\Desktop\\Mine\\restaurant-site\\docs\\screenshots\\home-hero.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "docs_screenshots_home_menu",
+      "label": "Home Menu Section Screenshot",
+      "file_type": "image",
+      "source_file": "C:\\Users\\User\\Desktop\\Mine\\restaurant-site\\docs\\screenshots\\home-menu.jpeg",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "docs_screenshots_home_reservation",
+      "label": "Home Reservation Form Screenshot",
+      "file_type": "image",
+      "source_file": "C:\\Users\\User\\Desktop\\Mine\\restaurant-site\\docs\\screenshots\\home-reservation.jpeg",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "docs_screenshots_home_visit",
+      "label": "Home Visit / Find Us Section Screenshot",
+      "file_type": "image",
+      "source_file": "C:\\Users\\User\\Desktop\\Mine\\restaurant-site\\docs\\screenshots\\home-visit.jpeg",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    }
+  ],
+  "edges": [
+    {
+      "source": "backend_static_uploads_menu_9e284b5b_83a7_468b_a1f6_f06158d7e7b4",
+      "target": "docs_screenshots_home_menu",
+      "relation": "shares_data_with",
+      "confidence": "INFERRED",
+      "confidence_score": 0.65,
+      "source_file": "C:\\Users\\User\\Desktop\\Mine\\restaurant-site\\backend\\static\\uploads\\menu\\9e284b5b-83a7-468b-a1f6-f06158d7e7b4.jpeg",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "docs_screenshots_home_hero",
+      "target": "docs_screenshots_home_about",
+      "relation": "semantically_similar_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "C:\\Users\\User\\Desktop\\Mine\\restaurant-site\\docs\\screenshots\\home-hero.png",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "docs_screenshots_home_hero",
+      "target": "docs_screenshots_home_menu",
+      "relation": "semantically_similar_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "C:\\Users\\User\\Desktop\\Mine\\restaurant-site\\docs\\screenshots\\home-hero.png",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "docs_screenshots_home_hero",
+      "target": "docs_screenshots_home_reservation",
+      "relation": "semantically_similar_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "C:\\Users\\User\\Desktop\\Mine\\restaurant-site\\docs\\screenshots\\home-hero.png",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "docs_screenshots_home_hero",
+      "target": "docs_screenshots_home_visit",
+      "relation": "semantically_similar_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "C:\\Users\\User\\Desktop\\Mine\\restaurant-site\\docs\\screenshots\\home-hero.png",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "docs_screenshots_home_visit",
+      "target": "docs_screenshots_home_reservation",
+      "relation": "semantically_similar_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.75,
+      "source_file": "C:\\Users\\User\\Desktop\\Mine\\restaurant-site\\docs\\screenshots\\home-visit.jpeg",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "docs_screenshots_admin_login_form",
+      "target": "docs_screenshots_admin_dashboard_stats",
+      "relation": "semantically_similar_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "C:\\Users\\User\\Desktop\\Mine\\restaurant-site\\docs\\screenshots\\admin-login-form.jpeg",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "docs_screenshots_admin_dashboard_stats",
+      "target": "docs_screenshots_home_menu",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.65,
+      "source_file": "C:\\Users\\User\\Desktop\\Mine\\restaurant-site\\docs\\screenshots\\admin-dashboard-stats.jpeg",
+      "source_location": null,
+      "weight": 1.0
+    }
+  ],
+  "hyperedges": [],
+  "input_tokens": 0,
+  "output_tokens": 0
+}

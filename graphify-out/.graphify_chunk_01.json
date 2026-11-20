@@ -1,0 +1,762 @@
+{
+  "nodes": [
+    {
+      "id": "_claude_skills_speckit_analyze_skill_speckit_analyze",
+      "label": "speckit-analyze Skill",
+      "file_type": "document",
+      "source_file": "C:\\Users\\User\\Desktop\\Mine\\restaurant-site\\.claude\\skills\\speckit-analyze\\SKILL.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": "github-spec-kit",
+      "contributor": null
+    },
+    {
+      "id": "_claude_skills_speckit_checklist_skill_speckit_checklist",
+      "label": "speckit-checklist Skill",
+      "file_type": "document",
+      "source_file": "C:\\Users\\User\\Desktop\\Mine\\restaurant-site\\.claude\\skills\\speckit-checklist\\SKILL.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": "github-spec-kit",
+      "contributor": null
+    },
+    {
+      "id": "_claude_skills_speckit_clarify_skill_speckit_clarify",
+      "label": "speckit-clarify Skill",
+      "file_type": "document",
+      "source_file": "C:\\Users\\User\\Desktop\\Mine\\restaurant-site\\.claude\\skills\\speckit-clarify\\SKILL.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": "github-spec-kit",
+      "contributor": null
+    },
+    {
+      "id": "_claude_skills_speckit_constitution_skill_speckit_constitution",
+      "label": "speckit-constitution Skill",
+      "file_type": "document",
+      "source_file": "C:\\Users\\User\\Desktop\\Mine\\restaurant-site\\.claude\\skills\\speckit-constitution\\SKILL.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": "github-spec-kit",
+      "contributor": null
+    },
+    {
+      "id": "_claude_skills_speckit_converge_skill_speckit_converge",
+      "label": "speckit-converge Skill",
+      "file_type": "document",
+      "source_file": "C:\\Users\\User\\Desktop\\Mine\\restaurant-site\\.claude\\skills\\speckit-converge\\SKILL.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": "github-spec-kit",
+      "contributor": null
+    },
+    {
+      "id": "_claude_skills_speckit_implement_skill_speckit_implement",
+      "label": "speckit-implement Skill",
+      "file_type": "document",
+      "source_file": "C:\\Users\\User\\Desktop\\Mine\\restaurant-site\\.claude\\skills\\speckit-implement\\SKILL.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": "github-spec-kit",
+      "contributor": null
+    },
+    {
+      "id": "_claude_skills_speckit_plan_skill_speckit_plan",
+      "label": "speckit-plan Skill",
+      "file_type": "document",
+      "source_file": "C:\\Users\\User\\Desktop\\Mine\\restaurant-site\\.claude\\skills\\speckit-plan\\SKILL.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": "github-spec-kit",
+      "contributor": null
+    },
+    {
+      "id": "_claude_skills_speckit_specify_skill_speckit_specify",
+      "label": "speckit-specify Skill",
+      "file_type": "document",
+      "source_file": "C:\\Users\\User\\Desktop\\Mine\\restaurant-site\\.claude\\skills\\speckit-specify\\SKILL.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": "github-spec-kit",
+      "contributor": null
+    },
+    {
+      "id": "_claude_skills_speckit_tasks_skill_speckit_tasks",
+      "label": "speckit-tasks Skill",
+      "file_type": "document",
+      "source_file": "C:\\Users\\User\\Desktop\\Mine\\restaurant-site\\.claude\\skills\\speckit-tasks\\SKILL.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": "github-spec-kit",
+      "contributor": null
+    },
+    {
+      "id": "_specify_memory_constitution_md_constitution",
+      "label": "Project Constitution Memory",
+      "file_type": "document",
+      "source_file": "C:\\Users\\User\\Desktop\\Mine\\restaurant-site\\.specify\\memory\\constitution.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "_specify_templates_checklist_template_md_checklist_template",
+      "label": "Checklist Template",
+      "file_type": "document",
+      "source_file": "C:\\Users\\User\\Desktop\\Mine\\restaurant-site\\.specify\\templates\\checklist-template.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "_specify_templates_constitution_template_md_constitution_template",
+      "label": "Constitution Template",
+      "file_type": "document",
+      "source_file": "C:\\Users\\User\\Desktop\\Mine\\restaurant-site\\.specify\\templates\\constitution-template.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "_specify_templates_plan_template_md_plan_template",
+      "label": "Plan Template",
+      "file_type": "document",
+      "source_file": "C:\\Users\\User\\Desktop\\Mine\\restaurant-site\\.specify\\templates\\plan-template.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "_specify_templates_spec_template_md_spec_template",
+      "label": "Feature Spec Template",
+      "file_type": "document",
+      "source_file": "C:\\Users\\User\\Desktop\\Mine\\restaurant-site\\.specify\\templates\\spec-template.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "_specify_templates_tasks_template_md_tasks_template",
+      "label": "Tasks Template",
+      "file_type": "document",
+      "source_file": "C:\\Users\\User\\Desktop\\Mine\\restaurant-site\\.specify\\templates\\tasks-template.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "_specify_workflows_speckit_workflow_yml_speckit_workflow",
+      "label": "Full SDD Cycle Workflow",
+      "file_type": "document",
+      "source_file": "C:\\Users\\User\\Desktop\\Mine\\restaurant-site\\.specify\\workflows\\speckit\\workflow.yml",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": "GitHub",
+      "contributor": null
+    },
+    {
+      "id": "readme_md_restaurant_site",
+      "label": "The Fanus Restaurant Site README",
+      "file_type": "document",
+      "source_file": "C:\\Users\\User\\Desktop\\Mine\\restaurant-site\\README.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "backend_requirements_txt_python_deps",
+      "label": "Backend Python Dependencies",
+      "file_type": "document",
+      "source_file": "C:\\Users\\User\\Desktop\\Mine\\restaurant-site\\backend\\requirements.txt",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "speckit_sdd_pipeline_concept",
+      "label": "Spec-Kit SDD Pipeline Concept",
+      "file_type": "concept",
+      "source_file": "C:\\Users\\User\\Desktop\\Mine\\restaurant-site\\.specify\\workflows\\speckit\\workflow.yml",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "speckit_constitution_authority_principle",
+      "label": "Constitution Authority Principle",
+      "file_type": "rationale",
+      "source_file": "C:\\Users\\User\\Desktop\\Mine\\restaurant-site\\.claude\\skills\\speckit-analyze\\SKILL.md",
+      "source_location": "Operating Constraints: Constitution Authority",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "speckit_requirements_as_unit_tests_principle",
+      "label": "Requirements as Unit Tests Principle",
+      "file_type": "rationale",
+      "source_file": "C:\\Users\\User\\Desktop\\Mine\\restaurant-site\\.claude\\skills\\speckit-checklist\\SKILL.md",
+      "source_location": "Checklist Purpose: Unit Tests for English",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "speckit_extension_hooks_concept",
+      "label": "Extension Hooks Mechanism",
+      "file_type": "concept",
+      "source_file": "C:\\Users\\User\\Desktop\\Mine\\restaurant-site\\.claude\\skills\\speckit-analyze\\SKILL.md",
+      "source_location": "Pre-Execution Checks",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "fastapi_backend_concept",
+      "label": "FastAPI Backend Application",
+      "file_type": "concept",
+      "source_file": "C:\\Users\\User\\Desktop\\Mine\\restaurant-site\\README.md",
+      "source_location": "Tech Stack table",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "angular_frontend_concept",
+      "label": "Angular 17 Frontend Application",
+      "file_type": "concept",
+      "source_file": "C:\\Users\\User\\Desktop\\Mine\\restaurant-site\\README.md",
+      "source_location": "Tech Stack table",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    }
+  ],
+  "edges": [
+    {
+      "source": "_specify_workflows_speckit_workflow_yml_speckit_workflow",
+      "target": "_claude_skills_speckit_specify_skill_speckit_specify",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "C:\\Users\\User\\Desktop\\Mine\\restaurant-site\\.specify\\workflows\\speckit\\workflow.yml",
+      "source_location": "steps[0] command: speckit.specify",
+      "weight": 1.0
+    },
+    {
+      "source": "_specify_workflows_speckit_workflow_yml_speckit_workflow",
+      "target": "_claude_skills_speckit_plan_skill_speckit_plan",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "C:\\Users\\User\\Desktop\\Mine\\restaurant-site\\.specify\\workflows\\speckit\\workflow.yml",
+      "source_location": "steps[2] command: speckit.plan",
+      "weight": 1.0
+    },
+    {
+      "source": "_specify_workflows_speckit_workflow_yml_speckit_workflow",
+      "target": "_claude_skills_speckit_tasks_skill_speckit_tasks",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "C:\\Users\\User\\Desktop\\Mine\\restaurant-site\\.specify\\workflows\\speckit\\workflow.yml",
+      "source_location": "steps[4] command: speckit.tasks",
+      "weight": 1.0
+    },
+    {
+      "source": "_specify_workflows_speckit_workflow_yml_speckit_workflow",
+      "target": "_claude_skills_speckit_implement_skill_speckit_implement",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "C:\\Users\\User\\Desktop\\Mine\\restaurant-site\\.specify\\workflows\\speckit\\workflow.yml",
+      "source_location": "steps[5] command: speckit.implement",
+      "weight": 1.0
+    },
+    {
+      "source": "_claude_skills_speckit_analyze_skill_speckit_analyze",
+      "target": "_specify_memory_constitution_md_constitution",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "C:\\Users\\User\\Desktop\\Mine\\restaurant-site\\.claude\\skills\\speckit-analyze\\SKILL.md",
+      "source_location": "Step 2 Load Artifacts - From constitution: Load .specify/memory/constitution.md",
+      "weight": 1.0
+    },
+    {
+      "source": "_claude_skills_speckit_clarify_skill_speckit_clarify",
+      "target": "_specify_memory_constitution_md_constitution",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "C:\\Users\\User\\Desktop\\Mine\\restaurant-site\\.claude\\skills\\speckit-clarify\\SKILL.md",
+      "source_location": "Step 2: IF EXISTS Load .specify/memory/constitution.md",
+      "weight": 1.0
+    },
+    {
+      "source": "_claude_skills_speckit_checklist_skill_speckit_checklist",
+      "target": "_specify_memory_constitution_md_constitution",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "C:\\Users\\User\\Desktop\\Mine\\restaurant-site\\.claude\\skills\\speckit-checklist\\SKILL.md",
+      "source_location": "Step 2: IF EXISTS Load .specify/memory/constitution.md",
+      "weight": 1.0
+    },
+    {
+      "source": "_claude_skills_speckit_converge_skill_speckit_converge",
+      "target": "_specify_memory_constitution_md_constitution",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "C:\\Users\\User\\Desktop\\Mine\\restaurant-site\\.claude\\skills\\speckit-converge\\SKILL.md",
+      "source_location": "CONSTITUTION = .specify/memory/constitution.md (if present)",
+      "weight": 1.0
+    },
+    {
+      "source": "_claude_skills_speckit_implement_skill_speckit_implement",
+      "target": "_specify_memory_constitution_md_constitution",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "C:\\Users\\User\\Desktop\\Mine\\restaurant-site\\.claude\\skills\\speckit-implement\\SKILL.md",
+      "source_location": "Step 3 Load context: IF EXISTS Read .specify/memory/constitution.md",
+      "weight": 1.0
+    },
+    {
+      "source": "_claude_skills_speckit_plan_skill_speckit_plan",
+      "target": "_specify_memory_constitution_md_constitution",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "C:\\Users\\User\\Desktop\\Mine\\restaurant-site\\.claude\\skills\\speckit-plan\\SKILL.md",
+      "source_location": "Step 2 Load context: Read .specify/memory/constitution.md",
+      "weight": 1.0
+    },
+    {
+      "source": "_claude_skills_speckit_specify_skill_speckit_specify",
+      "target": "_specify_memory_constitution_md_constitution",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "C:\\Users\\User\\Desktop\\Mine\\restaurant-site\\.claude\\skills\\speckit-specify\\SKILL.md",
+      "source_location": "Step 5: IF EXISTS Load .specify/memory/constitution.md",
+      "weight": 1.0
+    },
+    {
+      "source": "_claude_skills_speckit_tasks_skill_speckit_tasks",
+      "target": "_specify_memory_constitution_md_constitution",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "C:\\Users\\User\\Desktop\\Mine\\restaurant-site\\.claude\\skills\\speckit-tasks\\SKILL.md",
+      "source_location": "Step 2 IF EXISTS Load .specify/memory/constitution.md",
+      "weight": 1.0
+    },
+    {
+      "source": "_claude_skills_speckit_constitution_skill_speckit_constitution",
+      "target": "_specify_templates_constitution_template_md_constitution_template",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "C:\\Users\\User\\Desktop\\Mine\\restaurant-site\\.claude\\skills\\speckit-constitution\\SKILL.md",
+      "source_location": "Step 1: Run resolve-template.ps1 constitution-template",
+      "weight": 1.0
+    },
+    {
+      "source": "_claude_skills_speckit_constitution_skill_speckit_constitution",
+      "target": "_specify_memory_constitution_md_constitution",
+      "relation": "implements",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "C:\\Users\\User\\Desktop\\Mine\\restaurant-site\\.claude\\skills\\speckit-constitution\\SKILL.md",
+      "source_location": "Step 6: Write completed constitution back to .specify/memory/constitution.md",
+      "weight": 1.0
+    },
+    {
+      "source": "_specify_templates_constitution_template_md_constitution_template",
+      "target": "_specify_memory_constitution_md_constitution",
+      "relation": "semantically_similar_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "C:\\Users\\User\\Desktop\\Mine\\restaurant-site\\.specify\\memory\\constitution.md",
+      "source_location": "File content identical to constitution-template.md - unfilled template",
+      "weight": 1.0
+    },
+    {
+      "source": "_claude_skills_speckit_specify_skill_speckit_specify",
+      "target": "_specify_templates_spec_template_md_spec_template",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "C:\\Users\\User\\Desktop\\Mine\\restaurant-site\\.claude\\skills\\speckit-specify\\SKILL.md",
+      "source_location": "Step 3: Run resolve-template.ps1 spec-template; Write TEMPLATE_CONTENT to SPEC_FILE",
+      "weight": 1.0
+    },
+    {
+      "source": "_claude_skills_speckit_tasks_skill_speckit_tasks",
+      "target": "_specify_templates_tasks_template_md_tasks_template",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "C:\\Users\\User\\Desktop\\Mine\\restaurant-site\\.claude\\skills\\speckit-tasks\\SKILL.md",
+      "source_location": "Step 1 Setup: parse TASKS_TEMPLATE_CONTENT; Step 4 Generate tasks.md using TASKS_TEMPLATE_CONTENT",
+      "weight": 1.0
+    },
+    {
+      "source": "_claude_skills_speckit_checklist_skill_speckit_checklist",
+      "target": "_specify_templates_checklist_template_md_checklist_template",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "C:\\Users\\User\\Desktop\\Mine\\restaurant-site\\.claude\\skills\\speckit-checklist\\SKILL.md",
+      "source_location": "Step 7 Structure Reference: generate following canonical template in .specify/templates/checklist-template.md",
+      "weight": 1.0
+    },
+    {
+      "source": "_claude_skills_speckit_plan_skill_speckit_plan",
+      "target": "_specify_templates_plan_template_md_plan_template",
+      "relation": "references",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "C:\\Users\\User\\Desktop\\Mine\\restaurant-site\\.claude\\skills\\speckit-plan\\SKILL.md",
+      "source_location": "Step 2 Load context: Load IMPL_PLAN template (already copied) - setup-plan.ps1 copies plan template",
+      "weight": 0.85
+    },
+    {
+      "source": "_claude_skills_speckit_analyze_skill_speckit_analyze",
+      "target": "_claude_skills_speckit_tasks_skill_speckit_tasks",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "C:\\Users\\User\\Desktop\\Mine\\restaurant-site\\.claude\\skills\\speckit-analyze\\SKILL.md",
+      "source_location": "Goal: This command MUST run only after /speckit-tasks has successfully produced a complete tasks.md",
+      "weight": 1.0
+    },
+    {
+      "source": "_claude_skills_speckit_converge_skill_speckit_converge",
+      "target": "_claude_skills_speckit_implement_skill_speckit_implement",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "C:\\Users\\User\\Desktop\\Mine\\restaurant-site\\.claude\\skills\\speckit-converge\\SKILL.md",
+      "source_location": "Goal: This command MUST run only after /speckit-implement has run on the current tasks.md",
+      "weight": 1.0
+    },
+    {
+      "source": "_claude_skills_speckit_converge_skill_speckit_converge",
+      "target": "_claude_skills_speckit_tasks_skill_speckit_tasks",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "C:\\Users\\User\\Desktop\\Mine\\restaurant-site\\.claude\\skills\\speckit-converge\\SKILL.md",
+      "source_location": "Goal: after /speckit-tasks has produced a complete tasks.md",
+      "weight": 1.0
+    },
+    {
+      "source": "_claude_skills_speckit_clarify_skill_speckit_clarify",
+      "target": "_claude_skills_speckit_plan_skill_speckit_plan",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "C:\\Users\\User\\Desktop\\Mine\\restaurant-site\\.claude\\skills\\speckit-clarify\\SKILL.md",
+      "source_location": "Outline Note: This clarification workflow is expected to run BEFORE invoking /speckit-plan",
+      "weight": 1.0
+    },
+    {
+      "source": "_claude_skills_speckit_specify_skill_speckit_specify",
+      "target": "_claude_skills_speckit_clarify_skill_speckit_clarify",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "C:\\Users\\User\\Desktop\\Mine\\restaurant-site\\.claude\\skills\\speckit-specify\\SKILL.md",
+      "source_location": "Completion Report: Readiness for the next phase (/speckit-clarify or /speckit-plan)",
+      "weight": 1.0
+    },
+    {
+      "source": "_claude_skills_speckit_plan_skill_speckit_plan",
+      "target": "_claude_skills_speckit_tasks_skill_speckit_tasks",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "C:\\Users\\User\\Desktop\\Mine\\restaurant-site\\.specify\\workflows\\speckit\\workflow.yml",
+      "source_location": "Workflow step ordering: plan before tasks",
+      "weight": 1.0
+    },
+    {
+      "source": "_claude_skills_speckit_tasks_skill_speckit_tasks",
+      "target": "_claude_skills_speckit_implement_skill_speckit_implement",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "C:\\Users\\User\\Desktop\\Mine\\restaurant-site\\.specify\\workflows\\speckit\\workflow.yml",
+      "source_location": "Workflow step ordering: tasks before implement",
+      "weight": 1.0
+    },
+    {
+      "source": "_claude_skills_speckit_implement_skill_speckit_implement",
+      "target": "_claude_skills_speckit_converge_skill_speckit_converge",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "C:\\Users\\User\\Desktop\\Mine\\restaurant-site\\.claude\\skills\\speckit-converge\\SKILL.md",
+      "source_location": "Goal: MUST run only after /speckit-implement has run",
+      "weight": 1.0
+    },
+    {
+      "source": "_claude_skills_speckit_analyze_skill_speckit_analyze",
+      "target": "_claude_skills_speckit_implement_skill_speckit_implement",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "C:\\Users\\User\\Desktop\\Mine\\restaurant-site\\.claude\\skills\\speckit-analyze\\SKILL.md",
+      "source_location": "Next Actions: If CRITICAL issues exist recommend resolving before /speckit-implement",
+      "weight": 1.0
+    },
+    {
+      "source": "_claude_skills_speckit_implement_skill_speckit_implement",
+      "target": "_claude_skills_speckit_checklist_skill_speckit_checklist",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "C:\\Users\\User\\Desktop\\Mine\\restaurant-site\\.claude\\skills\\speckit-implement\\SKILL.md",
+      "source_location": "Step 2 Check checklists status: Scan all checklist files in checklists/ directory",
+      "weight": 1.0
+    },
+    {
+      "source": "_claude_skills_speckit_clarify_skill_speckit_clarify",
+      "target": "_claude_skills_speckit_specify_skill_speckit_specify",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "C:\\Users\\User\\Desktop\\Mine\\restaurant-site\\.claude\\skills\\speckit-clarify\\SKILL.md",
+      "source_location": "If spec file missing, instruct user to run /speckit-specify first",
+      "weight": 1.0
+    },
+    {
+      "source": "_claude_skills_speckit_converge_skill_speckit_converge",
+      "target": "_claude_skills_speckit_specify_skill_speckit_specify",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "C:\\Users\\User\\Desktop\\Mine\\restaurant-site\\.claude\\skills\\speckit-converge\\SKILL.md",
+      "source_location": "If spec.md missing, STOP and instruct /speckit-specify",
+      "weight": 1.0
+    },
+    {
+      "source": "_claude_skills_speckit_converge_skill_speckit_converge",
+      "target": "_claude_skills_speckit_plan_skill_speckit_plan",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "C:\\Users\\User\\Desktop\\Mine\\restaurant-site\\.claude\\skills\\speckit-converge\\SKILL.md",
+      "source_location": "If plan.md missing, STOP and instruct /speckit-plan",
+      "weight": 1.0
+    },
+    {
+      "source": "speckit_constitution_authority_principle",
+      "target": "_specify_memory_constitution_md_constitution",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "C:\\Users\\User\\Desktop\\Mine\\restaurant-site\\.claude\\skills\\speckit-analyze\\SKILL.md",
+      "source_location": "Operating Constraints: Constitution Authority - non-negotiable within this analysis scope",
+      "weight": 1.0
+    },
+    {
+      "source": "speckit_requirements_as_unit_tests_principle",
+      "target": "_specify_templates_checklist_template_md_checklist_template",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "C:\\Users\\User\\Desktop\\Mine\\restaurant-site\\.claude\\skills\\speckit-checklist\\SKILL.md",
+      "source_location": "Checklist Purpose: Checklists are UNIT TESTS FOR REQUIREMENTS WRITING",
+      "weight": 1.0
+    },
+    {
+      "source": "speckit_extension_hooks_concept",
+      "target": "_claude_skills_speckit_analyze_skill_speckit_analyze",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "C:\\Users\\User\\Desktop\\Mine\\restaurant-site\\.claude\\skills\\speckit-analyze\\SKILL.md",
+      "source_location": "Pre-Execution Checks and Step 9 Check for extension hooks",
+      "weight": 1.0
+    },
+    {
+      "source": "speckit_sdd_pipeline_concept",
+      "target": "_specify_workflows_speckit_workflow_yml_speckit_workflow",
+      "relation": "implements",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "C:\\Users\\User\\Desktop\\Mine\\restaurant-site\\.specify\\workflows\\speckit\\workflow.yml",
+      "source_location": "workflow name: Full SDD Cycle",
+      "weight": 1.0
+    },
+    {
+      "source": "readme_md_restaurant_site",
+      "target": "backend_requirements_txt_python_deps",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "C:\\Users\\User\\Desktop\\Mine\\restaurant-site\\README.md",
+      "source_location": "Project Structure: backend/requirements.txt",
+      "weight": 1.0
+    },
+    {
+      "source": "readme_md_restaurant_site",
+      "target": "fastapi_backend_concept",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "C:\\Users\\User\\Desktop\\Mine\\restaurant-site\\README.md",
+      "source_location": "Tech Stack: FastAPI Python 3.11 Uvicorn",
+      "weight": 1.0
+    },
+    {
+      "source": "readme_md_restaurant_site",
+      "target": "angular_frontend_concept",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "C:\\Users\\User\\Desktop\\Mine\\restaurant-site\\README.md",
+      "source_location": "Tech Stack: Angular 17 Standalone components Lazy routing",
+      "weight": 1.0
+    },
+    {
+      "source": "backend_requirements_txt_python_deps",
+      "target": "fastapi_backend_concept",
+      "relation": "implements",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "C:\\Users\\User\\Desktop\\Mine\\restaurant-site\\backend\\requirements.txt",
+      "source_location": "fastapi==0.111.0, uvicorn[standard]==0.29.0, sqlalchemy==2.0.30",
+      "weight": 0.95
+    },
+    {
+      "source": "_claude_skills_speckit_specify_skill_speckit_specify",
+      "target": "_claude_skills_speckit_checklist_skill_speckit_checklist",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "C:\\Users\\User\\Desktop\\Mine\\restaurant-site\\.claude\\skills\\speckit-specify\\SKILL.md",
+      "source_location": "Step 8a: Create Spec Quality Checklist at FEATURE_DIR/checklists/requirements.md",
+      "weight": 1.0
+    },
+    {
+      "source": "_claude_skills_speckit_clarify_skill_speckit_clarify",
+      "target": "_claude_skills_speckit_checklist_skill_speckit_checklist",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "C:\\Users\\User\\Desktop\\Mine\\restaurant-site\\.claude\\skills\\speckit-clarify\\SKILL.md",
+      "source_location": "Step 9 Re-validate Spec Quality Checklist: Check if FEATURE_DIR/checklists/requirements.md exists",
+      "weight": 1.0
+    }
+  ],
+  "hyperedges": [
+    {
+      "id": "speckit_core_pipeline",
+      "label": "Spec-Kit Core SDD Pipeline",
+      "nodes": [
+        "_claude_skills_speckit_specify_skill_speckit_specify",
+        "_claude_skills_speckit_clarify_skill_speckit_clarify",
+        "_claude_skills_speckit_plan_skill_speckit_plan",
+        "_claude_skills_speckit_tasks_skill_speckit_tasks",
+        "_claude_skills_speckit_implement_skill_speckit_implement",
+        "_claude_skills_speckit_converge_skill_speckit_converge"
+      ],
+      "relation": "participate_in",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "C:\\Users\\User\\Desktop\\Mine\\restaurant-site\\.specify\\workflows\\speckit\\workflow.yml"
+    },
+    {
+      "id": "speckit_constitution_consumers",
+      "label": "Skills Consuming Constitution",
+      "nodes": [
+        "_claude_skills_speckit_analyze_skill_speckit_analyze",
+        "_claude_skills_speckit_clarify_skill_speckit_clarify",
+        "_claude_skills_speckit_checklist_skill_speckit_checklist",
+        "_claude_skills_speckit_converge_skill_speckit_converge",
+        "_claude_skills_speckit_implement_skill_speckit_implement",
+        "_claude_skills_speckit_plan_skill_speckit_plan",
+        "_claude_skills_speckit_specify_skill_speckit_specify",
+        "_claude_skills_speckit_tasks_skill_speckit_tasks",
+        "_specify_memory_constitution_md_constitution"
+      ],
+      "relation": "participate_in",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "C:\\Users\\User\\Desktop\\Mine\\restaurant-site\\.claude\\skills\\speckit-analyze\\SKILL.md"
+    },
+    {
+      "id": "speckit_all_skills",
+      "label": "All Spec-Kit Skills v1.4.4",
+      "nodes": [
+        "_claude_skills_speckit_analyze_skill_speckit_analyze",
+        "_claude_skills_speckit_checklist_skill_speckit_checklist",
+        "_claude_skills_speckit_clarify_skill_speckit_clarify",
+        "_claude_skills_speckit_constitution_skill_speckit_constitution",
+        "_claude_skills_speckit_converge_skill_speckit_converge",
+        "_claude_skills_speckit_implement_skill_speckit_implement",
+        "_claude_skills_speckit_plan_skill_speckit_plan",
+        "_claude_skills_speckit_specify_skill_speckit_specify",
+        "_claude_skills_speckit_tasks_skill_speckit_tasks"
+      ],
+      "relation": "form",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "C:\\Users\\User\\Desktop\\Mine\\restaurant-site\\.claude\\skills\\speckit-analyze\\SKILL.md"
+    },
+    {
+      "id": "restaurant_site_tech_stack",
+      "label": "Restaurant Site Tech Stack",
+      "nodes": [
+        "readme_md_restaurant_site",
+        "backend_requirements_txt_python_deps",
+        "fastapi_backend_concept",
+        "angular_frontend_concept"
+      ],
+      "relation": "implement",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "C:\\Users\\User\\Desktop\\Mine\\restaurant-site\\README.md"
+    }
+  ],
+  "input_tokens": 0,
+  "output_tokens": 0
+}

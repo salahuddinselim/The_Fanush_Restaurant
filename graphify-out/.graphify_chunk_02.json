@@ -1,0 +1,746 @@
+{
+  "nodes": [
+    {
+      "id": "frontend_readme_angular_readme",
+      "label": "Frontend Angular README",
+      "file_type": "document",
+      "source_file": "C:\\Users\\User\\Desktop\\Mine\\restaurant-site\\frontend\\README.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "frontend_public_robots_robots_config",
+      "label": "robots.txt (Fanus Restaurant)",
+      "file_type": "document",
+      "source_file": "C:\\Users\\User\\Desktop\\Mine\\restaurant-site\\frontend\\public\\robots.txt",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "frontend_src_app_admin_config_manager_config_manager_component_template",
+      "label": "Config Manager Admin Component (HTML)",
+      "file_type": "code",
+      "source_file": "C:\\Users\\User\\Desktop\\Mine\\restaurant-site\\frontend\\src\\app\\admin\\config-manager\\config-manager.component.html",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "frontend_src_app_admin_dashboard_dashboard_component_template",
+      "label": "Dashboard Admin Component (HTML)",
+      "file_type": "code",
+      "source_file": "C:\\Users\\User\\Desktop\\Mine\\restaurant-site\\frontend\\src\\app\\admin\\dashboard\\dashboard.component.html",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "frontend_src_app_admin_gallery_manager_gallery_manager_component_template",
+      "label": "Gallery Manager Admin Component (HTML)",
+      "file_type": "code",
+      "source_file": "C:\\Users\\User\\Desktop\\Mine\\restaurant-site\\frontend\\src\\app\\admin\\gallery-manager\\gallery-manager.component.html",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "frontend_src_app_admin_hours_manager_hours_manager_component_template",
+      "label": "Hours Manager Admin Component (HTML)",
+      "file_type": "code",
+      "source_file": "C:\\Users\\User\\Desktop\\Mine\\restaurant-site\\frontend\\src\\app\\admin\\hours-manager\\hours-manager.component.html",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "frontend_src_app_admin_login_login_component_template",
+      "label": "Login Admin Component (HTML)",
+      "file_type": "code",
+      "source_file": "C:\\Users\\User\\Desktop\\Mine\\restaurant-site\\frontend\\src\\app\\admin\\login\\login.component.html",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "frontend_src_app_admin_menu_manager_menu_manager_component_template",
+      "label": "Menu Manager Admin Component (HTML)",
+      "file_type": "code",
+      "source_file": "C:\\Users\\User\\Desktop\\Mine\\restaurant-site\\frontend\\src\\app\\admin\\menu-manager\\menu-manager.component.html",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "frontend_src_app_admin_reservations_reservations_component_template",
+      "label": "Reservations Admin Component (HTML)",
+      "file_type": "code",
+      "source_file": "C:\\Users\\User\\Desktop\\Mine\\restaurant-site\\frontend\\src\\app\\admin\\reservations\\reservations.component.html",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "frontend_src_app_admin_reviews_reviews_component_template",
+      "label": "Reviews Admin Component (HTML)",
+      "file_type": "code",
+      "source_file": "C:\\Users\\User\\Desktop\\Mine\\restaurant-site\\frontend\\src\\app\\admin\\reviews\\reviews.component.html",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "frontend_src_app_app_component_template",
+      "label": "App Root Component (HTML)",
+      "file_type": "code",
+      "source_file": "C:\\Users\\User\\Desktop\\Mine\\restaurant-site\\frontend\\src\\app\\app.component.html",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "frontend_src_app_public_home_home_component_template",
+      "label": "Home Public Component (HTML)",
+      "file_type": "code",
+      "source_file": "C:\\Users\\User\\Desktop\\Mine\\restaurant-site\\frontend\\src\\app\\public\\home\\home.component.html",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "frontend_src_index_index_html",
+      "label": "App Entry HTML (index.html)",
+      "file_type": "code",
+      "source_file": "C:\\Users\\User\\Desktop\\Mine\\restaurant-site\\frontend\\src\\index.html",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "security_audit_01_application_inventory_inventory",
+      "label": "Application Inventory",
+      "file_type": "document",
+      "source_file": "C:\\Users\\User\\Desktop\\Mine\\restaurant-site\\security-audit\\01-application-inventory.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "security_audit_02_test_plan_test_plan",
+      "label": "Security Test Plan",
+      "file_type": "document",
+      "source_file": "C:\\Users\\User\\Desktop\\Mine\\restaurant-site\\security-audit\\02-test-plan.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "security_audit_03_functional_qa_report_functional_qa",
+      "label": "Functional QA Report",
+      "file_type": "document",
+      "source_file": "C:\\Users\\User\\Desktop\\Mine\\restaurant-site\\security-audit\\03-functional-qa-report.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "security_audit_04_security_audit_report_security_audit",
+      "label": "Security Audit Report",
+      "file_type": "document",
+      "source_file": "C:\\Users\\User\\Desktop\\Mine\\restaurant-site\\security-audit\\04-security-audit-report.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "security_audit_05_api_security_report_api_security",
+      "label": "API Security Report",
+      "file_type": "document",
+      "source_file": "C:\\Users\\User\\Desktop\\Mine\\restaurant-site\\security-audit\\05-api-security-report.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "security_audit_06_database_security_report_db_security",
+      "label": "Database Security Report",
+      "file_type": "document",
+      "source_file": "C:\\Users\\User\\Desktop\\Mine\\restaurant-site\\security-audit\\06-database-security-report.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "security_audit_07_performance_report_performance",
+      "label": "Performance Report",
+      "file_type": "document",
+      "source_file": "C:\\Users\\User\\Desktop\\Mine\\restaurant-site\\security-audit\\07-performance-report.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "security_audit_08_accessibility_report_accessibility",
+      "label": "Accessibility Report (WCAG 2.2 AA)",
+      "file_type": "document",
+      "source_file": "C:\\Users\\User\\Desktop\\Mine\\restaurant-site\\security-audit\\08-accessibility-report.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "security_audit_09_vulnerability_register_vuln_register",
+      "label": "Vulnerability Register",
+      "file_type": "document",
+      "source_file": "C:\\Users\\User\\Desktop\\Mine\\restaurant-site\\security-audit\\09-vulnerability-register.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "security_audit_10_remediation_plan_remediation",
+      "label": "Remediation Plan",
+      "file_type": "document",
+      "source_file": "C:\\Users\\User\\Desktop\\Mine\\restaurant-site\\security-audit\\10-remediation-plan.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "security_audit_11_regression_test_report_regression",
+      "label": "Regression Test Report",
+      "file_type": "document",
+      "source_file": "C:\\Users\\User\\Desktop\\Mine\\restaurant-site\\security-audit\\11-regression-test-report.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "security_audit_12_final_security_assessment_final_assessment",
+      "label": "Final Security Assessment",
+      "file_type": "document",
+      "source_file": "C:\\Users\\User\\Desktop\\Mine\\restaurant-site\\security-audit\\12-final-security-assessment.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "test_results_unit_test_results_unit_tests",
+      "label": "Unit Test Results (180/180 Pass)",
+      "file_type": "document",
+      "source_file": "C:\\Users\\User\\Desktop\\Mine\\restaurant-site\\test-results\\unit-test-results.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "fanus_cms_admin_sidebar_nav",
+      "label": "Fanus CMS Admin Sidebar Navigation",
+      "file_type": "concept",
+      "source_file": "C:\\Users\\User\\Desktop\\Mine\\restaurant-site\\frontend\\src\\app\\admin\\dashboard\\dashboard.component.html",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "fanus_restaurant_localbusiness",
+      "label": "Fanus Restaurant (LocalBusiness Entity)",
+      "file_type": "concept",
+      "source_file": "C:\\Users\\User\\Desktop\\Mine\\restaurant-site\\frontend\\src\\index.html",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "jwt_localstorage_accepted_risk",
+      "label": "JWT localStorage Accepted Risk",
+      "file_type": "rationale",
+      "source_file": "C:\\Users\\User\\Desktop\\Mine\\restaurant-site\\security-audit\\09-vulnerability-register.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "file_upload_validation_design",
+      "label": "File Upload Validation Design (Extension + Magic Byte + Size)",
+      "file_type": "rationale",
+      "source_file": "C:\\Users\\User\\Desktop\\Mine\\restaurant-site\\security-audit\\04-security-audit-report.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    }
+  ],
+  "edges": [
+    {
+      "source": "frontend_src_app_admin_config_manager_config_manager_component_template",
+      "target": "fanus_cms_admin_sidebar_nav",
+      "relation": "implements",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "C:\\Users\\User\\Desktop\\Mine\\restaurant-site\\frontend\\src\\app\\admin\\config-manager\\config-manager.component.html",
+      "source_location": "line 7-22",
+      "weight": 1.0
+    },
+    {
+      "source": "frontend_src_app_admin_dashboard_dashboard_component_template",
+      "target": "fanus_cms_admin_sidebar_nav",
+      "relation": "implements",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "C:\\Users\\User\\Desktop\\Mine\\restaurant-site\\frontend\\src\\app\\admin\\dashboard\\dashboard.component.html",
+      "source_location": "line 2-27",
+      "weight": 1.0
+    },
+    {
+      "source": "frontend_src_app_admin_gallery_manager_gallery_manager_component_template",
+      "target": "fanus_cms_admin_sidebar_nav",
+      "relation": "implements",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "C:\\Users\\User\\Desktop\\Mine\\restaurant-site\\frontend\\src\\app\\admin\\gallery-manager\\gallery-manager.component.html",
+      "source_location": "line 1-23",
+      "weight": 1.0
+    },
+    {
+      "source": "frontend_src_app_admin_hours_manager_hours_manager_component_template",
+      "target": "fanus_cms_admin_sidebar_nav",
+      "relation": "implements",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "C:\\Users\\User\\Desktop\\Mine\\restaurant-site\\frontend\\src\\app\\admin\\hours-manager\\hours-manager.component.html",
+      "source_location": "line 1-22",
+      "weight": 1.0
+    },
+    {
+      "source": "frontend_src_app_admin_menu_manager_menu_manager_component_template",
+      "target": "fanus_cms_admin_sidebar_nav",
+      "relation": "implements",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "C:\\Users\\User\\Desktop\\Mine\\restaurant-site\\frontend\\src\\app\\admin\\menu-manager\\menu-manager.component.html",
+      "source_location": "line 1-22",
+      "weight": 1.0
+    },
+    {
+      "source": "frontend_src_app_admin_reservations_reservations_component_template",
+      "target": "fanus_cms_admin_sidebar_nav",
+      "relation": "implements",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "C:\\Users\\User\\Desktop\\Mine\\restaurant-site\\frontend\\src\\app\\admin\\reservations\\reservations.component.html",
+      "source_location": "line 1-22",
+      "weight": 1.0
+    },
+    {
+      "source": "frontend_src_app_admin_reviews_reviews_component_template",
+      "target": "fanus_cms_admin_sidebar_nav",
+      "relation": "implements",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "C:\\Users\\User\\Desktop\\Mine\\restaurant-site\\frontend\\src\\app\\admin\\reviews\\reviews.component.html",
+      "source_location": "line 1-24",
+      "weight": 1.0
+    },
+    {
+      "source": "frontend_src_app_app_component_template",
+      "target": "frontend_src_app_public_home_home_component_template",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "C:\\Users\\User\\Desktop\\Mine\\restaurant-site\\frontend\\src\\app\\app.component.html",
+      "source_location": "line 336 — <router-outlet />",
+      "weight": 1.0
+    },
+    {
+      "source": "frontend_src_index_index_html",
+      "target": "frontend_src_app_app_component_template",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "C:\\Users\\User\\Desktop\\Mine\\restaurant-site\\frontend\\src\\index.html",
+      "source_location": "line 58 — <app-root>",
+      "weight": 1.0
+    },
+    {
+      "source": "frontend_src_index_index_html",
+      "target": "fanus_restaurant_localbusiness",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "C:\\Users\\User\\Desktop\\Mine\\restaurant-site\\frontend\\src\\index.html",
+      "source_location": "line 28-48 — JSON-LD LocalBusiness structured data",
+      "weight": 1.0
+    },
+    {
+      "source": "frontend_public_robots_robots_config",
+      "target": "fanus_restaurant_localbusiness",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "C:\\Users\\User\\Desktop\\Mine\\restaurant-site\\frontend\\public\\robots.txt",
+      "source_location": "line 4 — Sitemap: https://www.fanusrestaurant.com.au/sitemap.xml",
+      "weight": 1.0
+    },
+    {
+      "source": "frontend_src_app_public_home_home_component_template",
+      "target": "fanus_restaurant_localbusiness",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "C:\\Users\\User\\Desktop\\Mine\\restaurant-site\\frontend\\src\\app\\public\\home\\home.component.html",
+      "source_location": "line 102-119 — hero section with restaurant name, address, phone",
+      "weight": 1.0
+    },
+    {
+      "source": "security_audit_02_test_plan_test_plan",
+      "target": "security_audit_01_application_inventory_inventory",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "C:\\Users\\User\\Desktop\\Mine\\restaurant-site\\security-audit\\02-test-plan.md",
+      "source_location": "scope section — same application, same date",
+      "weight": 1.0
+    },
+    {
+      "source": "security_audit_03_functional_qa_report_functional_qa",
+      "target": "security_audit_01_application_inventory_inventory",
+      "relation": "references",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "C:\\Users\\User\\Desktop\\Mine\\restaurant-site\\security-audit\\03-functional-qa-report.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "security_audit_04_security_audit_report_security_audit",
+      "target": "security_audit_03_functional_qa_report_functional_qa",
+      "relation": "references",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "C:\\Users\\User\\Desktop\\Mine\\restaurant-site\\security-audit\\04-security-audit-report.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "security_audit_05_api_security_report_api_security",
+      "target": "security_audit_04_security_audit_report_security_audit",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "C:\\Users\\User\\Desktop\\Mine\\restaurant-site\\security-audit\\05-api-security-report.md",
+      "source_location": "references same vulnerability IDs (H-002, M-002, M-004, M-005, C-002)",
+      "weight": 1.0
+    },
+    {
+      "source": "security_audit_06_database_security_report_db_security",
+      "target": "security_audit_04_security_audit_report_security_audit",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "C:\\Users\\User\\Desktop\\Mine\\restaurant-site\\security-audit\\06-database-security-report.md",
+      "source_location": "references same vulnerability IDs (H-003, H-005)",
+      "weight": 1.0
+    },
+    {
+      "source": "security_audit_09_vulnerability_register_vuln_register",
+      "target": "security_audit_04_security_audit_report_security_audit",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "C:\\Users\\User\\Desktop\\Mine\\restaurant-site\\security-audit\\09-vulnerability-register.md",
+      "source_location": "tracks all vulnerability IDs from report (C-001, C-002, H-001..M-008)",
+      "weight": 1.0
+    },
+    {
+      "source": "security_audit_10_remediation_plan_remediation",
+      "target": "security_audit_09_vulnerability_register_vuln_register",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "C:\\Users\\User\\Desktop\\Mine\\restaurant-site\\security-audit\\10-remediation-plan.md",
+      "source_location": "references vulnerability IDs C-001, C-002, H-001..H-005, M-001..M-005",
+      "weight": 1.0
+    },
+    {
+      "source": "security_audit_11_regression_test_report_regression",
+      "target": "security_audit_10_remediation_plan_remediation",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "C:\\Users\\User\\Desktop\\Mine\\restaurant-site\\security-audit\\11-regression-test-report.md",
+      "source_location": "tests named after fix IDs (C-001, C-002, H-002, H-003, M-003, M-004)",
+      "weight": 1.0
+    },
+    {
+      "source": "security_audit_12_final_security_assessment_final_assessment",
+      "target": "security_audit_09_vulnerability_register_vuln_register",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "C:\\Users\\User\\Desktop\\Mine\\restaurant-site\\security-audit\\12-final-security-assessment.md",
+      "source_location": "risk summary table cites found/fixed/accepted counts matching register",
+      "weight": 1.0
+    },
+    {
+      "source": "security_audit_12_final_security_assessment_final_assessment",
+      "target": "security_audit_11_regression_test_report_regression",
+      "relation": "references",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "C:\\Users\\User\\Desktop\\Mine\\restaurant-site\\security-audit\\12-final-security-assessment.md",
+      "source_location": "commit history section lists same commit IDs as regression plan",
+      "weight": 1.0
+    },
+    {
+      "source": "security_audit_09_vulnerability_register_vuln_register",
+      "target": "jwt_localstorage_accepted_risk",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "C:\\Users\\User\\Desktop\\Mine\\restaurant-site\\security-audit\\09-vulnerability-register.md",
+      "source_location": "Accepted Risk section — H-001 JWT in localStorage rationale",
+      "weight": 1.0
+    },
+    {
+      "source": "security_audit_04_security_audit_report_security_audit",
+      "target": "file_upload_validation_design",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "C:\\Users\\User\\Desktop\\Mine\\restaurant-site\\security-audit\\04-security-audit-report.md",
+      "source_location": "C-002 fix section — magic byte + extension + size validation rationale",
+      "weight": 1.0
+    },
+    {
+      "source": "test_results_unit_test_results_unit_tests",
+      "target": "frontend_src_app_public_home_home_component_template",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "C:\\Users\\User\\Desktop\\Mine\\restaurant-site\\test-results\\unit-test-results.md",
+      "source_location": "home.component.spec.ts — 40/40 PASS",
+      "weight": 1.0
+    },
+    {
+      "source": "test_results_unit_test_results_unit_tests",
+      "target": "frontend_src_app_admin_config_manager_config_manager_component_template",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "C:\\Users\\User\\Desktop\\Mine\\restaurant-site\\test-results\\unit-test-results.md",
+      "source_location": "config-manager.component.spec.ts — 10/10 PASS",
+      "weight": 1.0
+    },
+    {
+      "source": "test_results_unit_test_results_unit_tests",
+      "target": "frontend_src_app_admin_dashboard_dashboard_component_template",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "C:\\Users\\User\\Desktop\\Mine\\restaurant-site\\test-results\\unit-test-results.md",
+      "source_location": "dashboard.component.spec.ts — 11/11 PASS",
+      "weight": 1.0
+    },
+    {
+      "source": "test_results_unit_test_results_unit_tests",
+      "target": "frontend_src_app_admin_hours_manager_hours_manager_component_template",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "C:\\Users\\User\\Desktop\\Mine\\restaurant-site\\test-results\\unit-test-results.md",
+      "source_location": "hours-manager.component.spec.ts — 10/10 PASS",
+      "weight": 1.0
+    },
+    {
+      "source": "test_results_unit_test_results_unit_tests",
+      "target": "frontend_src_app_admin_gallery_manager_gallery_manager_component_template",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "C:\\Users\\User\\Desktop\\Mine\\restaurant-site\\test-results\\unit-test-results.md",
+      "source_location": "gallery-manager.component.spec.ts — 23/23 PASS",
+      "weight": 1.0
+    },
+    {
+      "source": "test_results_unit_test_results_unit_tests",
+      "target": "frontend_src_app_admin_login_login_component_template",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "C:\\Users\\User\\Desktop\\Mine\\restaurant-site\\test-results\\unit-test-results.md",
+      "source_location": "login.component.spec.ts — 12/12 PASS",
+      "weight": 1.0
+    },
+    {
+      "source": "test_results_unit_test_results_unit_tests",
+      "target": "frontend_src_app_admin_menu_manager_menu_manager_component_template",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "C:\\Users\\User\\Desktop\\Mine\\restaurant-site\\test-results\\unit-test-results.md",
+      "source_location": "menu-manager.component.spec.ts — 24/24 PASS",
+      "weight": 1.0
+    },
+    {
+      "source": "test_results_unit_test_results_unit_tests",
+      "target": "frontend_src_app_admin_reservations_reservations_component_template",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "C:\\Users\\User\\Desktop\\Mine\\restaurant-site\\test-results\\unit-test-results.md",
+      "source_location": "reservations.component.spec.ts — 15/15 PASS",
+      "weight": 1.0
+    },
+    {
+      "source": "security_audit_07_performance_report_performance",
+      "target": "frontend_src_app_public_home_home_component_template",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "C:\\Users\\User\\Desktop\\Mine\\restaurant-site\\security-audit\\07-performance-report.md",
+      "source_location": "ngOnInit API calls — forkJoin improvement for home component",
+      "weight": 1.0
+    },
+    {
+      "source": "security_audit_08_accessibility_report_accessibility",
+      "target": "frontend_src_app_public_home_home_component_template",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "C:\\Users\\User\\Desktop\\Mine\\restaurant-site\\security-audit\\08-accessibility-report.md",
+      "source_location": "A-003 modal focus trap, A-004 search suggestions, A-007 hero h1",
+      "weight": 1.0
+    },
+    {
+      "source": "frontend_src_app_admin_dashboard_dashboard_component_template",
+      "target": "frontend_src_app_admin_reservations_reservations_component_template",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "C:\\Users\\User\\Desktop\\Mine\\restaurant-site\\frontend\\src\\app\\admin\\dashboard\\dashboard.component.html",
+      "source_location": "line 36 and 173 — View Reservations link and recent reservations table",
+      "weight": 1.0
+    },
+    {
+      "source": "security_audit_04_security_audit_report_security_audit",
+      "target": "security_audit_01_application_inventory_inventory",
+      "relation": "references",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "C:\\Users\\User\\Desktop\\Mine\\restaurant-site\\security-audit\\04-security-audit-report.md",
+      "source_location": "references specific source files listed in inventory",
+      "weight": 1.0
+    },
+    {
+      "source": "frontend_src_app_admin_config_manager_config_manager_component_template",
+      "target": "frontend_src_app_admin_dashboard_dashboard_component_template",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "C:\\Users\\User\\Desktop\\Mine\\restaurant-site\\frontend\\src\\app\\admin\\config-manager\\config-manager.component.html",
+      "source_location": "line 8 — routerLink /admin/dashboard in sidebar",
+      "weight": 1.0
+    }
+  ],
+  "hyperedges": [
+    {
+      "id": "admin_panel_components",
+      "label": "Admin Panel Components (share sidebar navigation layout)",
+      "nodes": [
+        "frontend_src_app_admin_config_manager_config_manager_component_template",
+        "frontend_src_app_admin_dashboard_dashboard_component_template",
+        "frontend_src_app_admin_gallery_manager_gallery_manager_component_template",
+        "frontend_src_app_admin_hours_manager_hours_manager_component_template",
+        "frontend_src_app_admin_menu_manager_menu_manager_component_template",
+        "frontend_src_app_admin_reservations_reservations_component_template",
+        "frontend_src_app_admin_reviews_reviews_component_template",
+        "fanus_cms_admin_sidebar_nav"
+      ],
+      "relation": "implement",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "C:\\Users\\User\\Desktop\\Mine\\restaurant-site\\frontend\\src\\app\\admin\\dashboard\\dashboard.component.html"
+    },
+    {
+      "id": "security_audit_pipeline",
+      "label": "Security Audit Pipeline (inventory → plan → qa → audit → register → remediation → regression → final)",
+      "nodes": [
+        "security_audit_01_application_inventory_inventory",
+        "security_audit_02_test_plan_test_plan",
+        "security_audit_03_functional_qa_report_functional_qa",
+        "security_audit_04_security_audit_report_security_audit",
+        "security_audit_09_vulnerability_register_vuln_register",
+        "security_audit_10_remediation_plan_remediation",
+        "security_audit_11_regression_test_report_regression",
+        "security_audit_12_final_security_assessment_final_assessment"
+      ],
+      "relation": "participate_in",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "C:\\Users\\User\\Desktop\\Mine\\restaurant-site\\security-audit\\12-final-security-assessment.md"
+    }
+  ],
+  "input_tokens": 0,
+  "output_tokens": 0
+}
