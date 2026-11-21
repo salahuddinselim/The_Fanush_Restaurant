@@ -1,21 +1,19 @@
-import { Component, OnInit, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { AdminShellComponent } from '@app/shared/admin-shell.component';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterLink, RouterLinkActive } from '@angular/router';
 import { ApiService, Reservation } from '../../core/services/api.service';
-import { AuthService } from '../../core/services/auth.service';
 
 @Component({
   selector: 'app-reservations',
   standalone: true,
-  imports: [CommonModule, RouterLink, RouterLinkActive],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  imports: [AdminShellComponent, CommonModule],
   templateUrl: './reservations.component.html',
 })
 export class ReservationsComponent implements OnInit {
   reservations: Reservation[] = [];
   filter: 'all' | 'pending' | 'confirmed' | 'cancelled' = 'all';
 
-  constructor(private api: ApiService, public auth: AuthService) {}
+  constructor(private api: ApiService) {}
 
   ngOnInit() { this.load(); }
   load() { this.api.getReservations().subscribe(r => this.reservations = r); }

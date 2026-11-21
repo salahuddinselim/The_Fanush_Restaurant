@@ -58,14 +58,14 @@ describe('ConfigManagerComponent', () => {
   });
 
   it('should expose all configurable fields with labels', () => {
-    expect(component.fields.length).toBe(10);
+    expect(component.fields.length).toBe(11);
     expect(component.fields[0]).toEqual({ key: 'restaurant_name', label: 'Restaurant Name' });
     expect(component.fields.map(f => f.key)).toContain('logo_url');
   });
 
   it('should render one input per config field', () => {
     const inputs = fixture.nativeElement.querySelectorAll('.settings-grid input[type="text"]') as NodeListOf<HTMLInputElement>;
-    expect(inputs.length).toBe(10);
+    expect(inputs.length).toBe(11);
     expect(inputs[0].value).toBe('Test Kitchen');
   });
 
@@ -73,7 +73,7 @@ describe('ConfigManagerComponent', () => {
     component.save();
     expect(apiSpy.updateConfig).toHaveBeenCalledTimes(1);
     const items = apiSpy.updateConfig.calls.mostRecent().args[0];
-    expect(items.length).toBe(10);
+    expect(items.length).toBe(11);
     expect(items).toContain({ key: 'restaurant_name', value: 'Test Kitchen' });
     expect(items).toContain({ key: 'logo_url', value: '' });
   });

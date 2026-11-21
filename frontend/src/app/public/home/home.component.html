@@ -10,8 +10,8 @@
     <div class="topbar-right">
       <span class="loc-text">{{ address }}</span>
       <span class="topbar-divider">·</span>
-      <a [href]="'tel:' + phone" class="topbar-phone" aria-label="Call restaurant">
-        <iconify-icon icon="lucide:phone-call" width="13" height="13" aria-hidden="true"></iconify-icon>
+      <a [href]="'tel:' + phone" class="topbar-phone" [attr.aria-label]="'Call restaurant on ' + phone">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13 19.79 19.79 0 0 1 1.61 4.4 2 2 0 0 1 3.6 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9a16 16 0 0 0 6 6l.92-.92a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/><path d="M14.05 2a9 9 0 0 1 8 7.94"/><path d="M14.05 6A5 5 0 0 1 18 10"/></svg>
         {{ phone }}
       </a>
     </div>
@@ -23,7 +23,7 @@
   <div class="wrap nav-inner">
 
     <!-- Brand -->
-    <a class="brand" (click)="scrollTo('top'); clearSearch()" style="cursor:pointer">
+    <a href="#top" class="brand" (click)="$event.preventDefault(); scrollTo('top'); clearSearch()" style="cursor:pointer">
       <span class="brand-mark">
         <img *ngIf="logoUrl" [src]="logoUrl" [alt]="name" class="brand-logo-img">
         <span *ngIf="!logoUrl" class="brand-letter">F</span>
@@ -37,7 +37,7 @@
     <!-- Search bar (desktop) -->
     <div class="nav-search-wrap">
       <div class="nav-search-box">
-        <span class="search-ic" aria-hidden="true"><iconify-icon icon="lucide:search" width="16" height="16"></iconify-icon></span>
+        <span class="search-ic" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg></span>
         <input
           type="text"
           class="nav-search-input"
@@ -54,12 +54,12 @@
           aria-haspopup="listbox"
         >
         <button *ngIf="searchQuery" class="search-clear" (click)="clearSearch()" aria-label="Clear search">
-          <iconify-icon icon="lucide:x" width="14" height="14" aria-hidden="true"></iconify-icon>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
         </button>
       </div>
       <div id="nav-search-suggestions" class="search-suggestions" role="listbox" *ngIf="showSuggestions" aria-label="Search suggestions">
         <button role="option" *ngFor="let s of searchSuggestions" (mousedown)="selectSuggestion(s)">
-          <iconify-icon icon="lucide:arrow-right" width="14" height="14"></iconify-icon>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
           {{ s }}
         </button>
       </div>
@@ -67,17 +67,17 @@
 
     <!-- Desktop nav links -->
     <nav class="navlinks">
-      <a (click)="scrollTo('about')">About</a>
-      <a (click)="scrollTo('gallery')">Ambiance</a>
-      <a (click)="scrollTo('menu')">Menu</a>
-      <a (click)="scrollTo('visit')">Visit &amp; Hours</a>
-      <a (click)="scrollTo('reviews')">Reviews</a>
-      <a (click)="scrollTo('reservation')" class="btn nav-book-btn">
-        <iconify-icon icon="lucide:calendar-check" width="14" height="14" aria-hidden="true"></iconify-icon>
+      <a href="#about" (click)="$event.preventDefault(); scrollTo('about')">About</a>
+      <a href="#gallery" (click)="$event.preventDefault(); scrollTo('gallery')">Ambiance</a>
+      <a href="#menu" (click)="$event.preventDefault(); scrollTo('menu')">Menu</a>
+      <a href="#visit" (click)="$event.preventDefault(); scrollTo('visit')">Visit &amp; Hours</a>
+      <a href="#reviews" (click)="$event.preventDefault(); scrollTo('reviews')">Reviews</a>
+      <a href="#reservation" (click)="$event.preventDefault(); scrollTo('reservation')" class="btn nav-book-btn">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/><path d="m9 16 2 2 4-4"/></svg>
         Book Table
       </a>
       <a [href]="'tel:' + phone" class="btn nav-cta">
-        <iconify-icon icon="lucide:phone-call" width="14" height="14" aria-hidden="true"></iconify-icon>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13 19.79 19.79 0 0 1 1.61 4.4 2 2 0 0 1 3.6 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9a16 16 0 0 0 6 6l.92-.92a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/><path d="M14.05 2a9 9 0 0 1 8 7.94"/><path d="M14.05 6A5 5 0 0 1 18 10"/></svg>
         {{ ctaText }}
       </a>
     </nav>
@@ -91,7 +91,7 @@
   <!-- Mobile panel -->
   <div class="mobile-panel" [class.open]="mobileMenuOpen">
     <div class="mobile-search-wrap">
-      <span class="search-ic" aria-hidden="true"><iconify-icon icon="lucide:search" width="16" height="16"></iconify-icon></span>
+      <span class="search-ic" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg></span>
       <input
         type="text"
         placeholder="Search menu…"
@@ -100,30 +100,30 @@
         aria-label="Search menu"
       >
       <button *ngIf="searchQuery" (click)="clearSearch()" aria-label="Clear search">
-        <iconify-icon icon="lucide:x" width="14" height="14" aria-hidden="true"></iconify-icon>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
       </button>
     </div>
     <div class="mobile-links">
-      <a (click)="scrollTo('about'); mobileMenuOpen=false">About</a>
-      <a (click)="scrollTo('gallery'); mobileMenuOpen=false">Ambiance &amp; Gallery</a>
-      <a (click)="scrollTo('menu'); mobileMenuOpen=false">Menu</a>
-      <a (click)="scrollTo('visit'); mobileMenuOpen=false">Visit &amp; Hours</a>
-      <a (click)="scrollTo('reviews'); mobileMenuOpen=false">Guest Reviews</a>
-      <a (click)="scrollTo('reservation'); mobileMenuOpen=false" class="mobile-highlight">Reserve a Table</a>
+      <a href="#about" (click)="$event.preventDefault(); scrollTo('about'); mobileMenuOpen=false">About</a>
+      <a href="#gallery" (click)="$event.preventDefault(); scrollTo('gallery'); mobileMenuOpen=false">Ambiance &amp; Gallery</a>
+      <a href="#menu" (click)="$event.preventDefault(); scrollTo('menu'); mobileMenuOpen=false">Menu</a>
+      <a href="#visit" (click)="$event.preventDefault(); scrollTo('visit'); mobileMenuOpen=false">Visit &amp; Hours</a>
+      <a href="#reviews" (click)="$event.preventDefault(); scrollTo('reviews'); mobileMenuOpen=false">Guest Reviews</a>
+      <a href="#reservation" (click)="$event.preventDefault(); scrollTo('reservation'); mobileMenuOpen=false" class="mobile-highlight">Reserve a Table</a>
     </div>
     <div class="mobile-cats" *ngIf="categories.length">
       <p class="cats-label">Menu Categories</p>
       <div class="cats-grid">
-        <a *ngFor="let c of categories" (click)="scrollToCat(c); mobileMenuOpen=false" [class.active]="activeCatId === c.id">{{ c.name }}</a>
+        <a href="#menu" *ngFor="let c of categories" (click)="$event.preventDefault(); scrollToCat(c); mobileMenuOpen=false" [class.active]="activeCatId === c.id">{{ c.name }}</a>
       </div>
     </div>
     <div class="mobile-cta-row">
-      <a (click)="scrollTo('reservation'); mobileMenuOpen=false" class="mobile-book-btn">
-        <iconify-icon icon="lucide:calendar-check" width="14" height="14" aria-hidden="true"></iconify-icon>
+      <a href="#reservation" (click)="$event.preventDefault(); scrollTo('reservation'); mobileMenuOpen=false" class="mobile-book-btn">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/><path d="m9 16 2 2 4-4"/></svg>
         Book a Table
       </a>
       <a [href]="'tel:' + phone" class="mobile-call-btn">
-        <iconify-icon icon="lucide:phone-call" width="14" height="14" aria-hidden="true"></iconify-icon>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13 19.79 19.79 0 0 1 1.61 4.4 2 2 0 0 1 3.6 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9a16 16 0 0 0 6 6l.92-.92a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/><path d="M14.05 2a9 9 0 0 1 8 7.94"/><path d="M14.05 6A5 5 0 0 1 18 10"/></svg>
         {{ ctaText }}
       </a>
     </div>
@@ -137,7 +137,12 @@
   <!-- HERO -->
   <section class="hero">
     <div class="hero-bg-container">
-      <img class="hero-bg" [src]="heroImg" [alt]="name + ' dining room'" fetchpriority="high">
+      <img class="hero-bg"
+        [src]="heroImg"
+        [srcset]="heroImgMobile + ' 800w, ' + heroImg + ' 1200w'"
+        sizes="100vw"
+        [alt]="name + ' dining room'"
+        fetchpriority="high">
 <div class="hero-overlay"></div>
     </div>
     <div class="wrap hero-body">
@@ -145,12 +150,12 @@
       <p class="lead">{{ description }}</p>
 
       <div class="hero-cta-row">
-        <button (click)="scrollTo('reservation')" class="btn btn-gold-glow">
-          <iconify-icon icon="lucide:calendar" width="17" height="17"></iconify-icon>
+        <button (click)="$event.preventDefault(); scrollTo('reservation')" class="btn btn-gold-glow">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>
           Reserve a Table
         </button>
-        <button (click)="scrollTo('menu')" class="btn ghost-white">
-          <iconify-icon icon="lucide:utensils" width="17" height="17"></iconify-icon>
+        <button (click)="$event.preventDefault(); scrollTo('menu')" class="btn ghost-white">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/><path d="M7 2v20"/><path d="M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3v7"/></svg>
           View Full Menu
         </button>
       </div>
@@ -158,7 +163,7 @@
     </div>
 
     <!-- Scroll Down Indicator -->
-    <a (click)="scrollTo('about')" class="hero-scroll-indicator" aria-label="Scroll to about section">
+    <a href="#about" (click)="$event.preventDefault(); scrollTo('about')" class="hero-scroll-indicator" aria-label="Explore about section">
       <span class="scroll-mouse">
         <span class="scroll-wheel"></span>
       </span>
@@ -192,7 +197,7 @@
 
         <div class="about-highlights">
           <div class="hl-item">
-            <span class="hl-icon"><iconify-icon icon="lucide:flame" width="20" height="20"></iconify-icon></span>
+            <span class="hl-icon"><app-icon name="flame" width="20" height="20"></app-icon></span>
             <div>
               <b>Wood-Fired &amp; Fresh</b>
               <small>Cooked over high heat with authentic crust</small>
@@ -225,7 +230,7 @@
           <div class="gallery-img-wrap">
             <img [src]="resolveImageUrl(img.image_url)" [alt]="img.caption || 'Restaurant image'" loading="lazy">
             <div class="gallery-overlay">
-              <span class="gallery-zoom-ic"><iconify-icon icon="lucide:maximize-2" width="22" height="22"></iconify-icon></span>
+              <span class="gallery-zoom-ic"><app-icon name="maximize-2" width="22" height="22"></app-icon></span>
               <p class="gallery-caption">{{ img.caption || 'The Fanus Experience' }}</p>
             </div>
           </div>
@@ -245,7 +250,7 @@
           (click)="scrollToCat(cat)"
           [attr.aria-pressed]="activeCatId === cat.id"
           [attr.data-count]="cat.items.length">
-          <span class="cat-btn-ic"><iconify-icon [attr.icon]="getCategoryIcon(cat.name)" width="18" height="18" aria-hidden="true"></iconify-icon></span>
+          <span class="cat-btn-ic"><app-icon [name]="getCategoryIcon(cat.name)" width="18" height="18" aria-hidden="true"></app-icon></span>
           <span class="cat-btn-name">{{ cat.name }}</span>
         </button>
       </div>
@@ -260,7 +265,7 @@
         </div>
         <div class="menu-header-meta">
           <span class="menu-count">
-            <iconify-icon icon="lucide:utensils" width="14" height="14"></iconify-icon>
+            <app-icon name="utensils" width="14" height="14"></app-icon>
             {{ menuItemCount }} Dishes Available
           </span>
         </div>
@@ -268,7 +273,7 @@
 
       <div *ngFor="let cat of filteredCategories" class="menu-block" [id]="'cat-' + cat.id">
         <div class="cat-heading">
-          <span class="cat-heading-icon" aria-hidden="true"><iconify-icon [attr.icon]="getCategoryIcon(cat.name)" width="24" height="24"></iconify-icon></span>
+          <span class="cat-heading-icon" aria-hidden="true"><app-icon [name]="getCategoryIcon(cat.name)" width="24" height="24"></app-icon></span>
           <h3>{{ cat.name }}</h3>
           <span class="cat-heading-count">{{ cat.items.length }}</span>
         </div>
@@ -286,7 +291,7 @@
           >
             <div class="card-img-wrap">
               <div *ngIf="!menuImageLoaded[item.id]" class="card-img-placeholder" aria-hidden="true">
-                <iconify-icon [attr.icon]="getCategoryIcon(cat.name)" width="44" height="44"></iconify-icon>
+                <app-icon [name]="getCategoryIcon(cat.name)" width="44" height="44"></app-icon>
               </div>
               <img
                 [src]="menuItemImage(item, cat.name)"
@@ -297,7 +302,7 @@
                 (error)="onMenuImageError(item.id)">
               <div class="card-img-overlay">
                 <span class="view-item-pill">
-                  <iconify-icon icon="lucide:eye" width="13" height="13"></iconify-icon>
+                  <app-icon name="eye" width="13" height="13"></app-icon>
                   Quick View
                 </span>
               </div>
@@ -307,7 +312,7 @@
               <!-- Item Tags (Dietary / Highlights) -->
               <div class="card-tags" *ngIf="getItemTags(item).length">
                 <span *ngFor="let tag of getItemTags(item)" class="item-tag" [class]="tag.cssClass">
-                  <iconify-icon [attr.icon]="tag.icon" width="12" height="12"></iconify-icon>
+                  <app-icon [name]="tag.icon" width="12" height="12"></app-icon>
                   {{ tag.label }}
                 </span>
               </div>
@@ -325,7 +330,7 @@
       </div>
 
       <div *ngIf="searchQuery && !filteredCategories.length" class="menu-empty">
-        <iconify-icon icon="lucide:search-x" width="48" height="48" style="opacity:.4;margin-bottom:1rem"></iconify-icon>
+        <app-icon name="search-x" width="48" height="48" style="opacity:.4;margin-bottom:1rem"></app-icon>
         <p>No dishes found matching "<b>{{ searchQuery }}</b>"</p>
         <button class="btn gold sm" (click)="clearSearch()" style="margin-top:1rem">Clear Search Filter</button>
       </div>
@@ -340,22 +345,22 @@
   <section class="feature-strip">
     <div class="wrap feature-cells">
       <div class="feature-cell reveal" style="transition-delay:.05s">
-        <span class="feature-ic" aria-hidden="true"><iconify-icon icon="lucide:flame" width="26" height="26"></iconify-icon></span>
+        <span class="feature-ic" aria-hidden="true"><app-icon name="flame" width="26" height="26"></app-icon></span>
         <b>Made to Order</b>
         <p>Every pasta, risotto and pizza is cooked fresh when you order — never pre-made or reheated.</p>
       </div>
       <div class="feature-cell reveal" style="transition-delay:.15s">
-        <span class="feature-ic" aria-hidden="true"><iconify-icon icon="lucide:users" width="26" height="26"></iconify-icon></span>
+        <span class="feature-ic" aria-hidden="true"><app-icon name="users" width="26" height="26"></app-icon></span>
         <b>Family Friendly</b>
         <p>High chairs available, delicious kids' menus, and large tables ready to host your celebrations.</p>
       </div>
       <div class="feature-cell reveal" style="transition-delay:.25s">
-        <span class="feature-ic" aria-hidden="true"><iconify-icon icon="lucide:wine" width="26" height="26"></iconify-icon></span>
+        <span class="feature-ic" aria-hidden="true"><app-icon name="wine" width="26" height="26"></app-icon></span>
         <b>Fully Licensed Bar</b>
         <p>Pair your dinner with curated Italian Chiantis, local Margaret River wines, and ice-cold Peroni.</p>
       </div>
       <div class="feature-cell reveal" style="transition-delay:.35s">
-        <span class="feature-ic" aria-hidden="true"><iconify-icon icon="lucide:shopping-bag" width="26" height="26"></iconify-icon></span>
+        <span class="feature-ic" aria-hidden="true"><app-icon name="shopping-bag" width="26" height="26"></app-icon></span>
         <b>Takeaway &amp; Pickup</b>
         <p>Order hot, fresh Italian dinners straight to your home across Gosnells and surrounding suburbs.</p>
       </div>
@@ -382,19 +387,19 @@
           </div>
 
           <div class="info-row">
-            <span class="info-ic"><iconify-icon icon="lucide:map-pin" width="20" height="20"></iconify-icon></span>
+            <span class="info-ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg></span>
             <span>
               <b>Address</b>
               <span>{{ address }}</span>
               <a [href]="directionsUrl" target="_blank" rel="noopener noreferrer" class="directions-link">
-                <iconify-icon icon="lucide:navigation" width="13" height="13"></iconify-icon>
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg>
                 Get Directions (Google Maps)
               </a>
             </span>
           </div>
 
           <div class="info-row">
-            <span class="info-ic"><iconify-icon icon="lucide:phone" width="20" height="20"></iconify-icon></span>
+            <span class="info-ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13 19.79 19.79 0 0 1 1.61 4.4 2 2 0 0 1 3.6 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9a16 16 0 0 0 6 6l.92-.92a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg></span>
             <span>
               <b>Direct Phone</b>
               <a [href]="'tel:' + phone" class="phone-link">{{ phone }}</a>
@@ -402,7 +407,7 @@
           </div>
 
           <div class="info-row" *ngIf="email">
-            <span class="info-ic"><iconify-icon icon="lucide:mail" width="20" height="20"></iconify-icon></span>
+            <span class="info-ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg></span>
             <span>
               <b>Email Bookings</b>
               <a [href]="'mailto:' + email">{{ email }}</a>
@@ -410,7 +415,7 @@
           </div>
 
           <div class="info-row" *ngIf="parkingInfo">
-            <span class="info-ic"><iconify-icon icon="lucide:parking-circle" width="20" height="20"></iconify-icon></span>
+            <span class="info-ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9 17V7h4a3 3 0 0 1 0 6H9"/></svg></span>
             <span>
               <b>Parking &amp; Access</b>
               <span>{{ parkingInfo }}</span>
@@ -443,13 +448,14 @@
           <iframe
             title="Map to {{ name }}"
             referrerpolicy="no-referrer-when-downgrade"
+            loading="lazy"
             [src]="mapEmbedUrl">
           </iframe>
           <div class="map-overlay-card">
             <b>{{ name }}</b>
             <p>{{ address }}</p>
             <a [href]="directionsUrl" target="_blank" rel="noopener noreferrer" class="btn gold sm">
-              <iconify-icon icon="lucide:map" width="14" height="14"></iconify-icon> Open Navigation
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21"/><line x1="9" x2="9" y1="3" y2="18"/><line x1="15" x2="15" y1="6" y2="21"/></svg> Open Navigation
             </a>
           </div>
         </div>
@@ -464,12 +470,12 @@
       <h2>Ready for an unforgettable dining experience?</h2>
       <p>Reserve your table online in seconds, or call our friendly team directly on {{ phone }}.</p>
       <div class="cta-actions">
-        <button class="btn gold" (click)="scrollTo('reservation')">
-          <iconify-icon icon="lucide:calendar-check" width="18" height="18"></iconify-icon>
+        <button class="btn gold" (click)="$event.preventDefault(); scrollTo('reservation')">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/><path d="m9 16 2 2 4-4"/></svg>
           Reserve Online
         </button>
         <a [href]="'tel:' + phone" class="btn ghost-white">
-          <iconify-icon icon="lucide:phone" width="18" height="18"></iconify-icon>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13 19.79 19.79 0 0 1 1.61 4.4 2 2 0 0 1 3.6 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9a16 16 0 0 0 6 6l.92-.92a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
           Call {{ phone }}
         </a>
       </div>
@@ -489,14 +495,14 @@
         <!-- Success State -->
         <div *ngIf="submitted" class="success-panel">
           <div class="success-icon">
-            <iconify-icon icon="lucide:check-circle-2" width="48" height="48"></iconify-icon>
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg>
           </div>
           <h3>Reservation Confirmed!</h3>
           <p class="ref-badge">Booking Ref: <b>{{ bookingReference }}</b></p>
           <p class="success-desc">Grazie! We have received your booking details and have prepared a table for you at {{ name }}. A confirmation notification has been sent.</p>
           <div class="success-actions">
             <button class="btn gold sm" (click)="submitted = false; form.reset({party_size: 2})">Make Another Booking</button>
-            <button class="btn ghost sm" (click)="scrollTo('menu')">Browse Menu</button>
+            <button class="btn ghost sm" (click)="$event.preventDefault(); scrollTo('menu')">Browse Menu</button>
           </div>
         </div>
 
@@ -513,8 +519,8 @@
                 [class.active]="form.get('party_size')?.value === s"
                 (click)="setPartySize(s)"
               >
-                <iconify-icon icon="lucide:user" width="14" height="14" *ngIf="s === 1"></iconify-icon>
-                <iconify-icon icon="lucide:users" width="14" height="14" *ngIf="s > 1"></iconify-icon>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" *ngIf="s === 1"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" *ngIf="s > 1"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
                 {{ s === 8 ? '8+ Guests' : s + (s === 1 ? ' Guest' : ' Guests') }}
               </button>
             </div>
@@ -525,8 +531,9 @@
             <label class="step-label">2. Date &amp; Preferred Time *</label>
             <div class="row2">
               <div class="field">
-                <label>Date *</label>
+                <label for="booking-date">Date *</label>
                 <input
+                  id="booking-date"
                   formControlName="date"
                   type="date"
                   [min]="minDate"
@@ -535,8 +542,9 @@
                 <span class="field-hint" *ngIf="form.get('date')!.invalid && form.get('date')!.touched">Booking date required</span>
               </div>
               <div class="field">
-                <label>Exact Time *</label>
+                <label for="booking-time">Exact Time *</label>
                 <input
+                  id="booking-time"
                   formControlName="time"
                   type="time"
                   [class.field-error]="form.get('time')!.invalid && form.get('time')!.touched"
@@ -567,8 +575,9 @@
             <label class="step-label">3. Contact Details *</label>
             <div class="row2">
               <div class="field">
-                <label>Full Name *</label>
+                <label for="booking-name">Full Name *</label>
                 <input
+                  id="booking-name"
                   formControlName="name"
                   type="text"
                   placeholder="e.g. Leonardo Rossi"
@@ -577,14 +586,15 @@
                 <span class="field-hint" *ngIf="form.get('name')!.invalid && form.get('name')!.touched">Please enter your name</span>
               </div>
               <div class="field">
-                <label>Phone Number</label>
-                <input formControlName="phone" type="tel" placeholder="+61 400 000 000">
+                <label for="booking-phone">Phone Number</label>
+                <input id="booking-phone" formControlName="phone" type="tel" placeholder="+61 400 000 000">
               </div>
             </div>
 
             <div class="field">
-              <label>Email Address *</label>
+              <label for="booking-email">Email Address *</label>
               <input
+                id="booking-email"
                 formControlName="email"
                 type="email"
                 placeholder="your.email@example.com"
@@ -594,8 +604,9 @@
             </div>
 
             <div class="field">
-              <label>Special Requests or Dietary Requirements</label>
+              <label for="booking-notes">Special Requests or Dietary Requirements</label>
               <textarea
+                id="booking-notes"
                 formControlName="notes"
                 placeholder="Birthdays, anniversaries, outdoor seating, gluten-free requests…"
                 maxlength="1000"
@@ -608,11 +619,10 @@
 
           <button
             type="submit"
-            class="btn btn-gold-glow"
-            style="width:100%;border-radius:12px;padding:1rem;font-size:1.02rem"
+            class="btn btn-gold-glow res-submit"
             [disabled]="submitting"
           >
-            <iconify-icon icon="lucide:check" width="18" height="18" *ngIf="!submitting"></iconify-icon>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" *ngIf="!submitting"><path d="M20 6 9 17l-5-5"/></svg>
             {{ submitting ? 'Confirming Table…' : 'Complete Table Reservation' }}
           </button>
         </form>
@@ -658,7 +668,7 @@
               <span *ngFor="let s of starsArray(5 - r.rating)" class="star">★</span>
             </div>
             <span class="verified-pill">
-              <iconify-icon icon="lucide:shield-check" width="13" height="13"></iconify-icon> Verified Diner
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg> Verified Diner
             </span>
           </div>
           <p class="review-comment" *ngIf="r.comment">"{{ r.comment }}"</p>
@@ -680,16 +690,16 @@
           <p>We value every feedback and strive to make every visit memorable.</p>
         </div>
 
-        <div *ngIf="reviewSubmitted" class="success-panel" style="padding:2rem">
-          <div class="success-icon" style="width:44px;height:44px">✓</div>
+        <div *ngIf="reviewSubmitted" class="success-panel">
+          <div class="success-icon">✓</div>
           <h4>Thank you for your review!</h4>
           <p>Your feedback helps our kitchen family grow.</p>
         </div>
 
         <form *ngIf="!reviewSubmitted" (ngSubmit)="submitReview()" class="review-form" [formGroup]="reviewForm">
           <div class="rating-picker-box">
-            <label class="rating-picker-lbl">Your Rating:</label>
-            <div class="review-stars-input">
+            <span class="rating-picker-lbl" id="rating-label">Your Rating:</span>
+            <div class="review-stars-input" role="group" aria-labelledby="rating-label">
               <button
                 type="button"
                 *ngFor="let n of [1,2,3,4,5]"
@@ -703,18 +713,18 @@
 
           <div class="row2">
             <div class="field">
-              <label>Your Name *</label>
-              <input type="text" formControlName="name" placeholder="e.g. Maria G." maxlength="100">
+              <label for="review-name">Your Name *</label>
+              <input id="review-name" type="text" formControlName="name" placeholder="e.g. Maria G." maxlength="100">
               <p *ngIf="reviewForm.get('name')?.invalid && reviewForm.get('name')?.touched" class="form-error">Name is required</p>
             </div>
             <div class="field">
-              <label>Experience Details</label>
-              <input formControlName="comment" placeholder="What dish did you love?" maxlength="1000">
+              <label for="review-comment">Experience Details</label>
+              <input id="review-comment" formControlName="comment" placeholder="What dish did you love?" maxlength="1000">
             </div>
           </div>
 
           <p *ngIf="reviewError" class="form-error">{{ reviewError }}</p>
-          <button type="submit" class="btn gold" style="border-radius:8px;padding:.85rem;align-self:flex-start" [disabled]="reviewSubmitting">
+          <button type="submit" class="btn gold review-submit" [disabled]="reviewSubmitting">
             {{ reviewSubmitting ? 'Posting…' : 'Submit Review' }}
           </button>
         </form>
@@ -745,7 +755,7 @@
     <div class="item-modal-body">
       <div class="card-tags" *ngIf="getItemTags(selectedMenuItem).length" style="margin-bottom:.6rem">
         <span *ngFor="let tag of getItemTags(selectedMenuItem)" class="item-tag" [class]="tag.cssClass">
-          <iconify-icon [attr.icon]="tag.icon" width="12" height="12"></iconify-icon>
+          <app-icon [name]="tag.icon" width="12" height="12"></app-icon>
           {{ tag.label }}
         </span>
       </div>
@@ -758,7 +768,7 @@
           <span class="item-modal-amount">A${{ selectedMenuItem.price.toFixed(2) }}</span>
         </div>
         <button class="btn gold sm" (click)="closeMenuItem(); scrollTo('reservation')">
-          <iconify-icon icon="lucide:calendar-plus" width="14" height="14"></iconify-icon>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/><line x1="12" x2="12" y1="14" y2="18"/><line x1="10" x2="14" y1="16" y2="16"/></svg>
           Reserve to Taste
         </button>
       </div>
@@ -795,7 +805,7 @@
   (click)="scrollToTop()"
   aria-label="Back to top of page"
 >
-  <iconify-icon icon="lucide:chevron-up" width="20" height="20"></iconify-icon>
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m18 15-6-6-6 6"/></svg>
 </button>
 
 <!-- FOOTER -->
@@ -809,13 +819,13 @@
       <p>Authentic Italian trattoria flavours cooked with passion and served generously in Gosnells, Western Australia.</p>
       <div class="social-links">
         <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-          <iconify-icon icon="lucide:instagram" width="18" height="18" style="color:#fff;display:flex"></iconify-icon>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
         </a>
         <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
-          <iconify-icon icon="lucide:facebook" width="18" height="18" style="color:#fff;display:flex"></iconify-icon>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
         </a>
         <a [href]="directionsUrl" target="_blank" rel="noopener noreferrer" aria-label="Google Maps Reviews">
-          <iconify-icon icon="lucide:map-pin" width="18" height="18" style="color:#fff;display:flex"></iconify-icon>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
         </a>
       </div>
     </div>
@@ -823,12 +833,12 @@
     <div class="foot-col">
       <h4>Navigation</h4>
       <ul>
-        <li><a (click)="scrollTo('about')" style="cursor:pointer">Our Story</a></li>
-        <li><a (click)="scrollTo('gallery')" style="cursor:pointer">Ambiance Gallery</a></li>
-        <li><a (click)="scrollTo('menu')" style="cursor:pointer">Kitchen Menu</a></li>
-        <li><a (click)="scrollTo('visit')" style="cursor:pointer">Visit &amp; Hours</a></li>
-        <li><a (click)="scrollTo('reviews')" style="cursor:pointer">Guest Reviews</a></li>
-        <li><a (click)="scrollTo('reservation')" style="cursor:pointer">Book a Table</a></li>
+        <li><a href="#about" (click)="$event.preventDefault(); scrollTo('about')" style="cursor:pointer">Our Story</a></li>
+        <li><a href="#gallery" (click)="$event.preventDefault(); scrollTo('gallery')" style="cursor:pointer">Ambiance Gallery</a></li>
+        <li><a href="#menu" (click)="$event.preventDefault(); scrollTo('menu')" style="cursor:pointer">Kitchen Menu</a></li>
+        <li><a href="#visit" (click)="$event.preventDefault(); scrollTo('visit')" style="cursor:pointer">Visit &amp; Hours</a></li>
+        <li><a href="#reviews" (click)="$event.preventDefault(); scrollTo('reviews')" style="cursor:pointer">Guest Reviews</a></li>
+        <li><a href="#reservation" (click)="$event.preventDefault(); scrollTo('reservation')" style="cursor:pointer">Book a Table</a></li>
       </ul>
     </div>
 
@@ -836,15 +846,15 @@
       <h4>Contact &amp; Hours</h4>
       <ul class="foot-contact-list">
         <li>
-          <iconify-icon icon="lucide:map-pin" width="15" height="15"></iconify-icon>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
           <span>{{ address }}</span>
         </li>
         <li>
-          <iconify-icon icon="lucide:phone" width="15" height="15"></iconify-icon>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13 19.79 19.79 0 0 1 1.61 4.4 2 2 0 0 1 3.6 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9a16 16 0 0 0 6 6l.92-.92a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
           <a [href]="'tel:' + phone">{{ phone }}</a>
         </li>
         <li *ngIf="email">
-          <iconify-icon icon="lucide:mail" width="15" height="15"></iconify-icon>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
           <a [href]="'mailto:' + email">{{ email }}</a>
         </li>
         <li class="foot-hours-pill">
@@ -867,22 +877,22 @@
 
 <!-- Mobile Bottom Navigation Bar -->
 <nav class="mobile-bottom-bar" aria-label="Mobile quick navigation">
-  <button class="mob-btn" (click)="scrollTo('top')" aria-label="Home">
-    <iconify-icon icon="lucide:home" width="22" height="22" aria-hidden="true"></iconify-icon>
+  <button class="mob-btn" (click)="$event.preventDefault(); scrollTo('top')" aria-label="Home">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
     <span>Home</span>
   </button>
-  <button class="mob-btn" (click)="scrollTo('menu')" aria-label="Menu">
-    <iconify-icon icon="lucide:utensils" width="22" height="22" aria-hidden="true"></iconify-icon>
+  <button class="mob-btn" (click)="$event.preventDefault(); scrollTo('menu')" aria-label="Menu">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/><path d="M7 2v20"/><path d="M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3v7"/></svg>
     <span>Menu</span>
   </button>
-  <button class="mob-btn mob-btn-book" (click)="scrollTo('reservation')" aria-label="Book a table">
+  <button class="mob-btn mob-btn-book" (click)="$event.preventDefault(); scrollTo('reservation')" aria-label="Book a table">
     <span class="mob-btn-ic">
-      <iconify-icon icon="lucide:calendar-check" width="20" height="20" aria-hidden="true"></iconify-icon>
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/><path d="m9 16 2 2 4-4"/></svg>
     </span>
     <span>Book</span>
   </button>
   <a [href]="'tel:' + phone" class="mob-btn" aria-label="Call us">
-    <iconify-icon icon="lucide:phone-call" width="22" height="22" aria-hidden="true"></iconify-icon>
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13 19.79 19.79 0 0 1 1.61 4.4 2 2 0 0 1 3.6 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9a16 16 0 0 0 6 6l.92-.92a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/><path d="M14.05 2a9 9 0 0 1 8 7.94"/><path d="M14.05 6A5 5 0 0 1 18 10"/></svg>
     <span>Call</span>
   </a>
 </nav>

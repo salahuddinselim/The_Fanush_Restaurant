@@ -5,13 +5,19 @@ from datetime import datetime, date as date_type
 
 
 class LoginRequest(BaseModel):
-    username: str = Field(max_length=150)
-    password: str = Field(max_length=200)
+    username: str = Field(min_length=1, max_length=150)
+    password: str = Field(min_length=12, max_length=72)
+
+    @field_validator("password")
+    @classmethod
+    def password_bytes_bounded(cls, value: str) -> str:
+        if len(value.encode("utf-8")) > 72:
+            raise ValueError("Password must not exceed 72 bytes")
+        return value
 
 
-class Token(BaseModel):
-    access_token: str
-    token_type: str = "bearer"
+class LoginResult(BaseModel):
+    detail: str = "Logged in"
 
 
 class ConfigItem(BaseModel):
@@ -24,7 +30,7 @@ class ConfigBulkUpdate(BaseModel):
 
 
 class BusinessHourBase(BaseModel):
-    day_of_week: int
+    day_of_week: int = Field(ge=0, le=6)
     open_time: Optional[str] = Field(None, pattern=r"^\d{2}:\d{2}$")
     close_time: Optional[str] = Field(None, pattern=r"^\d{2}:\d{2}$")
     is_closed: bool = False
@@ -42,23 +48,23 @@ class BusinessHourUpdate(BaseModel):
 
 
 class MenuCategoryCreate(BaseModel):
-    name: str
-    display_order: int = 0
+    name: str = Field(min_length=1, max_length=100)
+    display_order: int = Field(default=0, ge=0, le=10000)
     is_active: bool = True
 
 
 class MenuCategoryUpdate(BaseModel):
-    name: Optional[str] = None
-    display_order: Optional[int] = None
+    name: Optional[str] = Field(None, min_length=1, max_length=100)
+    display_order: Optional[int] = Field(None, ge=0, le=10000)
     is_active: Optional[bool] = None
 
 
 class MenuItemBase(BaseModel):
-    name: str
-    description: Optional[str] = None
-    price: float
+    name: str = Field(min_length=1, max_length=200)
+    description: Optional[str] = Field(None, max_length=2000)
+    price: float = Field(ge=0, le=100000, allow_inf_nan=False)
     is_available: bool = True
-    display_order: int = 0
+    display_order: int = Field(default=0, ge=0, le=10000)
 
 
 class MenuItemCreate(MenuItemBase):
@@ -66,12 +72,12 @@ class MenuItemCreate(MenuItemBase):
 
 
 class MenuItemUpdate(BaseModel):
-    name: Optional[str] = None
-    description: Optional[str] = None
-    price: Optional[float] = None
+    name: Optional[str] = Field(None, min_length=1, max_length=200)
+    description: Optional[str] = Field(None, max_length=2000)
+    price: Optional[float] = Field(None, ge=0, le=100000, allow_inf_nan=False)
     is_available: Optional[bool] = None
-    display_order: Optional[int] = None
-    category_id: Optional[int] = None
+    display_order: Optional[int] = Field(None, ge=0, le=10000)
+    category_id: Optional[int] = Field(None, ge=1)
 
 
 class MenuItemOut(MenuItemBase):
@@ -100,8 +106,8 @@ class GalleryImageOut(BaseModel):
 
 
 class GalleryImageUpdate(BaseModel):
-    caption: Optional[str] = None
-    display_order: Optional[int] = None
+    caption: Optional[str] = Field(None, max_length=300)
+    display_order: Optional[int] = Field(None, ge=0, le=10000)
     is_active: Optional[bool] = None
 
 

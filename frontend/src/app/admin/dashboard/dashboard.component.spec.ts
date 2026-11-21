@@ -76,7 +76,7 @@ describe('DashboardComponent', () => {
 
   it('should fetch all aggregations once on init', () => {
     fixture.detectChanges();
-    expect(apiSpy.getReservations).toHaveBeenCalledTimes(1);
+    expect(apiSpy.getReservations).toHaveBeenCalledTimes(2);
     expect(apiSpy.getAllCategories).toHaveBeenCalledTimes(1);
     expect(apiSpy.getAllGallery).toHaveBeenCalledTimes(1);
   });

@@ -1,4 +1,9 @@
+import logging
+import time
+from collections import defaultdict
+
 from fastapi import FastAPI, Request
+from fastapi.responses import JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.middleware.gzip import GZipMiddleware
 from fastapi.responses import Response
@@ -17,6 +22,12 @@ Base.metadata.create_all(bind=engine)
 _backend_dir = Path(__file__).resolve().parent.parent
 _static_dir = _backend_dir / "static"
 
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s %(levelname)s %(name)s %(message)s",
+)
+logger = logging.getLogger("restaurant")
+
 _debug = os.getenv("DEBUG", "").lower() in ("1", "true", "yes")
 app = FastAPI(
     title="Restaurant CMS API",
@@ -29,6 +40,7 @@ app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
 app.add_middleware(GZipMiddleware, minimum_size=500)
 
 
+_production = os.getenv("PRODUCTION", "").lower() in ("1", "true", "yes")
 _cors_env = os.getenv("CORS_ALLOW_ORIGINS")
 _cors_origins = (
     [o.strip() for o in _cors_env.split(",") if o.strip()]
@@ -37,37 +49,92 @@ _cors_origins = (
         "http://localhost:4200", "http://127.0.0.1:4200",
     ]
 )
+# Private-network origins are permitted only when explicitly opted into for
+# local development. Production uses the explicit CORS_ALLOW_ORIGINS allowlist.
+_dev_cors = os.getenv("ALLOW_PRIVATE_NETWORK_CORS", "").lower() in ("1", "true", "yes")
+_cors_regex = (
+    r"^https?://(localhost|127\.0\.0\.1|192\.168\.\d+\.\d+|"
+    r"10\.\d+\.\d+\.\d+|172\.(1[6-9]|2\d|3[01])\.\d+\.\d+|.*\.local)(:\d+)?$"
+    if _dev_cors else None
+)
+if _production and not _cors_env:
+    raise RuntimeError("CORS_ALLOW_ORIGINS must be set in production")
 
 app.add_middleware(
     CORSMiddleware,
     allow_origins=_cors_origins,
-    allow_origin_regex=r"^https?://(localhost|127\.0\.0\.1|192\.168\.\d+\.\d+|10\.\d+\.\d+\.\d+|172\.(1[6-9]|2\d|3[01])\.\d+\.\d+|.*\.local)(:\d+)?$",
+    allow_origin_regex=_cors_regex,
     allow_credentials=True,
     allow_methods=["GET", "POST", "PUT", "DELETE"],
     allow_headers=["Content-Type", "Authorization"],
 )
 
 
+# Coarse per-IP request cap in addition to per-endpoint slowapi limits.
+# Bounded and self-pruning so it cannot be used to exhaust memory.
+_request_counts: dict[tuple[str, str], tuple[float, int]] = defaultdict(lambda: (time.time(), 0))
+_RATE_WINDOW = 300
+_RATE_MAX_READ = 300
+_RATE_MAX_WRITE = 60
+_MAX_TRACKED_IPS = 10_000
+
+
+@app.middleware("http")
+async def global_rate_limit(request: Request, call_next):
+    ip = request.client.host if request.client else "unknown"
+    kind = "write" if request.method in {"POST", "PUT", "PATCH", "DELETE"} else "read"
+    key = (ip, kind)
+    now = time.time()
+    window_start, count = _request_counts[key]
+    if now - window_start > _RATE_WINDOW:
+        window_start, count = now, 0
+    count += 1
+    _request_counts[key] = (window_start, count)
+    if len(_request_counts) > _MAX_TRACKED_IPS:
+        for tracked in list(_request_counts)[: len(_request_counts) - _MAX_TRACKED_IPS]:
+            _request_counts.pop(tracked, None)
+    limit = _RATE_MAX_WRITE if kind == "write" else _RATE_MAX_READ
+    if count > limit:
+        logger.warning("Rate limit exceeded ip=%s kind=%s", ip, kind)
+        return JSONResponse(status_code=429, content={"detail": "Too many requests"})
+    return await call_next(request)
+
+
+@app.exception_handler(Exception)
+async def unhandled_exception(request: Request, exc: Exception) -> JSONResponse:
+    logger.exception("Unhandled error on %s %s", request.method, request.url.path, exc_info=exc)
+    return JSONResponse(status_code=500, content={"detail": "An internal error occurred"})
+
+
 @app.middleware("http")
 async def add_security_headers(request: Request, call_next) -> Response:
     response: Response = await call_next(request)
-    response.headers["X-Frame-Options"] = "SAMEORIGIN"
+    response.headers["X-Frame-Options"] = "DENY"
     response.headers["X-Content-Type-Options"] = "nosniff"
     response.headers["Referrer-Policy"] = "strict-origin-when-cross-origin"
     response.headers["Permissions-Policy"] = "camera=(), microphone=(), geolocation=()"
     response.headers["Strict-Transport-Security"] = "max-age=31536000; includeSubDomains"
     response.headers["Content-Security-Policy"] = (
         "default-src 'self'; "
-        "img-src 'self' https://images.unsplash.com https://api.iconify.design data: blob:; "
+        "img-src 'self' https://images.unsplash.com data: blob:; "
         "script-src 'self'; "
-        "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; "
-        "font-src 'self' https://fonts.gstatic.com; "
-        "connect-src 'self' https://api.iconify.design; "
-        "frame-src https://www.openstreetmap.org;"
+        "style-src 'self' 'unsafe-inline'; "
+        "font-src 'self'; "
+        "connect-src 'self'; "
+        "frame-src https://www.openstreetmap.org; "
+        "object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'"
     )
-    # cache public GET responses for 30 seconds
+    # Only anonymous public content is cacheable. Auth and admin data must never be
+    # stored by shared caches.
     if request.method == "GET" and response.status_code == 200:
-        response.headers.setdefault("Cache-Control", "public, max-age=30, stale-while-revalidate=60")
+        public_paths = {
+            "/config", "/hours", "/gallery", "/reviews",
+            "/page/home", "/health", "/menu/categories", "/menu/items",
+        }
+        if request.url.path in public_paths:
+            response.headers.setdefault("Cache-Control", "public, max-age=30, stale-while-revalidate=60")
+        else:
+            response.headers["Cache-Control"] = "private, no-store"
     return response
 
 _static_dir.joinpath("uploads").mkdir(parents=True, exist_ok=True)

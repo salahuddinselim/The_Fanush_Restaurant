@@ -25,20 +25,10 @@ describe('authInterceptor', () => {
 
   afterEach(() => httpMock.verify());
 
-  it('should add a Bearer Authorization header when a token exists', () => {
-    authSpy.getToken.and.returnValue('token-abc');
-
+  it('should send cookies and never expose the httpOnly token in a header', () => {
     http.get('/api/data').subscribe();
     const req = httpMock.expectOne('/api/data');
-    expect(req.request.headers.get('Authorization')).toBe('Bearer token-abc');
-    req.flush({});
-  });
-
-  it('should leave the Authorization header absent when no token exists', () => {
-    authSpy.getToken.and.returnValue(null);
-
-    http.get('/api/data').subscribe();
-    const req = httpMock.expectOne('/api/data');
+    expect(req.request.withCredentials).toBeTrue();
     expect(req.request.headers.has('Authorization')).toBeFalse();
     req.flush({});
   });

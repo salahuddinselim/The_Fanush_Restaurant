@@ -1,4 +1,5 @@
-import { Component, OnInit, AfterViewInit, OnDestroy, inject, HostListener, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { IconComponent } from '@app/shared/icon.component';
+import { Component, OnInit, AfterViewInit, OnDestroy, inject, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { RouterLink } from '@angular/router';
@@ -13,8 +14,7 @@ const DAYS = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, RouterLink],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  imports: [IconComponent, CommonModule, ReactiveFormsModule, RouterLink],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
 })
@@ -159,7 +159,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
           this.observer?.unobserve(e.target);
         }
       }),
-      { threshold: 0.12 }
+      { threshold: 0.05 }
     );
     document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale')
       .forEach(el => this.observer!.observe(el));
@@ -250,7 +250,14 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   get email() { return this.config['email'] || ''; }
   get heroImg() {
     const url = this.config['hero_image_url'];
-    return url ? this.resolveImageUrl(url) : this.HERO_FALLBACK;
+    const resolved = url ? this.resolveImageUrl(url) : this.HERO_FALLBACK;
+    return this.optimizeUnsplashUrl(resolved, 1200, 85);
+  }
+
+  get heroImgMobile() {
+    const url = this.config['hero_image_url'];
+    const resolved = url ? this.resolveImageUrl(url) : this.HERO_FALLBACK;
+    return this.optimizeUnsplashUrl(resolved, 800, 80);
   }
   get locationLabel() { return this.config['location_label'] || 'Gosnells · Western Australia'; }
   get ctaText() { return this.config['cta_text'] || 'Call to Order'; }
@@ -388,8 +395,13 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
     return this.categories.reduce((total, cat) => total + cat.items.length, 0);
   }
 
+  private optimizeUnsplashUrl(url: string, w = 400, q = 65): string {
+    if (!url.includes('images.unsplash.com')) return url;
+    return url.split('?')[0] + `?auto=format&fit=crop&w=${w}&q=${q}`;
+  }
+
   menuItemImage(item: MenuItem, categoryName = ''): string {
-    if (item.image_url) return this.resolveImageUrl(item.image_url);
+    if (item.image_url) return this.optimizeUnsplashUrl(this.resolveImageUrl(item.image_url));
 
     const name = item.name.toLowerCase();
     const category = categoryName.toLowerCase();

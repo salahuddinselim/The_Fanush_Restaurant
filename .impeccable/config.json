@@ -1,0 +1,16 @@
+{
+  "detector": {
+    "ignoreRules": [
+      "bounce-easing"
+    ],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "overused-font",
+        "value": "inter",
+        "createdAt": "2026-11-21T11:18:23.251Z",
+        "reason": "Intentional font choice: Inter + Playfair Display pairing is the established design system for this restaurant site"
+      }
+    ]
+  }
+}

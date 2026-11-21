@@ -1,14 +1,12 @@
-import { Component, OnInit, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'; // reviews
+import { AdminShellComponent } from '@app/shared/admin-shell.component';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterLink, RouterLinkActive } from '@angular/router';
 import { ApiService, Review } from '../../core/services/api.service';
-import { AuthService } from '../../core/services/auth.service';
 
 @Component({
   selector: 'app-reviews',
   standalone: true,
-  imports: [CommonModule, RouterLink, RouterLinkActive],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  imports: [AdminShellComponent, CommonModule],
   templateUrl: './reviews.component.html',
   styleUrl: './reviews.component.scss',
 })
@@ -17,7 +15,7 @@ export class ReviewsComponent implements OnInit {
   loading = true;
   error = '';
 
-  constructor(public auth: AuthService, private api: ApiService) {}
+  constructor(private api: ApiService) {}
 
   ngOnInit() {
     this.api.getReviews().subscribe({

@@ -1,27 +1,4 @@
-<div class="admin-layout">
-  <aside class="admin-sidebar">
-    <div class="sidebar-brand">
-      <div class="brand-mark">F</div>
-      <div class="brand-text"><b>Fanus CMS</b><small>Admin Panel</small></div>
-    </div>
-    <span class="sidebar-section">Main</span>
-    <a routerLink="/admin/dashboard" routerLinkActive="active"><span class="nav-ic"><iconify-icon icon="lucide:layout-dashboard" width="16" height="16"></iconify-icon></span> Dashboard</a>
-    <a routerLink="/admin/config" routerLinkActive="active"><span class="nav-ic"><iconify-icon icon="lucide:settings" width="16" height="16"></iconify-icon></span> Site Settings</a>
-    <hr class="sidebar-divider">
-    <span class="sidebar-section">Content</span>
-    <a routerLink="/admin/menu" routerLinkActive="active"><span class="nav-ic"><iconify-icon icon="lucide:utensils" width="16" height="16"></iconify-icon></span> Menu</a>
-    <a routerLink="/admin/gallery" routerLinkActive="active"><span class="nav-ic"><iconify-icon icon="lucide:images" width="16" height="16"></iconify-icon></span> Gallery</a>
-    <a routerLink="/admin/hours" routerLinkActive="active"><span class="nav-ic"><iconify-icon icon="lucide:clock" width="16" height="16"></iconify-icon></span> Opening Hours</a>
-    <hr class="sidebar-divider">
-    <span class="sidebar-section">Engagement</span>
-    <a routerLink="/admin/reservations" routerLinkActive="active"><span class="nav-ic"><iconify-icon icon="lucide:calendar-check" width="16" height="16"></iconify-icon></span> Reservations</a>
-    <a routerLink="/admin/reviews" routerLinkActive="active"><span class="nav-ic"><iconify-icon icon="lucide:star" width="16" height="16"></iconify-icon></span> Reviews</a>
-    <div class="sidebar-footer">
-      <a routerLink="/" style="cursor:pointer"><span class="nav-ic"><iconify-icon icon="lucide:arrow-up-right" width="16" height="16"></iconify-icon></span> View Site</a>
-      <a (click)="auth.logout()" style="cursor:pointer;color:rgba(255,80,80,.7)"><span class="nav-ic"><iconify-icon icon="lucide:log-out" width="16" height="16"></iconify-icon></span> Sign Out</a>
-    </div>
-  </aside>
-  <main class="admin-main">
+<app-admin-shell>
     <div class="admin-topbar">
       <h1 class="admin-page-title">Reservations <span>{{ reservations.length }} total bookings</span></h1>
       <div class="res-filter-pills">
@@ -66,5 +43,4 @@
         </tbody>
       </table>
     </div>
-  </main>
-</div>
+</app-admin-shell>

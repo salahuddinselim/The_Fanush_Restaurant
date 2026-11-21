@@ -6,7 +6,7 @@ from pathlib import Path
 from ..database import get_db
 from .. import models, schemas
 from ..auth import get_current_user
-from ..utils.upload import save_upload
+from ..utils.upload import save_upload, safe_upload_path
 
 router = APIRouter(prefix="/gallery", tags=["gallery"])
 
@@ -31,8 +31,8 @@ def get_gallery_admin(db: Session = Depends(get_db), _: models.User = Depends(ge
 
 @router.post("", response_model=schemas.GalleryImageOut)
 async def upload_image(
-    caption: str = Form(""),
-    display_order: int = Form(0),
+    caption: str = Form("", max_length=300),
+    display_order: int = Form(0, ge=0, le=10000),
     file: UploadFile = File(...),
     db: Session = Depends(get_db),
     _: models.User = Depends(get_current_user),
@@ -67,8 +67,11 @@ def delete_image(image_id: int, db: Session = Depends(get_db), _: models.User = 
     if not img:
         raise HTTPException(status_code=404, detail="Image not found")
     local_path = img.image_url.lstrip("/")
-    if os.path.exists(local_path):
-        os.remove(local_path)
+    if local_path.startswith("static/uploads/gallery/"):
+        filename = local_path.rsplit("/", 1)[-1]
+        resolved = safe_upload_path(str(UPLOAD_DIR), filename)
+        if os.path.isfile(resolved):
+            os.remove(resolved)
     db.delete(img)
     db.commit()
     return {"detail": "Deleted"}

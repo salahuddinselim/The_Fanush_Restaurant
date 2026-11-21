@@ -257,7 +257,7 @@ describe('HomeComponent', () => {
     const mapFrame = visitGrid.querySelector('.map-frame') as HTMLElement;
 
     expect(visitGrid.children.length).toBe(3);
-    expect(detailsCard.textContent).toContain('Restaurant Details');
+    expect(detailsCard.textContent).toContain('Contact & Location');
     expect(detailsCard.textContent).not.toContain('Opening Hours');
     expect(hoursCard.textContent).toContain('Opening Hours');
     expect(hoursCard.querySelector('.hours-list')).not.toBeNull();
@@ -295,11 +295,34 @@ describe('HomeComponent', () => {
     expect(component.heroImg).toBe('http://localhost:8000/static/uploads/hero.jpg');
   });
 
-  it('heroImg should keep the fallback when no image is configured', () => {
-    expect(component.heroImg).toBe(component.HERO_FALLBACK);
+  it('heroImg should use an optimized fallback when no image is configured', () => {
+    expect(component.heroImg).toBe(
+      component.HERO_FALLBACK.split('?')[0] + '?auto=format&fit=crop&w=1200&q=85'
+    );
   });
 
   it('should have correct current year', () => {
     expect(component.year).toBe(new Date().getFullYear());
+  });
+
+  it('should keep category icons from collapsing into their labels', () => {
+    const button = fixture.nativeElement.querySelector('.cat-scroll-track button') as HTMLElement;
+    const iconWrap = button.querySelector('.cat-btn-ic') as HTMLElement;
+    expect(getComputedStyle(iconWrap).flexShrink).toBe('0');
+    expect(getComputedStyle(button).flexShrink).toBe('0');
+  });
+
+  it('should associate every booking field with a label', () => {
+    const form = fixture.nativeElement.querySelector('.res-form') as HTMLElement;
+    const controls = form.querySelectorAll('input, select, textarea') as NodeListOf<HTMLInputElement>;
+    controls.forEach(control => {
+      expect(control.id).toBeTruthy();
+      expect(form.querySelector(`label[for="${control.id}"]`)).not.toBeNull();
+    });
+  });
+
+  it('should provide crawlable hrefs for all in-page navigation links', () => {
+    const anchors = fixture.nativeElement.querySelectorAll('a') as NodeListOf<HTMLAnchorElement>;
+    anchors.forEach(anchor => expect(anchor.getAttribute('href')).toBeTruthy());
   });
 });

@@ -1,0 +1,40 @@
+<div class="admin-layout">
+  <aside class="admin-sidebar">
+    <div class="sidebar-brand">
+      <div class="brand-mark">F</div>
+      <div class="brand-text"><b>Fanus CMS</b><small>Admin Panel</small></div>
+    </div>
+    <span class="sidebar-section">Main</span>
+    <a routerLink="/admin/dashboard" routerLinkActive="active"><span class="nav-ic"><app-icon name="layout-dashboard" width="16" height="16"></app-icon></span> Dashboard</a>
+    <a routerLink="/admin/config" routerLinkActive="active"><span class="nav-ic"><app-icon name="settings" width="16" height="16"></app-icon></span> Site Settings</a>
+    <hr class="sidebar-divider">
+    <span class="sidebar-section">Content</span>
+    <a routerLink="/admin/menu" routerLinkActive="active"><span class="nav-ic"><app-icon name="utensils" width="16" height="16"></app-icon></span> Menu</a>
+    <a routerLink="/admin/gallery" routerLinkActive="active"><span class="nav-ic"><app-icon name="images" width="16" height="16"></app-icon></span> Gallery</a>
+    <a routerLink="/admin/hours" routerLinkActive="active"><span class="nav-ic"><app-icon name="clock" width="16" height="16"></app-icon></span> Opening Hours</a>
+    <hr class="sidebar-divider">
+    <span class="sidebar-section">Engagement</span>
+    <a routerLink="/admin/reservations" routerLinkActive="active">
+      <span class="nav-ic"><app-icon name="calendar-check" width="16" height="16"></app-icon></span> Reservations
+      <span class="badge-count" *ngIf="pending > 0">{{ pending }}</span>
+    </a>
+    <a routerLink="/admin/reviews" routerLinkActive="active"><span class="nav-ic"><app-icon name="star" width="16" height="16"></app-icon></span> Reviews</a>
+    <div class="sidebar-footer">
+      <a routerLink="/"><span class="nav-ic"><app-icon name="arrow-up-right" width="16" height="16"></app-icon></span> View Site</a>
+      <a (click)="auth.logout()" style="cursor:pointer;color:rgba(255,80,80,.7)"><span class="nav-ic"><app-icon name="log-out" width="16" height="16"></app-icon></span> Sign Out</a>
+    </div>
+  </aside>
+
+  <main class="admin-main">
+    <div class="admin-notice" *ngIf="pending > 0 && !dismissed" role="status" aria-live="polite">
+      <span class="notice-ic"><app-icon name="calendar-check" width="18" height="18"></app-icon></span>
+      <span class="notice-text">
+        <strong>{{ pending }} pending reservation{{ pending === 1 ? '' : 's' }}</strong>
+        <span>Waiting for your confirmation.</span>
+      </span>
+      <a routerLink="/admin/reservations" class="btn sm">Review bookings</a>
+      <button type="button" class="notice-close" (click)="dismiss()" aria-label="Dismiss reservation notification">&times;</button>
+    </div>
+    <ng-content></ng-content>
+  </main>
+</div>

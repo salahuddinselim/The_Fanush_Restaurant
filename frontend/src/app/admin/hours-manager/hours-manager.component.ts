@@ -1,17 +1,15 @@
-import { Component, OnInit, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { AdminShellComponent } from '@app/shared/admin-shell.component';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { RouterLink, RouterLinkActive } from '@angular/router';
 import { ApiService, BusinessHour } from '../../core/services/api.service';
-import { AuthService } from '../../core/services/auth.service';
 
 const DAYS = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
 @Component({
   selector: 'app-hours-manager',
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterLink, RouterLinkActive],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  imports: [AdminShellComponent, CommonModule, FormsModule],
   templateUrl: './hours-manager.component.html',
   styleUrl: './hours-manager.component.scss',
 })
@@ -20,7 +18,7 @@ export class HoursManagerComponent implements OnInit {
   days = DAYS;
   saving = -1;
 
-  constructor(private api: ApiService, public auth: AuthService) {}
+  constructor(private api: ApiService) {}
 
   ngOnInit() { this.api.getHours().subscribe(h => this.hours = h); }
 

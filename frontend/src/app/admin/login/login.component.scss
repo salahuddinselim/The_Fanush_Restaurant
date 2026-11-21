@@ -1,9 +1,11 @@
 .login-wrap {
-  min-height: 100vh; display: flex; align-items: center; justify-content: center;
+  min-height: 100svh; display: flex; align-items: center; justify-content: center;
   background: var(--cream-2);
+  padding: clamp(1rem, 5vw, 2rem);
 }
 .login-card {
-  width: 380px; background: var(--white); padding: 44px;
+  width: 100%; max-width: 380px; background: var(--white);
+  padding: clamp(1.5rem, 6vw, 2.75rem);
   border: 1px solid var(--line); border-radius: 16px;
   box-shadow: var(--shadow);
   animation: fadeUp .6s cubic-bezier(.22,.61,.36,1) both;
@@ -19,3 +21,4 @@
 .login-title { font-family: 'Playfair Display', serif; font-size: 1.5rem; display: block; color: var(--ink); }
 .login-sub { font-size: 12px; letter-spacing: .15em; text-transform: uppercase; color: var(--ink-soft); display: block; margin-top: 4px; }
 .login-error { color: #991b1b; font-size: 13px; margin-bottom: 10px; background: #fee2e2; padding: 8px 12px; border-radius: 6px; }
+.login-submit { display: block; width: 100%; min-height: 48px; margin-top: 8px; border-radius: 8px; padding: 0.85rem; }

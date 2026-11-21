@@ -8,9 +8,9 @@ import { LoginComponent } from './login.component';
 import { AuthService } from '../../core/services/auth.service';
 import { API_URL } from '../../core/services/api.service';
 
-const TOKEN_RESPONSE = { access_token: 'test-token', token_type: 'Bearer' };
+const TOKEN_RESPONSE = { detail: 'Logged in' };
 
-type TokenResponse = { access_token: string; token_type: string };
+type TokenResponse = { detail: string };
 
 function buildAuthSpy(): jasmine.SpyObj<AuthService> {
   const spy = jasmine.createSpyObj<AuthService>('AuthService', ['login']);
@@ -125,7 +125,8 @@ describe('LoginComponent with real AuthService', () => {
   let navigateSpy: jasmine.Spy;
 
   beforeEach(async () => {
-    localStorage.removeItem('restaurant_token');
+    localStorage.removeItem('restaurant_session');
+    localStorage.removeItem('restaurant_session_exp');
     await TestBed.configureTestingModule({
       imports: [LoginComponent, ReactiveFormsModule, RouterTestingModule, HttpClientTestingModule],
     }).compileComponents();
@@ -139,17 +140,19 @@ describe('LoginComponent with real AuthService', () => {
 
   afterEach(() => {
     httpMock.verify();
-    localStorage.removeItem('restaurant_token');
+    localStorage.removeItem('restaurant_session');
+    localStorage.removeItem('restaurant_session_exp');
   });
 
-  it('should post credentials, store the access token, and navigate on success', () => {
+  it('should post credentials, start the session and navigate on success', () => {
     component.form.setValue({ username: 'admin', password: 'secret' });
     component.submit();
     const req = httpMock.expectOne(`${API_URL}/auth/login`);
     expect(req.request.method).toBe('POST');
+    expect(req.request.withCredentials).toBeTrue();
     expect(req.request.body).toEqual({ username: 'admin', password: 'secret' });
     req.flush(TOKEN_RESPONSE);
-    expect(localStorage.getItem('restaurant_token')).toBe('test-token');
+    expect(localStorage.getItem('restaurant_session')).toBe('1');
     expect(navigateSpy).toHaveBeenCalledOnceWith(['/admin/dashboard']);
   });
 
@@ -158,7 +161,7 @@ describe('LoginComponent with real AuthService', () => {
     component.submit();
     const req = httpMock.expectOne(`${API_URL}/auth/login`);
     req.flush({ detail: 'invalid credentials' }, { status: 401, statusText: 'Unauthorized' });
-    expect(localStorage.getItem('restaurant_token')).toBeNull();
+    expect(localStorage.getItem('restaurant_session')).toBeNull();
     expect(component.error).toBe('Invalid username or password');
     expect(component.loading).toBeFalse();
     expect(navigateSpy).not.toHaveBeenCalled();

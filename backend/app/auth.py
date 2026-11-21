@@ -1,6 +1,5 @@
 import os
 import uuid
-import secrets
 from pathlib import Path
 import bcrypt as _bcrypt
 import jwt as _jwt
@@ -11,49 +10,61 @@ from sqlalchemy.orm import Session
 from .database import get_db
 from . import models
 
-SECRET_KEY = os.environ.get("JWT_SECRET_KEY")
-if not SECRET_KEY:
-    _secret_file = Path(__file__).resolve().parent.parent / ".jwt-secret"
-    try:
-        if _secret_file.exists():
-            SECRET_KEY = _secret_file.read_text(encoding="utf-8").strip()
-        if not SECRET_KEY:
-            SECRET_KEY = secrets.token_hex(32)
-            _secret_file.write_text(SECRET_KEY, encoding="utf-8")
-    except OSError:
-        SECRET_KEY = secrets.token_hex(32)
+def _load_secret() -> str:
+    """Fail closed: never generate an ephemeral signing key at runtime."""
+    value = os.environ.get("JWT_SECRET_KEY")
+    if not value:
+        secret_file = Path(__file__).resolve().parent.parent / ".jwt-secret"
+        try:
+            if secret_file.exists():
+                value = secret_file.read_text(encoding="utf-8").strip()
+        except OSError:
+            value = None
+    if not value or len(value) < 32:
+        raise RuntimeError(
+            "A JWT signing secret of at least 32 characters is required. "
+            "Set JWT_SECRET_KEY or provide the .jwt-secret file."
+        )
+    return value
 
+
+SECRET_KEY = _load_secret()
 ALGORITHM = "HS256"
 ACCESS_TOKEN_EXPIRE_MINUTES = 30
 COOKIE_NAME = "session_token"
 
 
+BCRYPT_MAX_BYTES = 72
+
+
+def _password_bytes(password: str) -> bytes:
+    raw = password.encode("utf-8")
+    if len(raw) > BCRYPT_MAX_BYTES:
+        raise ValueError("Password must not exceed 72 bytes")
+    return raw
+
+
 def verify_password(plain: str, hashed: str) -> bool:
-    return _bcrypt.checkpw(plain.encode(), hashed.encode())
+    try:
+        return _bcrypt.checkpw(_password_bytes(plain), hashed.encode())
+    except (ValueError, TypeError):
+        return False
 
 
 def hash_password(password: str) -> str:
-    return _bcrypt.hashpw(password.encode(), _bcrypt.gensalt()).decode()
-
-
-def _require_secret() -> str:
-    if not SECRET_KEY:
-        raise RuntimeError("JWT_SECRET_KEY environment variable is not set")
-    return SECRET_KEY
+    return _bcrypt.hashpw(_password_bytes(password), _bcrypt.gensalt()).decode()
 
 
 def create_access_token(data: dict, expires_delta: Optional[timedelta] = None) -> str:
-    secret = _require_secret()
     to_encode = data.copy()
     expire = datetime.now(timezone.utc) + (expires_delta or timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES))
     to_encode.update({"exp": expire, "jti": str(uuid.uuid4())})
-    return _jwt.encode(to_encode, secret, algorithm=ALGORITHM)
+    return _jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
 
 
 def decode_token(token: str) -> dict:
-    secret = _require_secret()
     try:
-        return _jwt.decode(token, secret, algorithms=[ALGORITHM])
+        return _jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
     except _jwt.exceptions.InvalidTokenError as exc:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,

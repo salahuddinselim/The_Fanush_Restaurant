@@ -6,7 +6,7 @@ from pathlib import Path
 from ..database import get_db
 from .. import models, schemas
 from ..auth import get_current_user
-from ..utils.upload import save_upload
+from ..utils.upload import save_upload, safe_upload_path
 
 router = APIRouter(prefix="/menu", tags=["menu"])
 
@@ -62,7 +62,12 @@ def delete_category(cat_id: int, db: Session = Depends(get_db), _: models.User =
 
 @router.get("/items", response_model=List[schemas.MenuItemOut])
 def get_items(db: Session = Depends(get_db)):
-    return db.query(models.MenuItem).order_by(models.MenuItem.display_order).all()
+    return (
+        db.query(models.MenuItem)
+        .filter(models.MenuItem.is_available == True)
+        .order_by(models.MenuItem.display_order)
+        .all()
+    )
 
 
 @router.post("/items", response_model=schemas.MenuItemOut)
@@ -114,8 +119,11 @@ def remove_item_image(item_id: int, db: Session = Depends(get_db), _: models.Use
         raise HTTPException(status_code=404, detail="Item not found")
     if item.image_url:
         local_path = item.image_url.lstrip("/")
-        if os.path.exists(local_path):
-            os.remove(local_path)
+        if local_path.startswith("static/uploads/menu/"):
+            filename = local_path.rsplit("/", 1)[-1]
+            resolved = safe_upload_path(str(UPLOAD_DIR), filename)
+            if os.path.isfile(resolved):
+                os.remove(resolved)
         item.image_url = None
         db.commit()
     return {"detail": "Image removed"}

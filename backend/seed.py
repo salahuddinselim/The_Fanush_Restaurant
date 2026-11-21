@@ -13,6 +13,9 @@ init_password = os.environ.get("ADMIN_INIT_PASSWORD")
 if not init_password:
     print("ERROR: Set ADMIN_INIT_PASSWORD environment variable before seeding.", file=sys.stderr)
     sys.exit(1)
+if len(init_password) < 12 or len(init_password.encode("utf-8")) > 72:
+    print("ERROR: ADMIN_INIT_PASSWORD must be 12-72 bytes.", file=sys.stderr)
+    sys.exit(1)
 
 admin_user = db.query(models.User).filter(models.User.username == "admin").first()
 if not admin_user:

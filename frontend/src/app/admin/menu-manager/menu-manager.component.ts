@@ -1,15 +1,13 @@
-import { Component, OnInit, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { AdminShellComponent } from '@app/shared/admin-shell.component';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { RouterLink, RouterLinkActive } from '@angular/router';
 import { ApiService, MenuCategory, MenuItem } from '../../core/services/api.service';
-import { AuthService } from '../../core/services/auth.service';
 
 @Component({
   selector: 'app-menu-manager',
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterLink, RouterLinkActive],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  imports: [AdminShellComponent, CommonModule, FormsModule],
   templateUrl: './menu-manager.component.html',
   styleUrl: './menu-manager.component.scss',
 })
@@ -20,7 +18,7 @@ export class MenuManagerComponent implements OnInit {
   editingItem: MenuItem | null = null;
   apiBase = 'http://localhost:8000';
 
-  constructor(private api: ApiService, public auth: AuthService) {}
+  constructor(private api: ApiService) {}
 
   ngOnInit() { this.load(); }
 

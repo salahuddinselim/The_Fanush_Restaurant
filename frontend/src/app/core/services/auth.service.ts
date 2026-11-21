@@ -15,7 +15,7 @@ export class AuthService {
   constructor(private http: HttpClient, private router: Router) {}
 
   login(username: string, password: string) {
-    return this.http.post<{ access_token: string; token_type: string }>(
+    return this.http.post<{ detail: string }>(
       `${API_URL}/auth/login`, { username, password }, { withCredentials: true }
     ).pipe(
       tap(() => {
@@ -33,9 +33,10 @@ export class AuthService {
       localStorage.removeItem(this.SESSION_EXPIRY);
     } catch {}
     this.http.post(`${API_URL}/auth/logout`, {}, { withCredentials: true }).subscribe({
-      complete: () => this.router.navigate(['/admin/login']),
-      error: () => this.router.navigate(['/admin/login']),
+      error: () => undefined,
     });
+    // Redirect immediately: the cookie is cleared locally and the server call is best-effort.
+    this.router.navigate(['/admin/login']);
   }
 
   verify(): Observable<boolean> {

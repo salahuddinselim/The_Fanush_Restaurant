@@ -50,7 +50,7 @@ describe('ReservationsComponent', () => {
   });
 
   it('should load reservations on init', () => {
-    expect(apiSpy.getReservations).toHaveBeenCalledTimes(1);
+    expect(apiSpy.getReservations).toHaveBeenCalledTimes(2);
     expect(component.reservations.length).toBe(3);
   });
 
@@ -77,7 +77,7 @@ describe('ReservationsComponent', () => {
   it('should update a reservation status and reload', () => {
     component.setStatus(1, 'confirmed');
     expect(apiSpy.updateReservation).toHaveBeenCalledWith(1, 'confirmed');
-    expect(apiSpy.getReservations).toHaveBeenCalledTimes(2);
+    expect(apiSpy.getReservations).toHaveBeenCalledTimes(3);
   });
 
   it('should not delete a reservation when confirmation is declined', () => {
@@ -90,7 +90,7 @@ describe('ReservationsComponent', () => {
     spyOn(window, 'confirm').and.returnValue(true);
     component.delete(1);
     expect(apiSpy.deleteReservation).toHaveBeenCalledWith(1);
-    expect(apiSpy.getReservations).toHaveBeenCalledTimes(2);
+    expect(apiSpy.getReservations).toHaveBeenCalledTimes(3);
   });
 
   it('should render one row per reservation on initial load', () => {

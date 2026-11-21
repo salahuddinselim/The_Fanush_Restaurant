@@ -1,15 +1,15 @@
-import { Component, OnInit, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { AdminShellComponent } from '@app/shared/admin-shell.component';
+import { IconComponent } from '@app/shared/icon.component';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterLink, RouterLinkActive } from '@angular/router';
+import { RouterLink } from '@angular/router';
 import { forkJoin } from 'rxjs';
 import { ApiService, Reservation } from '../../core/services/api.service';
-import { AuthService } from '../../core/services/auth.service';
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [CommonModule, RouterLink, RouterLinkActive],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  imports: [AdminShellComponent, IconComponent, CommonModule, RouterLink],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss',
 })
@@ -21,7 +21,7 @@ export class DashboardComponent implements OnInit {
   loading = true;
   loadError = '';
 
-  constructor(public auth: AuthService, private api: ApiService) {}
+  constructor(private api: ApiService) {}
 
   ngOnInit() {
     forkJoin({

@@ -28,5 +28,3 @@ export function getApiUrl(locationHostname = typeof window !== 'undefined' ? win
 
   return '';
 }
-
-export const API_URL = getApiUrl();
